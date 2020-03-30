@@ -1,5 +1,5 @@
 //
-//  CalenderView.swift
+//  CalendarView.swift
 //  Smart Doc
 //
 //  Created by Vlad Zhokhov on 16/02/2020.
@@ -8,8 +8,24 @@
 
 import UIKit
 
+/// Выбор темы приложения
+enum MyTheme {
+	case light
+	case dark
+}
+
 /// Календарь
-final class CalenderView: UIView {
+final class CalendarViewController: UIViewController {
+
+	private var theme = MyTheme.dark
+
+	let daysView: UIView = {
+		let view = UIView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.backgroundColor = UIColor(red: 144/255, green: 238/255, blue: 144/255, alpha: 1)
+		view.layer.cornerRadius = 20
+		return view
+	}()
 
 	/// коллектион вью содержащий все дни месяца
 	let daysCollectionView: UICollectionView = {
@@ -30,7 +46,7 @@ final class CalenderView: UIView {
 	var presentMonthIndex = 0
 	var presentYear = 0
 	var todaysDate = 0
-	var firstWeekDayOfMonth = 0  //0   //(Sunday-Saturday 1-7)
+	var firstWeekDayOfMonth = 1  //0   //(Sunday-Saturday 1-7)
 
 	private lazy var monthView: MonthView = {
 		let view = MonthView()
@@ -45,37 +61,44 @@ final class CalenderView: UIView {
 		return view
 	}()
 
-	override init(frame: CGRect) {
-		super.init(frame: frame)
+	override func viewWillLayoutSubviews() {
+		super.viewWillLayoutSubviews()
+		daysCollectionView.collectionViewLayout.invalidateLayout()
+	}
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		self.title = "My Calender"
+		self.navigationController?.navigationBar.isTranslucent = false
+		self.view.backgroundColor = Style.bgColor
+		//view.backgroundColor = UIColor(red: 0, green: 255, blue: 127, alpha: 1)
+
+//		let rightBarBtn = UIBarButtonItem(title: "Light", style: .plain, target: self, action: #selector(rightBarBtnAction))
+//		self.navigationItem.rightBarButtonItem = rightBarBtn
+
 		initializeView()
+		setupViews()
+
 	}
 
-	convenience init(theme: MyTheme) {
-		self.init()
-
-		if theme == .dark {
-			Style.themeDark()
-		} else {
-			Style.themeLight()
-		}
-		initializeView()
-	}
-
-	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-
-	func changeTheme() {
-		daysCollectionView.reloadData()
-
-		monthView.currentMonthLabel.textColor = Style.monthViewLblColor
-		monthView.rightNavigationBarButton.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
-		monthView.leftNavigationBarButton.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
-
-		for i in 0..<7 {
-			(weekdaysView.myStackView.subviews[i] as! UILabel).textColor = Style.weekdaysLblColor
-		}
-	}
+//	@objc func rightBarBtnAction(sender: UIBarButtonItem) {
+//		if theme == .dark {
+//			sender.title = "Dark"
+//			theme = .light
+//			Style.themeLight()
+//		} else {
+//			sender.title = "Light"
+//			theme = .dark
+//			Style.themeDark()
+//		}
+//		self.view.backgroundColor = Style.bgColor
+//		changeTheme()
+//	}
 
 	func initializeView() {
+
+		setupStyleInApplication()
+
 		currentMonthIndex = Calendar.current.component(.month, from: Date())
 		currentYear = Calendar.current.component(.year, from: Date())
 		todaysDate = Calendar.current.component(.day, from: Date())
@@ -90,40 +113,70 @@ final class CalenderView: UIView {
 		presentMonthIndex = currentMonthIndex
 		presentYear = currentYear
 
-		setupViews()
+//		setupViews()
 
 		daysCollectionView.delegate = self
 		daysCollectionView.dataSource = self
 		daysCollectionView.register(DayCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
 	}
 
+	private func setupStyleInApplication(){
+		if theme == .dark {
+			theme = .light
+			Style.themeLight()
+		} else {
+			theme = .dark
+			Style.themeDark()
+		}
+		self.view.backgroundColor = Style.bgColor
+		changeTheme()
+	}
+
+	private func changeTheme() {
+		daysCollectionView.reloadData()
+
+		monthView.currentMonthLabel.textColor = Style.monthViewLblColor
+		monthView.rightNavigationBarButton.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
+		monthView.leftNavigationBarButton.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
+
+		for i in 0..<7 {
+			(weekdaysView.myStackView.subviews[i] as! UILabel).textColor = Style.weekdaysLblColor
+		}
+	}
+
 	private func getFirstWeekDay() -> Int {
 		let day = ("\(currentYear)-\(currentMonthIndex)-01".date?.firstDayOfTheMonth.weekday)!
 		return day
-		//return day == 7 ? 1 : day
 	}
 
 	private func setupViews() {
 
-		addSubview(monthView)
-		addSubview(weekdaysView)
-		addSubview(daysCollectionView)
+		view.addSubview(monthView)
+		view.addSubview(weekdaysView)
+		view.addSubview(daysView)
+		daysView.addSubview(daysCollectionView)
+		//view.addSubview(daysCollectionView)
 
 		NSLayoutConstraint.activate([
-			monthView.topAnchor.constraint(equalTo: topAnchor),
-			monthView.leftAnchor.constraint(equalTo: leftAnchor),
-			monthView.rightAnchor.constraint(equalTo: rightAnchor),
+			monthView.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
+			monthView.leftAnchor.constraint(equalTo: view.leftAnchor),
+			monthView.rightAnchor.constraint(equalTo: view.rightAnchor),
 			monthView.heightAnchor.constraint(equalToConstant: 35),
 
 			weekdaysView.topAnchor.constraint(equalTo: monthView.bottomAnchor),
-			weekdaysView.leftAnchor.constraint(equalTo: leftAnchor),
-			weekdaysView.rightAnchor.constraint(equalTo: rightAnchor),
+			weekdaysView.leftAnchor.constraint(equalTo: view.leftAnchor),
+			weekdaysView.rightAnchor.constraint(equalTo: view.rightAnchor),
 			weekdaysView.heightAnchor.constraint(equalToConstant: 30),
 
-			daysCollectionView.topAnchor.constraint(equalTo: weekdaysView.bottomAnchor, constant: 0),
-			daysCollectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0),
-			daysCollectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0),
-			daysCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
+			daysView.topAnchor.constraint(equalTo: weekdaysView.bottomAnchor, constant: 0),
+			daysView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
+			daysView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+			daysView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -400),
+
+			daysCollectionView.topAnchor.constraint(equalTo: daysView.topAnchor, constant: 0),
+			daysCollectionView.leftAnchor.constraint(equalTo: daysView.leftAnchor, constant: 0),
+			daysCollectionView.rightAnchor.constraint(equalTo: daysView.rightAnchor, constant: 0),
+			daysCollectionView.bottomAnchor.constraint(equalTo: daysView.bottomAnchor, constant: 0),
 		])
 	}
 
@@ -131,7 +184,7 @@ final class CalenderView: UIView {
 
 // MARK: - MonthViewDelegate
 
-extension CalenderView: MonthViewDelegate {
+extension CalendarViewController: MonthViewDelegate {
 
 	func didChangeMonth(monthIndex: Int, year: Int) {
 
@@ -151,45 +204,24 @@ extension CalenderView: MonthViewDelegate {
 
 		daysCollectionView.reloadData()
 
+		/// отмена пролистывания влево 
 		monthView.leftNavigationBarButton.isEnabled = !(currentMonthIndex == presentMonthIndex && currentYear == presentYear)
-	}
-}
-
-// MARK: - Date
-
-extension Date {
-	/// День недели
-	var weekday: Int {
-		return Calendar.current.component(.weekday, from: self) - 1
-	}
-	/// Первый день месяца
-	var firstDayOfTheMonth: Date {
-		return Calendar.current.date(from: Calendar.current.dateComponents([.year,.month], from: self))!
-	}
-}
-
-//get date from string
-extension String {
-	static var dateFormatter: DateFormatter = {
-		let formatter = DateFormatter()
-		formatter.dateFormat = "yyyy-MM-dd"
-		return formatter
-	}()
-
-	var date: Date? {
-		return String.dateFormatter.date(from: self)
 	}
 }
 
 // MARK: - UICollectionViewDelegate
 
-extension CalenderView: UICollectionViewDelegate {
+extension CalendarViewController: UICollectionViewDelegate {
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let cell = collectionView.cellForItem(at: indexPath)
 		cell?.backgroundColor = Colors.darkRed
 		let lbl = cell?.subviews[1] as! UILabel
 		lbl.textColor = UIColor.white
+
+		///  вынести отображение вью черех координатор
+		let viewController = DoctorsViewController()
+		present(viewController, animated: true, completion: nil)
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -203,10 +235,10 @@ extension CalenderView: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDataSource
 
-extension CalenderView: UICollectionViewDataSource {
+extension CalendarViewController: UICollectionViewDataSource {
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		 return numOfDaysInMonth[currentMonthIndex - 1] + firstWeekDayOfMonth - 1
+		 return numOfDaysInMonth[currentMonthIndex - 1] + firstWeekDayOfMonth  - 1
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -235,10 +267,10 @@ extension CalenderView: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension CalenderView: UICollectionViewDelegateFlowLayout {
+extension CalendarViewController: UICollectionViewDelegateFlowLayout {
 
 		func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-			let width = collectionView.frame.width / 7 - 8 
+			let width = collectionView.frame.width / 7 - 8
 			let height: CGFloat = 40
 			return CGSize(width: width, height: height)
 		}

@@ -7,29 +7,63 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01943D8B240C074600DD4237 /* ReceptionFlowAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943D8A240C074600DD4237 /* ReceptionFlowAssembly.swift */; };
+		01943D8D240C084B00DD4237 /* Assembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943D8C240C084B00DD4237 /* Assembly.swift */; };
+		01943D92240C1BB400DD4237 /* CalendarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943D91240C1BB400DD4237 /* CalendarPresenter.swift */; };
+		01943D95240C1C1B00DD4237 /* CalendarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943D94240C1C1B00DD4237 /* CalendarInteractor.swift */; };
+		01943D97240C1C3000DD4237 /* DoctorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943D96240C1C3000DD4237 /* DoctorsViewController.swift */; };
+		01943D99240C1C4000DD4237 /* DoctorsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943D98240C1C4000DD4237 /* DoctorsPresenter.swift */; };
+		01943D9B240C1C5300DD4237 /* DoctorsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943D9A240C1C5300DD4237 /* DoctorsInteractor.swift */; };
+		01943D9D240C1C6200DD4237 /* TimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943D9C240C1C6200DD4237 /* TimeTableViewController.swift */; };
+		01943D9F240C1C7200DD4237 /* TimeTablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943D9E240C1C7200DD4237 /* TimeTablePresenter.swift */; };
+		01943DA1240C1C8200DD4237 /* TimeTableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943DA0240C1C8200DD4237 /* TimeTableInteractor.swift */; };
+		01943DA6240C1E2100DD4237 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943DA5240C1E2100DD4237 /* Date+Extension.swift */; };
+		01943DA8240C1FB100DD4237 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943DA7240C1FB100DD4237 /* ServiceAssembly.swift */; };
+		01943DAC240C202600DD4237 /* DoctorsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943DAB240C202600DD4237 /* DoctorsService.swift */; };
+		01943DAE240C209500DD4237 /* DoctorsServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943DAD240C209500DD4237 /* DoctorsServiceModel.swift */; };
+		01943DB0240C214200DD4237 /* NetworkClientServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943DAF240C214200DD4237 /* NetworkClientServices.swift */; };
 		019CC58B23F9A4AE00CB8D14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019CC58A23F9A4AE00CB8D14 /* AppDelegate.swift */; };
 		019CC59223F9A4AF00CB8D14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 019CC59123F9A4AF00CB8D14 /* Assets.xcassets */; };
 		019CC59523F9A4AF00CB8D14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 019CC59323F9A4AF00CB8D14 /* LaunchScreen.storyboard */; };
-		019CC59D23F9A5C500CB8D14 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019CC59C23F9A5C500CB8D14 /* MainViewController.swift */; };
 		019CC59F23F9A66300CB8D14 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019CC59E23F9A66300CB8D14 /* MonthView.swift */; };
 		019CC5A123F9A67A00CB8D14 /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019CC5A023F9A67A00CB8D14 /* WeekdaysView.swift */; };
-		019CC5A323F9A69500CB8D14 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019CC5A223F9A69500CB8D14 /* CalenderView.swift */; };
+		019CC5A323F9A69500CB8D14 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019CC5A223F9A69500CB8D14 /* CalendarViewController.swift */; };
 		019CC5A823F9BE8F00CB8D14 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019CC5A723F9BE8F00CB8D14 /* Style.swift */; };
 		019CC5AA23F9C98A00CB8D14 /* DayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019CC5A923F9C98A00CB8D14 /* DayCollectionViewCell.swift */; };
+		01BD72A124324E4B0090175E /* DayCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BD72A024324E4B0090175E /* DayCellTableViewCell.swift */; };
+		01BD72A32432523E0090175E /* DoctorSpecialities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BD72A22432523E0090175E /* DoctorSpecialities.swift */; };
+		01BD72A5243252CB0090175E /* DoctorSpecialitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BD72A4243252CB0090175E /* DoctorSpecialitiesCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01943D8A240C074600DD4237 /* ReceptionFlowAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceptionFlowAssembly.swift; sourceTree = "<group>"; };
+		01943D8C240C084B00DD4237 /* Assembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembly.swift; sourceTree = "<group>"; };
+		01943D91240C1BB400DD4237 /* CalendarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPresenter.swift; sourceTree = "<group>"; };
+		01943D94240C1C1B00DD4237 /* CalendarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInteractor.swift; sourceTree = "<group>"; };
+		01943D96240C1C3000DD4237 /* DoctorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsViewController.swift; sourceTree = "<group>"; };
+		01943D98240C1C4000DD4237 /* DoctorsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsPresenter.swift; sourceTree = "<group>"; };
+		01943D9A240C1C5300DD4237 /* DoctorsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsInteractor.swift; sourceTree = "<group>"; };
+		01943D9C240C1C6200DD4237 /* TimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewController.swift; sourceTree = "<group>"; };
+		01943D9E240C1C7200DD4237 /* TimeTablePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTablePresenter.swift; sourceTree = "<group>"; };
+		01943DA0240C1C8200DD4237 /* TimeTableInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableInteractor.swift; sourceTree = "<group>"; };
+		01943DA5240C1E2100DD4237 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		01943DA7240C1FB100DD4237 /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
+		01943DAB240C202600DD4237 /* DoctorsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsService.swift; sourceTree = "<group>"; };
+		01943DAD240C209500DD4237 /* DoctorsServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsServiceModel.swift; sourceTree = "<group>"; };
+		01943DAF240C214200DD4237 /* NetworkClientServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientServices.swift; sourceTree = "<group>"; };
 		019CC58723F9A4AE00CB8D14 /* Smart Doc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smart Doc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		019CC58A23F9A4AE00CB8D14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		019CC59123F9A4AF00CB8D14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		019CC59423F9A4AF00CB8D14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		019CC59623F9A4AF00CB8D14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		019CC59C23F9A5C500CB8D14 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		019CC59E23F9A66300CB8D14 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		019CC5A023F9A67A00CB8D14 /* WeekdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
-		019CC5A223F9A69500CB8D14 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
+		019CC5A223F9A69500CB8D14 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		019CC5A723F9BE8F00CB8D14 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		019CC5A923F9C98A00CB8D14 /* DayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCollectionViewCell.swift; sourceTree = "<group>"; };
+		01BD72A024324E4B0090175E /* DayCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellTableViewCell.swift; sourceTree = "<group>"; };
+		01BD72A22432523E0090175E /* DoctorSpecialities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSpecialities.swift; sourceTree = "<group>"; };
+		01BD72A4243252CB0090175E /* DoctorSpecialitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSpecialitiesCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +77,110 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01943D88240C052100DD4237 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				019CC5A223F9A69500CB8D14 /* CalendarViewController.swift */,
+				01943D91240C1BB400DD4237 /* CalendarPresenter.swift */,
+				01943D94240C1C1B00DD4237 /* CalendarInteractor.swift */,
+				01943D93240C1BBE00DD4237 /* Views */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		01943D89240C070F00DD4237 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				01943D8A240C074600DD4237 /* ReceptionFlowAssembly.swift */,
+				01943D8C240C084B00DD4237 /* Assembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		01943D8E240C1B4300DD4237 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				01BD729F243245B40090175E /* DoctorSpecialties */,
+				01943D88240C052100DD4237 /* MainScreen */,
+				01943D8F240C1B5A00DD4237 /* Doctors */,
+				01943D90240C1B7800DD4237 /* TimeTable */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		01943D8F240C1B5A00DD4237 /* Doctors */ = {
+			isa = PBXGroup;
+			children = (
+				01BD72A024324E4B0090175E /* DayCellTableViewCell.swift */,
+				01943D96240C1C3000DD4237 /* DoctorsViewController.swift */,
+				01943D98240C1C4000DD4237 /* DoctorsPresenter.swift */,
+				01943D9A240C1C5300DD4237 /* DoctorsInteractor.swift */,
+			);
+			path = Doctors;
+			sourceTree = "<group>";
+		};
+		01943D90240C1B7800DD4237 /* TimeTable */ = {
+			isa = PBXGroup;
+			children = (
+				01943D9C240C1C6200DD4237 /* TimeTableViewController.swift */,
+				01943D9E240C1C7200DD4237 /* TimeTablePresenter.swift */,
+				01943DA0240C1C8200DD4237 /* TimeTableInteractor.swift */,
+			);
+			path = TimeTable;
+			sourceTree = "<group>";
+		};
+		01943D93240C1BBE00DD4237 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				019CC59E23F9A66300CB8D14 /* MonthView.swift */,
+				019CC5A023F9A67A00CB8D14 /* WeekdaysView.swift */,
+				019CC5A923F9C98A00CB8D14 /* DayCollectionViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		01943DA2240C1DA200DD4237 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				01943DA5240C1E2100DD4237 /* Date+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		01943DA3240C1DC800DD4237 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				01943DA7240C1FB100DD4237 /* ServiceAssembly.swift */,
+				01943DA9240C1FE400DD4237 /* Doctors */,
+				01943DAA240C1FEF00DD4237 /* TimeTable */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		01943DA4240C1DD800DD4237 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				01943DAF240C214200DD4237 /* NetworkClientServices.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		01943DA9240C1FE400DD4237 /* Doctors */ = {
+			isa = PBXGroup;
+			children = (
+				01943DAB240C202600DD4237 /* DoctorsService.swift */,
+				01943DAD240C209500DD4237 /* DoctorsServiceModel.swift */,
+			);
+			path = Doctors;
+			sourceTree = "<group>";
+		};
+		01943DAA240C1FEF00DD4237 /* TimeTable */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TimeTable;
+			sourceTree = "<group>";
+		};
 		019CC57E23F9A4AE00CB8D14 = {
 			isa = PBXGroup;
 			children = (
@@ -74,11 +212,11 @@
 		019CC5A423F9A70000CB8D14 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				019CC59C23F9A5C500CB8D14 /* MainViewController.swift */,
-				019CC5A223F9A69500CB8D14 /* CalenderView.swift */,
-				019CC59E23F9A66300CB8D14 /* MonthView.swift */,
-				019CC5A023F9A67A00CB8D14 /* WeekdaysView.swift */,
-				019CC5A923F9C98A00CB8D14 /* DayCollectionViewCell.swift */,
+				01943D89240C070F00DD4237 /* Assembly */,
+				01943D8E240C1B4300DD4237 /* Screens */,
+				01943DA4240C1DD800DD4237 /* API */,
+				01943DA3240C1DC800DD4237 /* Service */,
+				01943DA2240C1DA200DD4237 /* Extensions */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -98,6 +236,15 @@
 				019CC5A723F9BE8F00CB8D14 /* Style.swift */,
 			);
 			path = Style;
+			sourceTree = "<group>";
+		};
+		01BD729F243245B40090175E /* DoctorSpecialties */ = {
+			isa = PBXGroup;
+			children = (
+				01BD72A22432523E0090175E /* DoctorSpecialities.swift */,
+				01BD72A4243252CB0090175E /* DoctorSpecialitiesCell.swift */,
+			);
+			path = DoctorSpecialties;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,12 +317,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				019CC59D23F9A5C500CB8D14 /* MainViewController.swift in Sources */,
+				01BD72A32432523E0090175E /* DoctorSpecialities.swift in Sources */,
+				01943D9D240C1C6200DD4237 /* TimeTableViewController.swift in Sources */,
+				01943D9F240C1C7200DD4237 /* TimeTablePresenter.swift in Sources */,
+				01943DAC240C202600DD4237 /* DoctorsService.swift in Sources */,
+				01943D8B240C074600DD4237 /* ReceptionFlowAssembly.swift in Sources */,
+				01943DA8240C1FB100DD4237 /* ServiceAssembly.swift in Sources */,
 				019CC5A823F9BE8F00CB8D14 /* Style.swift in Sources */,
 				019CC5A123F9A67A00CB8D14 /* WeekdaysView.swift in Sources */,
+				01943D92240C1BB400DD4237 /* CalendarPresenter.swift in Sources */,
+				01BD72A5243252CB0090175E /* DoctorSpecialitiesCell.swift in Sources */,
+				01943DAE240C209500DD4237 /* DoctorsServiceModel.swift in Sources */,
+				01943DA1240C1C8200DD4237 /* TimeTableInteractor.swift in Sources */,
+				01BD72A124324E4B0090175E /* DayCellTableViewCell.swift in Sources */,
+				01943DB0240C214200DD4237 /* NetworkClientServices.swift in Sources */,
+				01943D8D240C084B00DD4237 /* Assembly.swift in Sources */,
+				01943D9B240C1C5300DD4237 /* DoctorsInteractor.swift in Sources */,
+				01943DA6240C1E2100DD4237 /* Date+Extension.swift in Sources */,
 				019CC59F23F9A66300CB8D14 /* MonthView.swift in Sources */,
 				019CC5AA23F9C98A00CB8D14 /* DayCollectionViewCell.swift in Sources */,
-				019CC5A323F9A69500CB8D14 /* CalenderView.swift in Sources */,
+				01943D99240C1C4000DD4237 /* DoctorsPresenter.swift in Sources */,
+				019CC5A323F9A69500CB8D14 /* CalendarViewController.swift in Sources */,
+				01943D95240C1C1B00DD4237 /* CalendarInteractor.swift in Sources */,
+				01943D97240C1C3000DD4237 /* DoctorsViewController.swift in Sources */,
 				019CC58B23F9A4AE00CB8D14 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

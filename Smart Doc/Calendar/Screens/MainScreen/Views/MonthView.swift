@@ -25,7 +25,7 @@ final class MonthView: UIView {
 		lbl.text = "Default Month Year text"
 		lbl.textColor = Style.monthViewLblColor
 		lbl.textAlignment = .center
-		lbl.font=UIFont.boldSystemFont(ofSize: 16)
+		lbl.font = UIFont.boldSystemFont(ofSize: 16)
 		lbl.translatesAutoresizingMaskIntoConstraints=false
 		return lbl
 	}()

@@ -21,10 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window = UIWindow()
 		window?.makeKeyAndVisible()
 		window?.backgroundColor = .orange
-		//self.window?.rootViewController = ViewController()
-		let nc = UINavigationController(rootViewController: MainViewController())
+//		self.window?.rootViewController = CalendarViewController()
+		let nc = UINavigationController(rootViewController: CalendarViewController())
 		window?.rootViewController = nc
-
 		return true
 	}
 
