@@ -55,13 +55,13 @@ extension DoctorSpecialities : UITableViewDataSource {
 extension DoctorSpecialities : UITableViewDelegate {
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 200
+		return 100
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
 		///  вынести отображение вью черех координатор
-		let viewController = DoctorsViewController()
+		let viewController = CalendarViewController()
 		present(viewController, animated: true, completion: nil)
 	}
 }

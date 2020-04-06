@@ -73,6 +73,8 @@ extension DoctorsViewController : UITableViewDelegate {
 
 		///  вынести отображение вью черех координатор
 		let viewController = DoctorSpecialities()
-		present(viewController, animated: true, completion: nil)
+		navigationController?.pushViewController(viewController, animated: true)
+		//show(viewController, sender: nil)
+		//present(viewController, animated: true, completion: nil)
 	}
 }

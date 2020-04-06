@@ -13,16 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 
-
-
-
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
 		window = UIWindow()
 		window?.makeKeyAndVisible()
 		window?.backgroundColor = .orange
-//		self.window?.rootViewController = CalendarViewController()
 		let nc = UINavigationController(rootViewController: CalendarViewController())
+//		nc.viewControllers = [firstViewController, secondViewController]
 		window?.rootViewController = nc
 		return true
 	}

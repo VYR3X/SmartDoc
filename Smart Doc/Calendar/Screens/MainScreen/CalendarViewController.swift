@@ -221,6 +221,8 @@ extension CalendarViewController: UICollectionViewDelegate {
 
 		///  вынести отображение вью черех координатор
 		let viewController = DoctorsViewController()
+		//navigationController?.pushViewController(viewController, animated: true)
+		//show(viewController, sender: self)
 		present(viewController, animated: true, completion: nil)
 	}
 
