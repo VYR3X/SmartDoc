@@ -8,6 +8,8 @@
 
 import UIKit
 
+/// Ячейка с врачами
+/// TODO:  поменять название вообще не понтно что тут написано 
 class DayCellTableViewCell: UITableViewCell {
 
 	required init?(coder aDecoder: NSCoder) {
@@ -23,11 +25,17 @@ class DayCellTableViewCell: UITableViewCell {
 		return view
 	}()
 
+	let picture: UIImageView = {
+		let image = UIImageView()
+		image.translatesAutoresizingMaskIntoConstraints = false
+		return image
+	}()
+
 	let dayLabel: UILabel = {
 		let label = UILabel()
 		label.sizeToFit()
 		label.text = "Day 1"
-		label.textColor = UIColor.gray
+		label.textColor = UIColor.black
 		label.font = UIFont.boldSystemFont(ofSize: 20)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
@@ -46,6 +54,7 @@ class DayCellTableViewCell: UITableViewCell {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 
 		addSubview(cellView)
+		cellView.addSubview(picture)
 		cellView.addSubview(dayLabel)
 		cellView.addSubview(descrioption)
 		setupView()
@@ -60,15 +69,20 @@ class DayCellTableViewCell: UITableViewCell {
 			cellView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
 			cellView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
 
+			picture.heightAnchor.constraint(equalToConstant: 56),
+			picture.widthAnchor.constraint(equalToConstant: 56),
+			picture.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 25),
+			picture.leftAnchor.constraint(equalTo: cellView.leftAnchor, constant: 20),
+
 			dayLabel.heightAnchor.constraint(equalToConstant: 20),
 			dayLabel.widthAnchor.constraint(equalToConstant: 327),
-			dayLabel.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 45),
-			dayLabel.leftAnchor.constraint(equalTo: cellView.leftAnchor, constant: 20),
+			dayLabel.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 25),
+			dayLabel.leftAnchor.constraint(equalTo: picture.rightAnchor, constant: 20),
 
 			descrioption.heightAnchor.constraint(equalToConstant: 20),
 			descrioption.widthAnchor.constraint(equalToConstant: 200),
-			descrioption.topAnchor.constraint(equalTo: dayLabel.topAnchor, constant: 45),
-			descrioption.leftAnchor.constraint(equalTo: cellView.leftAnchor, constant: 20),
+			descrioption.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 4),
+			descrioption.leftAnchor.constraint(equalTo: picture.rightAnchor, constant: 20),
 
 			])
 	}

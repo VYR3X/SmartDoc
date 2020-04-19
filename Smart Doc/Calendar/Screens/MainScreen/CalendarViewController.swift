@@ -8,6 +8,29 @@
 
 import UIKit
 
+/// Интерфейс взаимодействия с вью-контроллером экрана TransferToAnotherPerson.
+protocol CalendarViewControllable {}
+
+// TO DO : viewcontroller - все через протокол CalendarViewControllable
+// убрать UIViewController
+
+/// Интерфейс взаимодействия с презентером экрана TransferToAnotherPerson.
+protocol CalendarPresentableListener {
+
+	/// Данные загрузились
+	///
+	/// - Parameter viewController: текущий вью контроллер
+	func didLoad(_ viewController: UIViewController)
+
+	/// Информирует листенер о нажатии кнопки назад.
+	///
+	/// - Parameter viewController: Вью-контроллера экрана TransferToAnotherPerson.
+	func didPressBack(_ viewController: UIViewController)
+
+	/// Информирует листенер о переходе на экран с врачами
+	func didPressDoctors()
+}
+
 /// Выбор темы приложения
 enum MyTheme {
 	case light
@@ -15,9 +38,12 @@ enum MyTheme {
 }
 
 /// Календарь
-final class CalendarViewController: UIViewController {
+class CalendarViewController: UIViewController {//, CalendarViewControllable {
 
 	private var theme = MyTheme.dark
+
+	/// TO DO: сделать приватным
+	//let listener: CalendarPresentableListener? = nil
 
 	let daysView: UIView = {
 		let view = UIView()
@@ -66,8 +92,12 @@ final class CalendarViewController: UIViewController {
 		daysCollectionView.collectionViewLayout.invalidateLayout()
 	}
 
+	/// хрен его знает что не так с init поэтому не делаю приватной
+	var listener: CalendarPresentableListener?
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
+//		listener?.didLoad(self)
 		self.title = "My Calender"
 		self.navigationController?.navigationBar.isTranslucent = false
 		self.view.backgroundColor = Style.bgColor
@@ -219,6 +249,7 @@ extension CalendarViewController: UICollectionViewDelegate {
 		let lbl = cell?.subviews[1] as! UILabel
 		lbl.textColor = UIColor.white
 
+		//listener?.didPressDoctors()
 		///  вынести отображение вью черех координатор
 		let viewController = DoctorsViewController()
 		//navigationController?.pushViewController(viewController, animated: true)
@@ -285,3 +316,5 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
 			return 8.0
 		}
 }
+
+//extension CalendarViewController: CalendarViewControllable {}

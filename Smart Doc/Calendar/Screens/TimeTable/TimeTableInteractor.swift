@@ -6,4 +6,8 @@
 //  Copyright © 2020 Vlad Zhokhov. All rights reserved.
 //
 
-import Foundation
+/// Интерфейс взаимодействия с интерактором экрана TimeTable
+protocol TimeTableInteractable {}
+
+/// Интерактор c расписанием врача
+final class TimeTableInteractor: TimeTableInteractable {}

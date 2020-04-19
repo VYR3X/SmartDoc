@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01186834244CA0D000609D35 /* TimeTableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01186833244CA0D000609D35 /* TimeTableCollectionViewCell.swift */; };
+		018CE3BC24427D230064E3E1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CE3BB24427D230064E3E1 /* Coordinator.swift */; };
+		018CE3BE24427DAF0064E3E1 /* FlowRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CE3BD24427DAF0064E3E1 /* FlowRouting.swift */; };
+		018CE3C024427E920064E3E1 /* FlowCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CE3BF24427E920064E3E1 /* FlowCoordinating.swift */; };
 		01943D8B240C074600DD4237 /* ReceptionFlowAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943D8A240C074600DD4237 /* ReceptionFlowAssembly.swift */; };
 		01943D8D240C084B00DD4237 /* Assembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943D8C240C084B00DD4237 /* Assembly.swift */; };
 		01943D92240C1BB400DD4237 /* CalendarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943D91240C1BB400DD4237 /* CalendarPresenter.swift */; };
@@ -36,6 +40,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01186833244CA0D000609D35 /* TimeTableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableCollectionViewCell.swift; sourceTree = "<group>"; };
+		018CE3BB24427D230064E3E1 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		018CE3BD24427DAF0064E3E1 /* FlowRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowRouting.swift; sourceTree = "<group>"; };
+		018CE3BF24427E920064E3E1 /* FlowCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinating.swift; sourceTree = "<group>"; };
 		01943D8A240C074600DD4237 /* ReceptionFlowAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceptionFlowAssembly.swift; sourceTree = "<group>"; };
 		01943D8C240C084B00DD4237 /* Assembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembly.swift; sourceTree = "<group>"; };
 		01943D91240C1BB400DD4237 /* CalendarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPresenter.swift; sourceTree = "<group>"; };
@@ -93,6 +101,9 @@
 			children = (
 				01943D8A240C074600DD4237 /* ReceptionFlowAssembly.swift */,
 				01943D8C240C084B00DD4237 /* Assembly.swift */,
+				018CE3BB24427D230064E3E1 /* Coordinator.swift */,
+				018CE3BD24427DAF0064E3E1 /* FlowRouting.swift */,
+				018CE3BF24427E920064E3E1 /* FlowCoordinating.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -125,6 +136,7 @@
 				01943D9C240C1C6200DD4237 /* TimeTableViewController.swift */,
 				01943D9E240C1C7200DD4237 /* TimeTablePresenter.swift */,
 				01943DA0240C1C8200DD4237 /* TimeTableInteractor.swift */,
+				01186833244CA0D000609D35 /* TimeTableCollectionViewCell.swift */,
 			);
 			path = TimeTable;
 			sourceTree = "<group>";
@@ -319,6 +331,7 @@
 			files = (
 				01BD72A32432523E0090175E /* DoctorSpecialities.swift in Sources */,
 				01943D9D240C1C6200DD4237 /* TimeTableViewController.swift in Sources */,
+				018CE3C024427E920064E3E1 /* FlowCoordinating.swift in Sources */,
 				01943D9F240C1C7200DD4237 /* TimeTablePresenter.swift in Sources */,
 				01943DAC240C202600DD4237 /* DoctorsService.swift in Sources */,
 				01943D8B240C074600DD4237 /* ReceptionFlowAssembly.swift in Sources */,
@@ -329,17 +342,20 @@
 				01BD72A5243252CB0090175E /* DoctorSpecialitiesCell.swift in Sources */,
 				01943DAE240C209500DD4237 /* DoctorsServiceModel.swift in Sources */,
 				01943DA1240C1C8200DD4237 /* TimeTableInteractor.swift in Sources */,
+				018CE3BE24427DAF0064E3E1 /* FlowRouting.swift in Sources */,
 				01BD72A124324E4B0090175E /* DayCellTableViewCell.swift in Sources */,
 				01943DB0240C214200DD4237 /* NetworkClientServices.swift in Sources */,
 				01943D8D240C084B00DD4237 /* Assembly.swift in Sources */,
 				01943D9B240C1C5300DD4237 /* DoctorsInteractor.swift in Sources */,
 				01943DA6240C1E2100DD4237 /* Date+Extension.swift in Sources */,
+				018CE3BC24427D230064E3E1 /* Coordinator.swift in Sources */,
 				019CC59F23F9A66300CB8D14 /* MonthView.swift in Sources */,
 				019CC5AA23F9C98A00CB8D14 /* DayCollectionViewCell.swift in Sources */,
 				01943D99240C1C4000DD4237 /* DoctorsPresenter.swift in Sources */,
 				019CC5A323F9A69500CB8D14 /* CalendarViewController.swift in Sources */,
 				01943D95240C1C1B00DD4237 /* CalendarInteractor.swift in Sources */,
 				01943D97240C1C3000DD4237 /* DoctorsViewController.swift in Sources */,
+				01186834244CA0D000609D35 /* TimeTableCollectionViewCell.swift in Sources */,
 				019CC58B23F9A4AE00CB8D14 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

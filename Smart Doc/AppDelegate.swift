@@ -18,9 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window = UIWindow()
 		window?.makeKeyAndVisible()
 		window?.backgroundColor = .orange
-		let nc = UINavigationController(rootViewController: CalendarViewController())
+
+		//let nc = UINavigationController(rootViewController: CalendarViewController())
 //		nc.viewControllers = [firstViewController, secondViewController]
-		window?.rootViewController = nc
+
+		let vc = DoctorSpecialities()
+		window?.rootViewController = vc
 		return true
 	}
 

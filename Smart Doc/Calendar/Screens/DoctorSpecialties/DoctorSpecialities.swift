@@ -10,6 +10,26 @@ import UIKit
 
 class DoctorSpecialities: UIViewController  {
 
+	let datasource = [
+	"Окулист",
+	"Терапевт",
+	"Хирург",
+	"Невролог",
+	"Стоматолог",
+	"Оториноларинголог",
+	"Педиатр"
+	]
+
+	private let descriptionLabel: UILabel = {
+		let label = UILabel()
+		label.translatesAutoresizingMaskIntoConstraints = false
+		label.font = UIFont.boldSystemFont(ofSize: 25)
+		label.textColor = .gray
+		label.text = "Выберите врача из списка:"
+		label.backgroundColor = .white
+		return label
+	}()
+
 	private lazy var tableView : UITableView = {
 		let tableView = UITableView()
 		tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,16 +42,24 @@ class DoctorSpecialities: UIViewController  {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		view.backgroundColor = .white
+		view.addSubview(descriptionLabel)
 		view.addSubview(tableView)
 		setupTableView()
 	}
 
 	func setupTableView (){
 		NSLayoutConstraint.activate([
-			tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
-			tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-			tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-			tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor)
+
+			descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 45),
+			descriptionLabel.heightAnchor.constraint(equalToConstant: 45),
+			descriptionLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
+			descriptionLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
+
+			tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+			tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+			tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+			tableView.leftAnchor.constraint(equalTo: view.leftAnchor)
 			])
 	}
 
@@ -40,14 +68,14 @@ class DoctorSpecialities: UIViewController  {
 extension DoctorSpecialities : UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 10
+		return datasource.count
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! DoctorSpecialitiesCell
 		//cell.backgroundColor = UIColor.white
-		cell.dayLabel.text = "Стоматолог"
+		cell.dayLabel.text = datasource[indexPath.row]
 		return cell
 	}
 }
@@ -58,9 +86,7 @@ extension DoctorSpecialities : UITableViewDelegate {
 		return 100
 	}
 
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-		///  вынести отображение вью черех координатор
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
 		let viewController = CalendarViewController()
 		present(viewController, animated: true, completion: nil)
 	}

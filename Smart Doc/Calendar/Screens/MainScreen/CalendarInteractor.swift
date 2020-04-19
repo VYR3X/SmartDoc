@@ -6,4 +6,8 @@
 //  Copyright © 2020 Vlad Zhokhov. All rights reserved.
 //
 
-import Foundation
+/// Интерфейс взаимодействия с интерактором экрана Calendar
+protocol CalendarInteractable {}
+
+/// Интерактор календарь
+final class CalendarInteractor: CalendarInteractable {}

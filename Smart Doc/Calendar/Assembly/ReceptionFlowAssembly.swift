@@ -5,6 +5,7 @@
 //  Created by Vlad Zhokhov on 01/03/2020.
 //  Copyright © 2020 Vlad Zhokhov. All rights reserved.
 //
+import UIKit
 
 /// Сборщик флоу отмена оплаты билета
 final class ReseptionFlowAssembly {
@@ -20,38 +21,44 @@ final class ReseptionFlowAssembly {
 		self.services = services
 	}
 
-	func makeDoctorsViewController() {//-> UIViewController {
-//		let coordinator = makeCoordinator()
-//		let interactor = MainPurchaseInteractor(movieService: services.makeMovieService(),
-//												cinemaService: services.makeCinemaService(),
-//												cityService: services.makeCityService())
-//		let presenter = MainPurchasePresenter(interactor: interactor, coordinator: coordinator)
-//		let viewController = MainViewController(listener: presenter)
-//		presenter.viewController = viewController
-//		coordinator.rootViewController = viewController
-		//return UIViewController()
+	/// Метод для сборки экрана со списком Докторов
+	func makeDoctorsViewController(coordinator: Coordinator) -> UIViewController {
+		let interactor = DoctorsInteractor()
+		let presenter = DoctorsPresenter(interactor: interactor,
+															   coordinator: coordinator)
+		let viewController = DoctorsViewController()
+		presenter.viewController = viewController
+		return viewController
 	}
 
-//	func makeMainViewController() -> UIViewController {
-//		let coordinator = makeCoordinator()
-//		let interactor = MainPurchaseInteractor(movieService: services.makeMovieService(),
-//												cinemaService: services.makeCinemaService(),
-//												cityService: services.makeCityService())
-//		let presenter = MainPurchasePresenter(interactor: interactor, coordinator: coordinator)
-//		let viewController = MainViewController(listener: presenter)
-//		presenter.viewController = viewController
-//		coordinator.rootViewController = viewController
-//		return viewController
-//	}
+	/// Метод для сборки экрана с каленадарем
+	func makeMainViewController(coordinator: Coordinator) -> UIViewController {
+		let interactor = CalendarInteractor()
+		let presenter = CalendarPresenter(interactor: interactor,
+															   coordinator: coordinator)
+		let viewController = CalendarViewController()
+		// проблема с init поэтому так :(
+		viewController.listener = presenter
 
+		presenter.viewController = viewController
+		return viewController
+	}
 
-	/// Создает координатор
+	/// Метод для сборки экрана со списком свободного времени для записи
+	func makeTimeTableViewController(coordinator: Coordinator) -> UIViewController {
+		let interactor = TimeTableInteractor()
+		let presenter = TimeTablePresenter(interactor: interactor,
+															   coordinator: coordinator)
+		let viewController = TimeTableViewController()
+		presenter.viewController = viewController
+		return viewController
+	}
+
+	/// Создать координатор
 	///
-		/// - Returns: координатор отмены оплаты
-//	private func makeCoordinator() -> PurchaseFlowCoordinator {
-//		if let coordinator = self.coordinator { return coordinator }
-//		let coordinator = PurchaseFlowCoordinator(assembly: self)
-//		self.coordinator = coordinator
-//		return coordinator
-//	}
+	/// - Parameter context: контекст навигации
+	/// - Returns: координатор
+	func makeCoordinator(in context: UINavigationController?) -> Coordinator {
+		return Coordinator(assembly: self, navigationController: context)
+	}
 }

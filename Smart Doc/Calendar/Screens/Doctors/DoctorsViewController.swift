@@ -8,17 +8,64 @@
 
 import UIKit
 
+/// Интерфейс взаимодействия с вью-контроллером экрана DoctorsViewController.
+protocol DoctorsViewControllable {}
+
+// TO DO : viewcontroller - все через протокол CalendarViewControllable
+// убрать UIViewController
+
+/// Интерфейс взаимодействия с презентером экрана DoctorsViewController.
+protocol DoctorsPresentableListener {
+
+	/// Данные загрузились
+	///
+	/// - Parameter viewController: текущий вью контроллер
+	func didLoad(_ viewController: UIViewController)
+
+	/// Информирует листенер о нажатии кнопки назад.
+	///
+	/// - Parameter viewController: Вью-контроллера экрана TransferToAnotherPerson.
+	func didPressBack(_ viewController: UIViewController)
+
+	/// Информирует листенер о готовности записаться к врачу
+	func didPressReadyToMeetDoctor()
+}
+
+/// Экран со списком имен врачей
 class DoctorsViewController: UIViewController  {
 
 	let datasource = [
-	"Смирнова Мария Михайловна",
-	"Петрова Светлана Владимировна",
-	"Иванова Татьяна Игоревна",
-	"Кошкина Елена Владимировна",
-	"Сидорова Екатерина Ивановна",
-	"Козловская Елизавета Михайловна",
-	"Цукерберг Марк Ростиславович"
+	"Смирнова М. М.",
+	"Петрова С. В.",
+	"Иванова Т. И.",
+	"Кошкина Е. В.",
+	"Сидорова Е. И.",
+	"Козловская Е. М.",
+	"Цукерберг М. Р."
 	]
+
+	private var listener: DoctorsPresentableListener?
+
+//	init() {
+//		super.init(nibName: nil, bundle: nil)
+//	}
+//
+//	 convenience init(listener: DoctorsPresentableListener) {
+//		self.init()
+//		self.listener = listener
+//	}
+
+//	required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+	private let descriptionLabel: UILabel = {
+		let label = UILabel()
+		label.translatesAutoresizingMaskIntoConstraints = false
+		label.font = UIFont.boldSystemFont(ofSize: 25)
+		label.textColor = .gray
+		label.text = "Выберите врача из списка:"
+		label.backgroundColor = .white
+		return label
+	}()
 
 	private lazy var tableView : UITableView = {
 		let tableView = UITableView()
@@ -31,20 +78,26 @@ class DoctorsViewController: UIViewController  {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
+		view.backgroundColor = .white
+		view.addSubview(descriptionLabel)
 		view.addSubview(tableView)
 		setupTableView()
 	}
 
-	func setupTableView (){
+	func setupTableView () {
 		NSLayoutConstraint.activate([
-			tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
-			tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-			tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-			tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor)
+
+			descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 45),
+			descriptionLabel.heightAnchor.constraint(equalToConstant: 45),
+			descriptionLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
+			descriptionLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
+
+			tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+			tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+			tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+			tableView.leftAnchor.constraint(equalTo: view.leftAnchor)
 			])
 	}
-
 }
 
 extension DoctorsViewController : UITableViewDataSource {
@@ -59,6 +112,7 @@ extension DoctorsViewController : UITableViewDataSource {
 		cell.backgroundColor = UIColor.white
 		cell.dayLabel.text = datasource[indexPath.row]
 		cell.descrioption.text = "Терапевт"
+		cell.picture.image = UIImage(named: "doctorM")
 		return cell
 	}
 }
@@ -66,15 +120,12 @@ extension DoctorsViewController : UITableViewDataSource {
 extension DoctorsViewController : UITableViewDelegate {
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 200
+		return 150
 	}
 
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
 
-		///  вынести отображение вью черех координатор
-		let viewController = DoctorSpecialities()
-		navigationController?.pushViewController(viewController, animated: true)
-		//show(viewController, sender: nil)
-		//present(viewController, animated: true, completion: nil)
+		let viewController = TimeTableViewController()
+		present(viewController, animated: true, completion: nil)
 	}
 }
