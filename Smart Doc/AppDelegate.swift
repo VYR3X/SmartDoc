@@ -19,11 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window?.makeKeyAndVisible()
 		window?.backgroundColor = .orange
 
-		//let nc = UINavigationController(rootViewController: CalendarViewController())
-//		nc.viewControllers = [firstViewController, secondViewController]
+		let assembly = ReseptionFlowAssembly()
+		let mainNavigationViewController = UINavigationController(rootViewController: LaunchView())
+		
+		let coordinator = assembly.makeCoordinator(in: mainNavigationViewController)
+		coordinator.routeToSpecialities()
 
-		let vc = DoctorSpecialities()
-		window?.rootViewController = vc
+		window?.rootViewController = mainNavigationViewController
 		return true
 	}
 

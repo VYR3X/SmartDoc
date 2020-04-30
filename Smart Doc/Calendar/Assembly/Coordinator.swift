@@ -35,6 +35,11 @@ extension Coordinator: FlowRouting {
 		navigationController?.popViewController(animated: true)
 	}
 
+	func routeToSpecialities() {
+		let viewController = assembly.makeSpecialitiesViewController(coordinator: self)
+		navigationController?.pushViewController(viewController, animated: true)
+	}
+
 	func routeToCalendar() {
 //		guard let productsModel = productsModel else { return }
 		let viewController = assembly.makeMainViewController(coordinator: self)

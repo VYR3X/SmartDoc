@@ -15,6 +15,9 @@ protocol FlowRouting {
 	/// - Parameter from: с вью контроллера
 	func routeBack(from viewController: UIViewController)
 
+	/// Перекинуть на список со специальностями врачей
+	func routeToSpecialities()
+
 	/// Перекинуть на экран календарь
 	func routeToCalendar()
 
@@ -23,5 +26,6 @@ protocol FlowRouting {
 
 	/// Перекинуть на экран запись на прием к врачу
 	func routeToMeetingDoctor()
+
 }
 

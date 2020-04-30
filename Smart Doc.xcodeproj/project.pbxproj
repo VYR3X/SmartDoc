@@ -34,6 +34,10 @@
 		019CC5A323F9A69500CB8D14 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019CC5A223F9A69500CB8D14 /* CalendarViewController.swift */; };
 		019CC5A823F9BE8F00CB8D14 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019CC5A723F9BE8F00CB8D14 /* Style.swift */; };
 		019CC5AA23F9C98A00CB8D14 /* DayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019CC5A923F9C98A00CB8D14 /* DayCollectionViewCell.swift */; };
+		01A16E6F245B4CC40014650C /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E6E245B4CC40014650C /* LaunchView.swift */; };
+		01A16E71245B56000014650C /* DoctorsSpecialitiesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E70245B56000014650C /* DoctorsSpecialitiesPresenter.swift */; };
+		01A16E73245B56160014650C /* DoctorSpecialitiesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E72245B56160014650C /* DoctorSpecialitiesInteractor.swift */; };
+		01A16E75245B59D90014650C /* SpecialitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E74245B59D90014650C /* SpecialitiesModel.swift */; };
 		01BD72A124324E4B0090175E /* DayCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BD72A024324E4B0090175E /* DayCellTableViewCell.swift */; };
 		01BD72A32432523E0090175E /* DoctorSpecialities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BD72A22432523E0090175E /* DoctorSpecialities.swift */; };
 		01BD72A5243252CB0090175E /* DoctorSpecialitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BD72A4243252CB0090175E /* DoctorSpecialitiesCell.swift */; };
@@ -69,6 +73,10 @@
 		019CC5A223F9A69500CB8D14 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		019CC5A723F9BE8F00CB8D14 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		019CC5A923F9C98A00CB8D14 /* DayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCollectionViewCell.swift; sourceTree = "<group>"; };
+		01A16E6E245B4CC40014650C /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		01A16E70245B56000014650C /* DoctorsSpecialitiesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsSpecialitiesPresenter.swift; sourceTree = "<group>"; };
+		01A16E72245B56160014650C /* DoctorSpecialitiesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSpecialitiesInteractor.swift; sourceTree = "<group>"; };
+		01A16E74245B59D90014650C /* SpecialitiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialitiesModel.swift; sourceTree = "<group>"; };
 		01BD72A024324E4B0090175E /* DayCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellTableViewCell.swift; sourceTree = "<group>"; };
 		01BD72A22432523E0090175E /* DoctorSpecialities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSpecialities.swift; sourceTree = "<group>"; };
 		01BD72A4243252CB0090175E /* DoctorSpecialitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSpecialitiesCell.swift; sourceTree = "<group>"; };
@@ -111,6 +119,7 @@
 		01943D8E240C1B4300DD4237 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				01A16E6D245B4C920014650C /* Launcher */,
 				01BD729F243245B40090175E /* DoctorSpecialties */,
 				01943D88240C052100DD4237 /* MainScreen */,
 				01943D8F240C1B5A00DD4237 /* Doctors */,
@@ -250,11 +259,22 @@
 			path = Style;
 			sourceTree = "<group>";
 		};
+		01A16E6D245B4C920014650C /* Launcher */ = {
+			isa = PBXGroup;
+			children = (
+				01A16E6E245B4CC40014650C /* LaunchView.swift */,
+			);
+			path = Launcher;
+			sourceTree = "<group>";
+		};
 		01BD729F243245B40090175E /* DoctorSpecialties */ = {
 			isa = PBXGroup;
 			children = (
 				01BD72A22432523E0090175E /* DoctorSpecialities.swift */,
 				01BD72A4243252CB0090175E /* DoctorSpecialitiesCell.swift */,
+				01A16E70245B56000014650C /* DoctorsSpecialitiesPresenter.swift */,
+				01A16E72245B56160014650C /* DoctorSpecialitiesInteractor.swift */,
+				01A16E74245B59D90014650C /* SpecialitiesModel.swift */,
 			);
 			path = DoctorSpecialties;
 			sourceTree = "<group>";
@@ -331,6 +351,7 @@
 			files = (
 				01BD72A32432523E0090175E /* DoctorSpecialities.swift in Sources */,
 				01943D9D240C1C6200DD4237 /* TimeTableViewController.swift in Sources */,
+				01A16E75245B59D90014650C /* SpecialitiesModel.swift in Sources */,
 				018CE3C024427E920064E3E1 /* FlowCoordinating.swift in Sources */,
 				01943D9F240C1C7200DD4237 /* TimeTablePresenter.swift in Sources */,
 				01943DAC240C202600DD4237 /* DoctorsService.swift in Sources */,
@@ -339,10 +360,12 @@
 				019CC5A823F9BE8F00CB8D14 /* Style.swift in Sources */,
 				019CC5A123F9A67A00CB8D14 /* WeekdaysView.swift in Sources */,
 				01943D92240C1BB400DD4237 /* CalendarPresenter.swift in Sources */,
+				01A16E71245B56000014650C /* DoctorsSpecialitiesPresenter.swift in Sources */,
 				01BD72A5243252CB0090175E /* DoctorSpecialitiesCell.swift in Sources */,
 				01943DAE240C209500DD4237 /* DoctorsServiceModel.swift in Sources */,
 				01943DA1240C1C8200DD4237 /* TimeTableInteractor.swift in Sources */,
 				018CE3BE24427DAF0064E3E1 /* FlowRouting.swift in Sources */,
+				01A16E6F245B4CC40014650C /* LaunchView.swift in Sources */,
 				01BD72A124324E4B0090175E /* DayCellTableViewCell.swift in Sources */,
 				01943DB0240C214200DD4237 /* NetworkClientServices.swift in Sources */,
 				01943D8D240C084B00DD4237 /* Assembly.swift in Sources */,
@@ -350,6 +373,7 @@
 				01943DA6240C1E2100DD4237 /* Date+Extension.swift in Sources */,
 				018CE3BC24427D230064E3E1 /* Coordinator.swift in Sources */,
 				019CC59F23F9A66300CB8D14 /* MonthView.swift in Sources */,
+				01A16E73245B56160014650C /* DoctorSpecialitiesInteractor.swift in Sources */,
 				019CC5AA23F9C98A00CB8D14 /* DayCollectionViewCell.swift in Sources */,
 				01943D99240C1C4000DD4237 /* DoctorsPresenter.swift in Sources */,
 				019CC5A323F9A69500CB8D14 /* CalendarViewController.swift in Sources */,

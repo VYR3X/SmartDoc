@@ -95,6 +95,13 @@ class CalendarViewController: UIViewController {//, CalendarViewControllable {
 	/// хрен его знает что не так с init поэтому не делаю приватной
 	var listener: CalendarPresentableListener?
 
+	init(listener: CalendarPresentableListener) {
+		super.init(nibName: nil, bundle: nil)
+		self.listener = listener
+	}
+
+	required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 //		listener?.didLoad(self)
@@ -251,10 +258,12 @@ extension CalendarViewController: UICollectionViewDelegate {
 
 		//listener?.didPressDoctors()
 		///  вынести отображение вью черех координатор
-		let viewController = DoctorsViewController()
+		listener!.didPressDoctors()
 		//navigationController?.pushViewController(viewController, animated: true)
 		//show(viewController, sender: self)
-		present(viewController, animated: true, completion: nil)
+
+		//let viewController = DoctorsViewController()
+		//present(viewController, animated: true, completion: nil)
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -317,4 +326,4 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
 		}
 }
 
-//extension CalendarViewController: CalendarViewControllable {}
+extension CalendarViewController: CalendarViewControllable {}

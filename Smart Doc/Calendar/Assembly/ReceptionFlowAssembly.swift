@@ -13,12 +13,26 @@ final class ReseptionFlowAssembly {
 	//private weak var coordinator: Coordinator?
 	private var orderID: String?
 
-	private let services: ServiceAssembly
+	private let services: ServiceAssembly? = nil
 
 	//private weak var coordinator: PurchaseFlowCoordinator?
 
-	init(services: ServiceAssembly) {
-		self.services = services
+//	init(services: ServiceAssembly) {
+//		self.services = services
+//	}
+
+	init() {
+		
+	}
+
+	/// Метод для сборки экрана со списком специальностей врачей
+	func makeSpecialitiesViewController(coordinator: Coordinator) -> UIViewController {
+		let interactor = DoctorSpecialitiesInteractor()
+		let presenter = DoctorsSpecialitiesPresenter(interactor: interactor,
+															   coordinator: coordinator)
+		let viewController = DoctorSpecialities(listener: presenter)
+		presenter.viewController = viewController
+		return viewController
 	}
 
 	/// Метод для сборки экрана со списком Докторов
@@ -26,7 +40,7 @@ final class ReseptionFlowAssembly {
 		let interactor = DoctorsInteractor()
 		let presenter = DoctorsPresenter(interactor: interactor,
 															   coordinator: coordinator)
-		let viewController = DoctorsViewController()
+		let viewController = DoctorsViewController(listener: presenter)
 		presenter.viewController = viewController
 		return viewController
 	}
@@ -36,10 +50,7 @@ final class ReseptionFlowAssembly {
 		let interactor = CalendarInteractor()
 		let presenter = CalendarPresenter(interactor: interactor,
 															   coordinator: coordinator)
-		let viewController = CalendarViewController()
-		// проблема с init поэтому так :(
-		viewController.listener = presenter
-
+		let viewController = CalendarViewController(listener: presenter)
 		presenter.viewController = viewController
 		return viewController
 	}

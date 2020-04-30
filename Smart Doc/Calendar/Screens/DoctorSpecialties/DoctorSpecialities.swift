@@ -8,10 +8,27 @@
 
 import UIKit
 
+/// Интерфейс взаимодействия с презентером экрана TransferToAnotherPerson.
+protocol DoctorSpecialitiesListener {
+
+	/// Данные загрузились
+	///
+	/// - Parameter viewController: текущий вью контроллер
+	func didLoad(_ viewController: UIViewController)
+
+	/// Информирует листенер о нажатии кнопки назад.
+	///
+	/// - Parameter viewController: Вью-контроллера экрана TransferToAnotherPerson.
+	func didPressBack(_ viewController: UIViewController)
+
+	/// Информирует листенер о переходе на экран с врачами
+	func didOpenCalendar()
+}
+
 class DoctorSpecialities: UIViewController  {
 
 	let datasource = [
-	"Окулист",
+	"Офтальмолог",
 	"Терапевт",
 	"Хирург",
 	"Невролог",
@@ -38,6 +55,15 @@ class DoctorSpecialities: UIViewController  {
 		tableView.register(DoctorSpecialitiesCell.self, forCellReuseIdentifier: "cellId")
 		return tableView
 	}()
+
+	var listener: DoctorSpecialitiesListener?
+
+	init(listener: DoctorSpecialitiesListener) {
+		super.init(nibName: nil, bundle: nil)
+		self.listener = listener
+	}
+
+	required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -86,9 +112,11 @@ extension DoctorSpecialities : UITableViewDelegate {
 		return 100
 	}
 
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-		let viewController = CalendarViewController()
-		present(viewController, animated: true, completion: nil)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+		listener?.didOpenCalendar()
+		//let viewController = CalendarViewController()
+		//present(viewController, animated: true, completion: nil)
 	}
 }
 

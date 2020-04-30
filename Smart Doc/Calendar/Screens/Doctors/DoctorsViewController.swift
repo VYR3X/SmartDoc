@@ -46,10 +46,13 @@ class DoctorsViewController: UIViewController  {
 
 	private var listener: DoctorsPresentableListener?
 
-//	init() {
-//		super.init(nibName: nil, bundle: nil)
-//	}
-//
+	init(listener: DoctorsPresentableListener) {
+		super.init(nibName: nil, bundle: nil)
+		self.listener = listener
+	}
+
+	required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+	//
 //	 convenience init(listener: DoctorsPresentableListener) {
 //		self.init()
 //		self.listener = listener
@@ -125,7 +128,8 @@ extension DoctorsViewController : UITableViewDelegate {
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
 
-		let viewController = TimeTableViewController()
-		present(viewController, animated: true, completion: nil)
+		listener!.didPressReadyToMeetDoctor()
+//		let viewController = TimeTableViewController()
+//		present(viewController, animated: true, completion: nil)
 	}
 }
