@@ -7,7 +7,7 @@
 //
 import UIKit
 
-/// Протокол роутинга между экранами банка
+/// Протокол роутинга между экранами
 protocol FlowRouting {
 
 	/// Вернуться назад
@@ -19,13 +19,16 @@ protocol FlowRouting {
 	func routeToSpecialities()
 
 	/// Перекинуть на экран календарь
-	func routeToCalendar()
+	func routeToCalendar(resourceID: String)
 
 	/// Перекинуть на экран c именами врачей
 	func routeToDoctors()
 
 	/// Перекинуть на экран запись на прием к врачу
 	func routeToMeetingDoctor()
+
+	/// Перекинуть на экран: профиль пользователя
+	func routeToUserProfile()
 
 }
 

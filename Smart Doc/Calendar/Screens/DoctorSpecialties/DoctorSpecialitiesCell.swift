@@ -18,7 +18,7 @@ class DoctorSpecialitiesCell: UITableViewCell {
 		let view = UIView()
 		view.layer.cornerRadius = 10
 		view.translatesAutoresizingMaskIntoConstraints = false
-		view.backgroundColor = UIColor(red: 0, green: 255, blue: 127, alpha: 1)
+		view.backgroundColor = UIColor(red: 175/255, green: 242/255, blue: 250/255, alpha: 1)
 		return view
 	}()
 

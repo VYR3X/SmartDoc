@@ -8,13 +8,10 @@
 
 import UIKit
 
-/// Интерфейс взаимодействия с вью-контроллером экрана TransferToAnotherPerson.
+/// Интерфейс взаимодействия с вью-контроллером экрана CalendarViewController.
 protocol CalendarViewControllable {}
 
-// TO DO : viewcontroller - все через протокол CalendarViewControllable
-// убрать UIViewController
-
-/// Интерфейс взаимодействия с презентером экрана TransferToAnotherPerson.
+/// Интерфейс взаимодействия с презентером экрана CalendarViewController.
 protocol CalendarPresentableListener {
 
 	/// Данные загрузились
@@ -24,11 +21,17 @@ protocol CalendarPresentableListener {
 
 	/// Информирует листенер о нажатии кнопки назад.
 	///
-	/// - Parameter viewController: Вью-контроллера экрана TransferToAnotherPerson.
+	/// - Parameter viewController: Вью-контроллера экрана CalendarViewController.
 	func didPressBack(_ viewController: UIViewController)
 
 	/// Информирует листенер о переходе на экран с врачами
 	func didPressDoctors()
+
+	/// Пользователь выбрал дату в календаре
+	/// - Parameters:
+	///   - date: Выбранная дата
+	///   - resourceID: Выбранная специлизация врача (хирург, терапевт, стоматолог...)
+	func personSelectDate(date: String, resourceID: String)
 }
 
 /// Выбор темы приложения
@@ -38,18 +41,28 @@ enum MyTheme {
 }
 
 /// Календарь
-class CalendarViewController: UIViewController {//, CalendarViewControllable {
+class CalendarViewController: UIViewController {
 
 	private var theme = MyTheme.dark
 
-	/// TO DO: сделать приватным
-	//let listener: CalendarPresentableListener? = nil
+	/// Листенер экрана CalendarViewController
+	var listener: CalendarPresentableListener?
 
+	/// Специализация врача
+	var resourseID: String?
+
+	/// Вью выбора дня в календаре (все дни месяца) 
 	let daysView: UIView = {
 		let view = UIView()
 		view.translatesAutoresizingMaskIntoConstraints = false
-		view.backgroundColor = UIColor(red: 144/255, green: 238/255, blue: 144/255, alpha: 1)
+		view.backgroundColor = .white
 		view.layer.cornerRadius = 20
+		// настойка тени
+		view.layer.shadowColor = UIColor.black.cgColor
+		view.layer.shadowOpacity = 1
+		view.layer.shadowOffset = .zero
+		view.layer.shadowRadius = 3
+
 		return view
 	}()
 
@@ -92,9 +105,6 @@ class CalendarViewController: UIViewController {//, CalendarViewControllable {
 		daysCollectionView.collectionViewLayout.invalidateLayout()
 	}
 
-	/// хрен его знает что не так с init поэтому не делаю приватной
-	var listener: CalendarPresentableListener?
-
 	init(listener: CalendarPresentableListener) {
 		super.init(nibName: nil, bundle: nil)
 		self.listener = listener
@@ -104,11 +114,10 @@ class CalendarViewController: UIViewController {//, CalendarViewControllable {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-//		listener?.didLoad(self)
-		self.title = "My Calender"
+		listener?.didLoad(self)
+		self.title = "Calendar"
 		self.navigationController?.navigationBar.isTranslucent = false
-		self.view.backgroundColor = Style.bgColor
-		//view.backgroundColor = UIColor(red: 0, green: 255, blue: 127, alpha: 1)
+
 
 //		let rightBarBtn = UIBarButtonItem(title: "Light", style: .plain, target: self, action: #selector(rightBarBtnAction))
 //		self.navigationItem.rightBarButtonItem = rightBarBtn
@@ -117,6 +126,7 @@ class CalendarViewController: UIViewController {//, CalendarViewControllable {
 		setupViews()
 
 	}
+
 
 //	@objc func rightBarBtnAction(sender: UIBarButtonItem) {
 //		if theme == .dark {
@@ -165,7 +175,8 @@ class CalendarViewController: UIViewController {//, CalendarViewControllable {
 			theme = .dark
 			Style.themeDark()
 		}
-		self.view.backgroundColor = Style.bgColor
+		self.view.backgroundColor = UIColor(red: 175/255, green: 242/255, blue: 250/255, alpha: 1)
+		//self.view.backgroundColor = Style.bgColor
 		changeTheme()
 	}
 
@@ -192,7 +203,6 @@ class CalendarViewController: UIViewController {//, CalendarViewControllable {
 		view.addSubview(weekdaysView)
 		view.addSubview(daysView)
 		daysView.addSubview(daysCollectionView)
-		//view.addSubview(daysCollectionView)
 
 		NSLayoutConstraint.activate([
 			monthView.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
@@ -253,17 +263,14 @@ extension CalendarViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let cell = collectionView.cellForItem(at: indexPath)
 		cell?.backgroundColor = Colors.darkRed
-		let lbl = cell?.subviews[1] as! UILabel
-		lbl.textColor = UIColor.white
+		let selectDay = cell?.subviews[1] as! UILabel
+		selectDay.textColor = UIColor.white
 
-		//listener?.didPressDoctors()
-		///  вынести отображение вью черех координатор
+		let bdate = String(selectDay.text!)+"."+String(currentMonthIndex)+"."+String(currentYear)
+		print("Выбранная пользователем дата: \(bdate)")
+
+		listener!.personSelectDate(date: bdate, resourceID: resourseID!)
 		listener!.didPressDoctors()
-		//navigationController?.pushViewController(viewController, animated: true)
-		//show(viewController, sender: self)
-
-		//let viewController = DoctorsViewController()
-		//present(viewController, animated: true, completion: nil)
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

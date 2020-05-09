@@ -25,6 +25,16 @@ final class ReseptionFlowAssembly {
 		
 	}
 
+	/// Метод для сборки экрана Профиль пользователя
+	func makeProfileViewController(coordinator: Coordinator) -> UIViewController {
+		let interactor = UserProfileInteractor()
+		let presenter = UserProfilePresenter(interactor: interactor,
+													 coordinator: coordinator)
+		let viewController = UserProfileViewController(listener: presenter)
+		presenter.viewController = viewController
+		return viewController
+	}
+
 	/// Метод для сборки экрана со списком специальностей врачей
 	func makeSpecialitiesViewController(coordinator: Coordinator) -> UIViewController {
 		let interactor = DoctorSpecialitiesInteractor()
@@ -46,11 +56,12 @@ final class ReseptionFlowAssembly {
 	}
 
 	/// Метод для сборки экрана с каленадарем
-	func makeMainViewController(coordinator: Coordinator) -> UIViewController {
+	func makeMainViewController(coordinator: Coordinator, resourseID: String) -> UIViewController {
 		let interactor = CalendarInteractor()
 		let presenter = CalendarPresenter(interactor: interactor,
 															   coordinator: coordinator)
 		let viewController = CalendarViewController(listener: presenter)
+		viewController.resourseID = resourseID
 		presenter.viewController = viewController
 		return viewController
 	}
@@ -60,7 +71,17 @@ final class ReseptionFlowAssembly {
 		let interactor = TimeTableInteractor()
 		let presenter = TimeTablePresenter(interactor: interactor,
 															   coordinator: coordinator)
-		let viewController = TimeTableViewController()
+		let viewController = TimeTableViewController(listener: presenter)
+		presenter.viewController = viewController
+		return viewController
+	}
+
+	/// Метод для сборки экрана История записи к врачу
+	func makeOperationHistoryViewController(coordinator: Coordinator) -> UIViewController {
+		let interactor = OperationHistoryInteractor()
+		let presenter = OperationHistoryPresenter(interactor: interactor,
+													 coordinator: coordinator)
+		let viewController = OperationHistoryViewController(listener: presenter)
 		presenter.viewController = viewController
 		return viewController
 	}

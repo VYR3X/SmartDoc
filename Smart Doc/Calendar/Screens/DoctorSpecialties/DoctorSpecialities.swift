@@ -21,21 +21,25 @@ protocol DoctorSpecialitiesListener {
 	/// - Parameter viewController: Вью-контроллера экрана TransferToAnotherPerson.
 	func didPressBack(_ viewController: UIViewController)
 
-	/// Информирует листенер о переходе на экран с врачами
-	func didOpenCalendar()
+	/// Информирует листенер о переходе на экран календарь
+	/// - Parameter Resource_ID: id выбранной специализации врача
+	func didOpenCalendar(Resource_ID: String)
 }
 
 class DoctorSpecialities: UIViewController  {
 
 	let datasource = [
-	"Офтальмолог",
-	"Терапевт",
-	"Хирург",
+	"Стоматолог", // A417276AC757742CE0530100007F6A68
+	"Терапевт", // 7F7DA9355EAAF96FE0530100007F0F8B
+	"Хирург", // 7FA60C0CEEE364F3E0530100007F82C1
 	"Невролог",
-	"Стоматолог",
+	"Офтальмолог",
 	"Оториноларинголог",
 	"Педиатр"
 	]
+
+	// стоматологи пока не записывают )
+	let Resource_ID = [ "A417276AC757742CE0530100007F6A68", "7F7DA9355EAAF96FE0530100007F0F8B", "7FA60C0CEEE364F3E0530100007F82C1" ]
 
 	private let descriptionLabel: UILabel = {
 		let label = UILabel()
@@ -114,9 +118,8 @@ extension DoctorSpecialities : UITableViewDelegate {
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-		listener?.didOpenCalendar()
-		//let viewController = CalendarViewController()
-		//present(viewController, animated: true, completion: nil)
+		let selectDoctor = Resource_ID[indexPath.row];
+		listener?.didOpenCalendar(Resource_ID: selectDoctor)
 	}
 }
 

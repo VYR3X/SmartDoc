@@ -26,6 +26,9 @@ protocol TimeTablePresentableListener {
 	///
 	/// - Parameter viewController: Вью-контроллера экрана DoctorsSpecialities.
 	func didPressBack(_ viewController: UIViewController)
+
+	/// Пользователь выбрал удобное время и записался на прием
+	func createAppointment()
 }
 
 /// Расписание
@@ -79,6 +82,15 @@ class TimeTableViewController: UIViewController {
 		label.font = UIFont.boldSystemFont(ofSize: 25)
 		return label
 	}()
+
+	private var listener: TimeTablePresentableListener?
+
+	init(listener: TimeTablePresentableListener) {
+		super.init(nibName: nil, bundle: nil)
+		self.listener = listener
+	}
+
+	required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -142,6 +154,7 @@ extension TimeTableViewController: UICollectionViewDelegateFlowLayout {
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
+		listener!.createAppointment()
 		//guard let session = sessions?[safe: indexPath.row] else { return }
 
 		//selectedIndex = indexPath.row

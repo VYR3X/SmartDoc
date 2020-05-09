@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 /// Интерфейс взаимодействия с интерактором экрана списка категорий специалистов
 protocol DoctorSpecialitiesInteractable {}

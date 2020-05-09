@@ -7,14 +7,16 @@
 //
 import UIKit
 
-/// Координатор переводов
-/// Реализует композицию двух протоколов – TransfersFlowCoordinating & TransfersFlowRouting
+/// Координатор
+/// Реализует композицию двух протоколов – FlowCoordinating & FlowRouting
 final class Coordinator {
 
 	private let assembly: ReseptionFlowAssembly
 	private weak var navigationController: UINavigationController?
 	private weak var rootViewController: UIViewController?
-//	private var productsModel: ProductsModel?
+
+	var resource_ID: String? // id специальности врача ( терапевт, хирург, стоматолог )
+	var bdate: String? 		// выбранная дата в календаре
 
 	/// Конструктор
 	///
@@ -27,7 +29,7 @@ final class Coordinator {
 	}
 }
 
-// MARK: - TransfersFlowRouting
+// MARK: - FlowRouting
 
 extension Coordinator: FlowRouting {
 
@@ -35,14 +37,19 @@ extension Coordinator: FlowRouting {
 		navigationController?.popViewController(animated: true)
 	}
 
+	func routeToUserProfile() {
+		let viewController = assembly.makeProfileViewController(coordinator: self)
+		navigationController?.pushViewController(viewController, animated: true)
+	}
+
 	func routeToSpecialities() {
 		let viewController = assembly.makeSpecialitiesViewController(coordinator: self)
 		navigationController?.pushViewController(viewController, animated: true)
 	}
 
-	func routeToCalendar() {
-//		guard let productsModel = productsModel else { return }
-		let viewController = assembly.makeMainViewController(coordinator: self)
+	func routeToCalendar(resourceID: String) {
+		resource_ID = resourceID
+		let viewController = assembly.makeMainViewController(coordinator: self, resourseID: resourceID)
 		navigationController?.pushViewController(viewController, animated: true)
 	}
 
@@ -59,7 +66,7 @@ extension Coordinator: FlowRouting {
 	}
 }
 
-// MARK: - TransfersFlowCoordinating
+// MARK: - FlowCoordinating
 
 extension Coordinator: FlowCoordinating {
 

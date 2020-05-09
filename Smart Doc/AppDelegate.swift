@@ -23,7 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let mainNavigationViewController = UINavigationController(rootViewController: LaunchView())
 		
 		let coordinator = assembly.makeCoordinator(in: mainNavigationViewController)
-		coordinator.routeToSpecialities()
+		//coordinator.routeToSpecialities()
+		coordinator.routeToUserProfile()
 
 		window?.rootViewController = mainNavigationViewController
 		return true

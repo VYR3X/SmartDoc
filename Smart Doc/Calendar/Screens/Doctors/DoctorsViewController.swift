@@ -52,13 +52,6 @@ class DoctorsViewController: UIViewController  {
 	}
 
 	required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-	//
-//	 convenience init(listener: DoctorsPresentableListener) {
-//		self.init()
-//		self.listener = listener
-//	}
-
-//	required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
 	private let descriptionLabel: UILabel = {
 		let label = UILabel()
@@ -129,7 +122,5 @@ extension DoctorsViewController : UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
 
 		listener!.didPressReadyToMeetDoctor()
-//		let viewController = TimeTableViewController()
-//		present(viewController, animated: true, completion: nil)
 	}
 }

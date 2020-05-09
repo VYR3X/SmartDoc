@@ -30,8 +30,8 @@ final class DoctorsSpecialitiesPresenter: DoctorsSpecialitiesPresentable {
 
 extension DoctorsSpecialitiesPresenter: DoctorSpecialitiesListener {
 
-	func didOpenCalendar() {
-		coordinator.routeToCalendar()
+	func didOpenCalendar(Resource_ID: String) {
+		coordinator.routeToCalendar(resourceID: Resource_ID)
 	}
 
 	func didLoad(_ viewController: UIViewController) {}

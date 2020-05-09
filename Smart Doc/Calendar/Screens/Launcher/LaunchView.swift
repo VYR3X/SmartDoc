@@ -12,6 +12,7 @@ import UIKit
 class LaunchView: UIViewController {
 
 	override func viewDidLoad() {
-		view.backgroundColor = .yellow
+		//view.backgroundColor = .yellow
+		view.backgroundColor = UIColor(red: 175/255, green: 242/255, blue: 250/255, alpha: 1)
 	}
 }

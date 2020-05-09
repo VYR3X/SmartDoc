@@ -29,11 +29,17 @@ final class CalendarPresenter: CalendarPresentable {
 
 extension CalendarPresenter: CalendarPresentableListener {
 
+	func personSelectDate(date: String, resourceID: String) {
+		interactor.getDoctorTickets(selectdate: date, resourceID: resourceID)
+	}
+
+
 	func didPressDoctors() {
 		coordinator.routeToDoctors()
 	}
 
 	func didLoad(_ viewController: UIViewController) {
+
 //		let cards = interactor.getCardsModel()
 //		let cardsViewModel = cards.map { CardViewModel(model: $0) }
 //		viewController.setCards(viewModel: cardsViewModel)
@@ -42,4 +48,6 @@ extension CalendarPresenter: CalendarPresentableListener {
 	func didPressBack(_ viewController: UIViewController) {
 		coordinator.routeBack(from: viewController)
 	}
+
+
 }

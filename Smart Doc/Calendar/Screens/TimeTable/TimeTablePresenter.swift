@@ -31,6 +31,11 @@ final class TimeTablePresenter: TimeTablePresentable {
 
 extension TimeTablePresenter: TimeTablePresentableListener {
 
+	func createAppointment() {
+		interactor.createAppointment()
+	}
+
+
 	func didLoad(_ viewController: UIViewController) {}
 
 	func didPressBack(_ viewController: UIViewController) {}
