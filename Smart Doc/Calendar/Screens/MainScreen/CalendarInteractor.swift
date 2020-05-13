@@ -15,13 +15,18 @@ protocol CalendarInteractable {
 	/// - Parameters:
 	///   - selectdate: Выбранная пользователем дата в календаре
 	///   - resourceID: Выбранная специализация врача (хирург, терапевт, стоматолог)
-	func getDoctorTickets(selectdate: String, resourceID: String)
+	///   - completion: Возвращаемый блок с результатом запроса
+	func getDoctorTickets(selectdate: String,
+						  resourceID: String,
+						  completion: @escaping (Result<TicketModel, Error>) -> Void)
 }
 
 /// Интерактор экрана: Календарь
 final class CalendarInteractor: CalendarInteractable {
 
-	func getDoctorTickets(selectdate: String, resourceID: String) {
+	func getDoctorTickets(selectdate: String,
+						  resourceID: String,
+						  completion: @escaping (Result<TicketModel, Error>) -> Void) {
 
 		let resource = "SLOT"
 		let method = "SEARCH"
@@ -50,18 +55,24 @@ final class CalendarInteractor: CalendarInteractable {
 
 			guard let data = data else { return }
 
-			guard let utf8Data = String(decoding: data, as: UTF8.self).data(using: .utf8) else {
-				print("could not convert data to UTF-8 format")
+			print("\n\nwin1251String\n\n")
+			let win1251String = String(data: data, encoding: .windowsCP1251)
+
+			guard let win1251Data = win1251String!.data(using: .utf8, allowLossyConversion: true) else {
+				print("could not convert data")
 				return
 			}
 
 			do {
-				let interinData = try JSONSerialization.jsonObject(with: utf8Data, options: .mutableContainers)
-				print(interinData)
+				let slots = try JSONDecoder().decode(TicketModel.self, from: win1251Data)
+				completion(.success(slots))
+
 			}
-			catch {
-				print(error)
+			catch let jsonError {
+				print("could not convert data to win1251 format")
+				completion(.failure(jsonError)) // вместо print
 			}
+
 		}.resume()
 
 	}

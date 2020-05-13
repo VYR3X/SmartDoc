@@ -12,19 +12,40 @@ import Foundation
 protocol TimeTableInteractable {
 
 	/// Создать запись к врачу
-	func createAppointment()
+
+	/// Создать запись к врачу
+	/// - Parameters:
+	///   - slotId: id выбранного талона
+	///   - firstName: имя пользователя
+	///   - birthday: дата рождения пользователя
+	///   - phoneNumber: номер телефона
+	///   - email: почта
+	///   - polis: номер полиса
+	func createAppointment(slotId: String,
+						   firstName: String,
+						   birthday: String,
+						   phoneNumber: String,
+						   email: String,
+						   polis: String,
+						   completion: @escaping (Result<Any, Error>) -> Void)
 }
 
 /// Интерактор c расписанием врача
 final class TimeTableInteractor: TimeTableInteractable {
 
-	func createAppointment() {
+	func createAppointment(slotId: String,
+						   firstName: String,
+						   birthday: String,
+						   phoneNumber: String,
+						   email: String,
+						   polis: String,
+						   completion: @escaping (Result<Any, Error>) -> Void) {
 
 		print("Post button tapped")
 
 		let resource = "APPOINTMENT"
 		let method = "CREATE"
-		let params = "{SLOT_ID:\"A47EFFADC5C2715BE0530100007F9634\", PATIENT_NAME:\"Nikita\", PATIENT_LASTNAME:\"Smirnov\"}"
+		let params = "{SLOT_ID:\"\(slotId)\",PATIENT_NAME:\"\(firstName)\",PATIENT_LASTNAME:\"\(firstName)\",PATIENT_BIRTHDAY:\"\(birthday)\",PATIENT_PHONE:\"\(phoneNumber)\",PATIENT_EMAIL:\"\(email)\",PATIENT_POLICY:\"\(polis)\"}"
 
 		var url: URL? {
 			var components = URLComponents()
@@ -61,10 +82,12 @@ final class TimeTableInteractor: TimeTableInteractable {
 
 			do {
 				let interinData = try JSONSerialization.jsonObject(with: data, options: [])
-				print(interinData)
+				//print(interinData)
+				completion(.success(interinData))
 
-			} catch {
-				print(error)
+			} catch let jsonError {
+				//print(error)
+				completion(.failure(jsonError))
 			}
 		}.resume()
 	}

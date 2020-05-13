@@ -28,18 +28,26 @@ protocol TimeTablePresentableListener {
 	func didPressBack(_ viewController: UIViewController)
 
 	/// Пользователь выбрал удобное время и записался на прием
-	func createAppointment()
+	/// - Parameters:
+	///   - slotID: id выбранного талона
+	///   - firstName: Имя пользователя
+	///   - birthday: Дата рождения пользователя
+	///   - phoneNumber: Номер телефона
+	///   - email: Электронная почта
+	///   - polis: Номер полиса
+	func createAppointment(slotID: String,
+						   firstName: String,
+						   birthday: String,
+						   phoneNumber: String,
+						   email: String,
+						   polis: String)
 }
 
 /// Расписание
 class TimeTableViewController: UIViewController {
 
-	let datasource = [
-	["9.00", "10.00", "11.00", "12.00", "13.00", "14.00", "15.00", "16.00"],
-	["9.15", "10.15", "11.15", "12.15", "13.15", "14.15", "15.15", "16.15"],
-	["9.30", "10.30", "11.30", "12.30", "13.30", "14.30", "15.30", "16.30"],
-	["9.45", "10.45", "11.45", "12.45", "13.45", "14.45", "15.45", "16.45"]
-	]
+	/// Талоны
+	var datasourse: TicketModel?
 
 	private let descriptionLabel: UILabel = {
 		let label = UILabel()
@@ -56,31 +64,14 @@ class TimeTableViewController: UIViewController {
 		collectionViewLayout.scrollDirection = .vertical
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
-		collectionView.showsHorizontalScrollIndicator = false
+		collectionView.showsVerticalScrollIndicator = false
 		collectionView.backgroundColor = .white
-		collectionView.clipsToBounds = false
+		collectionView.clipsToBounds = true // false
 		collectionView.delegate = self
 		collectionView.dataSource = self
 		collectionView.register(TimeTableCollectionViewCell.self,
 								forCellWithReuseIdentifier: "CollectionViewCell")
 		return collectionView
-	}()
-
-	private let button: UIButton = {
-		let button = UIButton()
-		button.translatesAutoresizingMaskIntoConstraints = false
-		button.layer.cornerRadius = 15
-		button.backgroundColor = .purple
-		return button
-	}()
-
-	private let buttonLabel: UILabel = {
-		let label = UILabel()
-		label.translatesAutoresizingMaskIntoConstraints = false
-		label.textColor = .white
-		label.text = "Записаться на прием"
-		label.font = UIFont.boldSystemFont(ofSize: 25)
-		return label
 	}()
 
 	private var listener: TimeTablePresentableListener?
@@ -97,8 +88,6 @@ class TimeTableViewController: UIViewController {
 		view.backgroundColor = .white
 		view.addSubview(descriptionLabel)
 		view.addSubview(collectionView)
-		view.addSubview(button)
-		button.addSubview(buttonLabel)
 		setupView()
 	}
 
@@ -108,44 +97,31 @@ class TimeTableViewController: UIViewController {
 			descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 35),
 			descriptionLabel.heightAnchor.constraint(equalToConstant: 45),
 			descriptionLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
-			descriptionLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
+			descriptionLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
 
 			collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-			collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -350),
-			collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-			collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-
-			button.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 25),
-			button.heightAnchor.constraint(equalToConstant: 45),
-			button.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25),
-			button.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
-
-			buttonLabel.heightAnchor.constraint(equalToConstant: 30),
-			buttonLabel.centerXAnchor.constraint(equalTo: button.centerXAnchor),
-			buttonLabel.centerYAnchor.constraint(equalTo: button.centerYAnchor)
-
-
+			collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+			collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+			collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25)
 		])
 	}
 }
 
 extension TimeTableViewController: UICollectionViewDataSource {
 
-	func numberOfSections(in collectionView: UICollectionView) -> Int {
-		return 8
-	}
-
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 4 //datasource.count
+		return datasourse?.row.count ?? 0
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! TimeTableCollectionViewCell
 
-		cell.titleLabel.text = datasource[indexPath.row][indexPath.section]
-	//	cell.backgroundColor = UIColor(red: 144/255, green: 238/255, blue: 144/255, alpha: 1)
-		//cell.layer.cornerRadius = 20
+		cell.titleLabel.text = datasourse?.row[indexPath.row].TIME_SHOW
+
+		if datasourse?.row[indexPath.row].STATE == 1 { cell.cellView.backgroundColor = .red }
+		print(datasourse?.row[indexPath.row].TIME_SHOW)
+
 		return cell
 	}
 }
@@ -154,18 +130,31 @@ extension TimeTableViewController: UICollectionViewDelegateFlowLayout {
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-		listener!.createAppointment()
-		//guard let session = sessions?[safe: indexPath.row] else { return }
+		let firstName = UserSettings.userModel.name
+		let birthday = UserSettings.userModel.birthdate
+		let phoneNumber = UserSettings.userModel.telephone
+		let email = UserSettings.userModel.email
+		let polis = UserSettings.userModel.polis
 
-		//selectedIndex = indexPath.row
-		//delegate?.didSelectSessionWith(id: session.id)
+		let slotID = datasourse?.row[indexPath.row].id ?? "0000"
+
+		if datasourse?.row[indexPath.row].STATE == 1 {
+			print("Данное время занято, Выберите пожалуйста другое время для записи к врачу")
+		} else {
+			listener!.createAppointment(slotID: slotID,
+			firstName: firstName,
+			birthday: birthday,
+			phoneNumber: phoneNumber,
+			email: email,
+			polis: polis)
+		}
 	}
 
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: 90,
-					  height: 45)
+		return CGSize(width: collectionView.frame.width / 3.5,
+					  height: collectionView.frame.width / 4)
 	}
 
 	func collectionView(_ collectionView: UICollectionView,

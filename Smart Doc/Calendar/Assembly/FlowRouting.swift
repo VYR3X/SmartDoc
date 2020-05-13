@@ -30,5 +30,9 @@ protocol FlowRouting {
 	/// Перекинуть на экран: профиль пользователя
 	func routeToUserProfile()
 
+	//var model: SlotModel { get set }
+
+	func setTicketModel(model: TicketModel)
+
 }
 

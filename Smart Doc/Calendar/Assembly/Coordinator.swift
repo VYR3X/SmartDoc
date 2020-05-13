@@ -16,7 +16,7 @@ final class Coordinator {
 	private weak var rootViewController: UIViewController?
 
 	var resource_ID: String? // id специальности врача ( терапевт, хирург, стоматолог )
-	var bdate: String? 		// выбранная дата в календаре
+	var slotModel: TicketModel?
 
 	/// Конструктор
 	///
@@ -32,6 +32,10 @@ final class Coordinator {
 // MARK: - FlowRouting
 
 extension Coordinator: FlowRouting {
+
+	func setTicketModel(model: TicketModel) {
+		slotModel = model
+	}
 
 	func routeBack(from viewController: UIViewController) {
 		navigationController?.popViewController(animated: true)
@@ -54,14 +58,15 @@ extension Coordinator: FlowRouting {
 	}
 
 	func routeToDoctors() {
-//		guard let productsModel = productsModel else { return }
+//		guard let doctors = doctors else { return }
 		let viewController = assembly.makeDoctorsViewController(coordinator: self)
 		navigationController?.pushViewController(viewController, animated: true)
 	}
 
 	func routeToMeetingDoctor() {
-//		guard let productsModel = productsModel else { return }
-		let viewController = assembly.makeTimeTableViewController(coordinator: self)
+
+		guard let slotModel = slotModel else { return }
+		let viewController = assembly.makeTimeTableViewController(coordinator: self, slotsModel: slotModel)
 		navigationController?.pushViewController(viewController, animated: true)
 	}
 }

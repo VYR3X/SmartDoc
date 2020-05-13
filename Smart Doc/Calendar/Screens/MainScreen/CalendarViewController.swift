@@ -32,6 +32,8 @@ protocol CalendarPresentableListener {
 	///   - date: Выбранная дата
 	///   - resourceID: Выбранная специлизация врача (хирург, терапевт, стоматолог...)
 	func personSelectDate(date: String, resourceID: String)
+
+	func loadData()
 }
 
 /// Выбор темы приложения
@@ -117,10 +119,6 @@ class CalendarViewController: UIViewController {
 		listener?.didLoad(self)
 		self.title = "Calendar"
 		self.navigationController?.navigationBar.isTranslucent = false
-
-
-//		let rightBarBtn = UIBarButtonItem(title: "Light", style: .plain, target: self, action: #selector(rightBarBtnAction))
-//		self.navigationItem.rightBarButtonItem = rightBarBtn
 
 		initializeView()
 		setupViews()
@@ -218,9 +216,9 @@ class CalendarViewController: UIViewController {
 			daysView.topAnchor.constraint(equalTo: weekdaysView.bottomAnchor, constant: 0),
 			daysView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
 			daysView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
-			daysView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -400),
+			daysView.heightAnchor.constraint(equalToConstant: 275),
 
-			daysCollectionView.topAnchor.constraint(equalTo: daysView.topAnchor, constant: 0),
+			daysCollectionView.topAnchor.constraint(equalTo: daysView.topAnchor, constant: 15),
 			daysCollectionView.leftAnchor.constraint(equalTo: daysView.leftAnchor, constant: 0),
 			daysCollectionView.rightAnchor.constraint(equalTo: daysView.rightAnchor, constant: 0),
 			daysCollectionView.bottomAnchor.constraint(equalTo: daysView.bottomAnchor, constant: 0),
@@ -270,7 +268,10 @@ extension CalendarViewController: UICollectionViewDelegate {
 		print("Выбранная пользователем дата: \(bdate)")
 
 		listener!.personSelectDate(date: bdate, resourceID: resourseID!)
+
 		listener!.didPressDoctors()
+
+		//listener!.loadData()
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

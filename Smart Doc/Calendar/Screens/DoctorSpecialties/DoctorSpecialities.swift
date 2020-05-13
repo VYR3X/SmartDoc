@@ -56,6 +56,9 @@ class DoctorSpecialities: UIViewController  {
 		tableView.translatesAutoresizingMaskIntoConstraints = false
 		tableView.delegate = self
 		tableView.dataSource = self
+		tableView.separatorStyle = .none
+//		tableView.allowsSelection = false
+//		tableView.scrollIndicatorInsets.bottom = 64
 		tableView.register(DoctorSpecialitiesCell.self, forCellReuseIdentifier: "cellId")
 		return tableView
 	}()
@@ -119,6 +122,7 @@ extension DoctorSpecialities : UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
 		let selectDoctor = Resource_ID[indexPath.row];
+		print("Выбранная специализация врача: \(selectDoctor) - Resourse_ID")
 		listener?.didOpenCalendar(Resource_ID: selectDoctor)
 	}
 }

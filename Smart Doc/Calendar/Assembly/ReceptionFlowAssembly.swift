@@ -7,7 +7,7 @@
 //
 import UIKit
 
-/// Сборщик флоу отмена оплаты билета
+/// Сборщик флоу запись на прием к врачу
 final class ReseptionFlowAssembly {
 
 	//private weak var coordinator: Coordinator?
@@ -17,13 +17,11 @@ final class ReseptionFlowAssembly {
 
 	//private weak var coordinator: PurchaseFlowCoordinator?
 
-//	init(services: ServiceAssembly) {
-//		self.services = services
-//	}
+	//	init(services: ServiceAssembly) {
+	//		self.services = services
+	//	}
 
-	init() {
-		
-	}
+	init() {}
 
 	/// Метод для сборки экрана Профиль пользователя
 	func makeProfileViewController(coordinator: Coordinator) -> UIViewController {
@@ -67,12 +65,13 @@ final class ReseptionFlowAssembly {
 	}
 
 	/// Метод для сборки экрана со списком свободного времени для записи
-	func makeTimeTableViewController(coordinator: Coordinator) -> UIViewController {
+	func makeTimeTableViewController(coordinator: Coordinator, slotsModel: TicketModel) -> UIViewController {
 		let interactor = TimeTableInteractor()
 		let presenter = TimeTablePresenter(interactor: interactor,
 															   coordinator: coordinator)
 		let viewController = TimeTableViewController(listener: presenter)
 		presenter.viewController = viewController
+		viewController.datasourse = slotsModel
 		return viewController
 	}
 

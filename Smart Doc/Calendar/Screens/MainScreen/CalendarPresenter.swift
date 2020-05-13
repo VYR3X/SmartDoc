@@ -18,6 +18,8 @@ final class CalendarPresenter: CalendarPresentable {
 	private let interactor: CalendarInteractable
 	private let coordinator: FlowCoordinating & FlowRouting
 
+	var viewModel: SlotViewModel?
+
 	init(interactor: CalendarInteractable,
 		 coordinator: FlowCoordinating & FlowRouting) {
 		self.interactor = interactor
@@ -29,10 +31,27 @@ final class CalendarPresenter: CalendarPresentable {
 
 extension CalendarPresenter: CalendarPresentableListener {
 
+	func loadData() {}
+
 	func personSelectDate(date: String, resourceID: String) {
-		interactor.getDoctorTickets(selectdate: date, resourceID: resourceID)
+
+		interactor.getDoctorTickets(selectdate: date, resourceID: resourceID) { (result) in
+			switch result {
+			case .success(let slots):
+				print("\nУспешно выполнен запрос на получение талонов :\n\(slots)")
+				self.viewModel = SlotViewModel(model: slots)
+				//print("\nПолучает вью модель:\n\(self.viewModel)")
+				self.openNextView(slots: slots)
+
+			case .failure(let error):
+				print("error: \n \(error)")
+			}
+		}
 	}
 
+	func openNextView(slots: TicketModel) {
+		coordinator.setTicketModel(model: slots)
+	}
 
 	func didPressDoctors() {
 		coordinator.routeToDoctors()
@@ -40,6 +59,7 @@ extension CalendarPresenter: CalendarPresentableListener {
 
 	func didLoad(_ viewController: UIViewController) {
 
+		//convertModelToViewModel()
 //		let cards = interactor.getCardsModel()
 //		let cardsViewModel = cards.map { CardViewModel(model: $0) }
 //		viewController.setCards(viewModel: cardsViewModel)
@@ -48,6 +68,4 @@ extension CalendarPresenter: CalendarPresentableListener {
 	func didPressBack(_ viewController: UIViewController) {
 		coordinator.routeBack(from: viewController)
 	}
-
-
 }

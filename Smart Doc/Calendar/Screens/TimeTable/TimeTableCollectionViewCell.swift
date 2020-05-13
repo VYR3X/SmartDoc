@@ -33,6 +33,7 @@ final class TimeTableCollectionViewCell: UICollectionViewCell {
 		titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
 		titleLabel.translatesAutoresizingMaskIntoConstraints = false
 		titleLabel.textColor = .white
+		titleLabel.numberOfLines = 0
 		return titleLabel
 	}()
 
@@ -50,16 +51,15 @@ final class TimeTableCollectionViewCell: UICollectionViewCell {
 	}
 
 	private func setupConstraints() {
+
+		cellView.pinToSuperView()
+
 		NSLayoutConstraint.activate([
 
-			cellView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-			cellView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10),
-			cellView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-			cellView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
-
-			titleLabel.heightAnchor.constraint(equalToConstant: 35),
-			titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
 			titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+			titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+			titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+			titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10)
 		])
 	}
 }

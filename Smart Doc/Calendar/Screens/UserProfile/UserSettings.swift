@@ -2,12 +2,13 @@
 //  UserSettings.swift
 //  Smart Doc
 //
-//  Created by 17790204 on 09/05/2020.
+//  Created by Vlad Zhokhov on 09/05/2020.
 //  Copyright © 2020 Vlad Zhokhov. All rights reserved.
 //
 
 import Foundation
 
+/// Настройки экрана профиль (сохранение значений в UserDefaults)
 final class UserSettings {
 
 	private enum SettingsKeys: String {
@@ -15,9 +16,11 @@ final class UserSettings {
 		case userModel
 	}
 
+	/// Сохраняемая модель с данными пользователя в UserDefaults
 	static var userModel: UserProfileModel! {
         get {
-            guard let savedData = UserDefaults.standard.object(forKey: SettingsKeys.userModel.rawValue) as? Data, let decodedModel = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedData) as? UserProfileModel else { return nil }
+            guard let savedData = UserDefaults.standard.object(forKey: SettingsKeys.userModel.rawValue) as? Data,
+				let decodedModel = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedData) as? UserProfileModel else { return nil }
             return decodedModel
         }
         set {
@@ -35,6 +38,7 @@ final class UserSettings {
         }
     }
 
+	/// Сохраняем только ФИО пользователя в UserDefaults
 	static var userFIO: String! {
 
 		get {

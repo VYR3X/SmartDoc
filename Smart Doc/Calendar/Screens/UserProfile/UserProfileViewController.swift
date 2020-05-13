@@ -18,25 +18,33 @@ protocol UserProfilePresentableListener {
 	func openDoctorsSpecialities()
 }
 
-final class UserProfileViewController: UIViewController, UserProfileViewControllable {
+final class UserProfileViewController: UIViewController, UserProfileViewControllable, UIScrollViewDelegate {
 
     private let listener: UserProfilePresentableListener
 
-	// MARK: UI
+	// MARK: Scroll View
 
-	/// Лэйбл "Персональные данные"
-	let personalData: UILabel = {
-		let label = UILabel()
-		label.sizeToFit()
-		label.translatesAutoresizingMaskIntoConstraints = false
-		label.text = "Персональные данные"
+	private lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 75)
 
-		label.layer.shadowColor = UIColor.black.cgColor
-		label.layer.shadowOpacity = 1
-		label.layer.shadowOffset = .zero
-		label.layer.shadowRadius = 7
-		return label
+	/// Скролл вью
+	private lazy var scrollView: UIScrollView = {
+		let scrollView = UIScrollView(frame: view.bounds)
+		scrollView.backgroundColor = .orange
+		scrollView.contentSize = contentViewSize
+		scrollView.showsVerticalScrollIndicator = false
+		//scrollView.alwaysBounceVertical = true //???
+		return scrollView
 	}()
+
+	///  Вью содержащее весь контент
+	private lazy var contentView: UIView = {
+		let view = UIView()
+		view.backgroundColor = .orange
+		view.frame.size = contentViewSize
+		return view
+	}()
+
+	// MARK: UI
 
 	/// Картинка пациента
 	let profileImageView: UIImageView = {
@@ -75,8 +83,8 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 		let view = UIView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 		view.layer.cornerRadius = 45
-		view.backgroundColor = UIColor(red: 182/255, green: 250/255, blue: 244/255, alpha: 1)
-
+		//view.backgroundColor = UIColor(red: 182/255, green: 250/255, blue: 244/255, alpha: 1)
+		view.backgroundColor = .white
 		view.layer.shadowColor = UIColor.black.cgColor
 		view.layer.shadowOpacity = 1
 		view.layer.shadowOffset = .zero
@@ -93,7 +101,9 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 		textField.borderStyle = UITextField.BorderStyle.roundedRect
 		textField.delegate = self
 		textField.sizeToFit()
-		textField.placeholder = "Введите ФИО"
+//		textField.placeholder = "Введите ФИО"
+		let color = UIColor.white
+		textField.attributedPlaceholder = NSAttributedString(string: "Введите ФИО", attributes: [NSAttributedString.Key.foregroundColor : color])
 		//textField.text = "ФИО"
 		textField.autocapitalizationType = .words // каждое слово с большой буквы
 		return textField
@@ -105,7 +115,9 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 		textField.sizeToFit()
 		textField.translatesAutoresizingMaskIntoConstraints = false
 		//textField.text = "Дата рождения"
-		textField.placeholder = "Введите дату рождения"
+//		textField.placeholder = "Введите дату рождения"
+		let color = UIColor.white
+		textField.attributedPlaceholder = NSAttributedString(string: "Введите дату рождения", attributes: [NSAttributedString.Key.foregroundColor : color])
 		textField.borderStyle = UITextField.BorderStyle.roundedRect
 		textField.backgroundColor = .orange
 		textField.delegate = self
@@ -119,7 +131,10 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 		textField.sizeToFit()
 		textField.translatesAutoresizingMaskIntoConstraints = false
 		//textField.text = "Телефон"
-		textField.placeholder = "Введите номер телефона"
+		//textField.placeholder = "Введите номер телефона"
+
+		let color = UIColor.white
+		textField.attributedPlaceholder = NSAttributedString(string: "Введите номер телефона", attributes: [NSAttributedString.Key.foregroundColor : color])
 		textField.borderStyle = UITextField.BorderStyle.roundedRect
 		textField.backgroundColor = .orange
 		textField.delegate = self
@@ -144,7 +159,7 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 		textField.backgroundColor = .orange
 		textField.keyboardType = .emailAddress
 
-		let color = UIColor.lightText
+		let color = UIColor.white
 		textField.attributedPlaceholder = NSAttributedString(string: "Введите почту", attributes: [NSAttributedString.Key.foregroundColor : color])
 		textField.borderStyle = UITextField.BorderStyle.roundedRect
 		textField.delegate = self
@@ -166,7 +181,9 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 		textField.sizeToFit()
 		textField.translatesAutoresizingMaskIntoConstraints = false
 		//textField.text = "полис"
-		textField.placeholder = "Введите полис"
+//		textField.placeholder = "Введите полис"
+		let color = UIColor.white
+		textField.attributedPlaceholder = NSAttributedString(string: "Введите полис", attributes: [NSAttributedString.Key.foregroundColor : color])
 		textField.borderStyle = UITextField.BorderStyle.roundedRect
 		textField.delegate = self
 		textField.backgroundColor = .orange
@@ -192,28 +209,23 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
         super.viewDidLoad()
 		listener.didLoad(self)
 		view.backgroundColor = UIColor(red: 175/255, green: 242/255, blue: 250/255, alpha: 1)
+
+		configureNavigationBar()
 		setupView()
 		configureTapGestureToCloseKeyBoard()
 
-		self.title = "User Profile"
-		self.navigationController?.navigationBar.isTranslucent = false
+		showSavedDataInTextFields()
 
-		let rightBarBtn = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonAction))
-		self.navigationItem.rightBarButtonItem = rightBarBtn
-		/// пока загдушка чтобы не могли перейти назад
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem()
 	}
 
 	@objc func saveButtonAction(sender: UIBarButtonItem) {
 
+		// TO:DO - приходит фио а нужны только  имя и фамилия значит нужно спарсить строку
 		let nameTrimmingText = fioTextField.text!.trimmingCharacters(in: .whitespaces)
-		// TO:DO - приходит фио а нужны толь  имя и фамилия значит нужно спарсить строку
         let birthdateTrimmingText = birthdayTextField.text!.trimmingCharacters(in: .whitespaces)
 		let telephoneTrimmingText = telephoneTextField.text!.trimmingCharacters(in: .whitespaces)
         let emailTrimmingText = emailTextField.text!.trimmingCharacters(in: .whitespaces)
 		let polisTrimmingText = polisTextField.text!.trimmingCharacters(in: .whitespaces)
-
-        print(nameTrimmingText)
 
         let userObject = UserProfileModel(name: nameTrimmingText,
 										  birthdate: birthdateTrimmingText,
@@ -221,13 +233,28 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 										  email: emailTrimmingText,
 										  polis: polisTrimmingText)
 
-		//UserSettings.userName = nameTrimmingText
-		UserSettings.userModel = userObject
-
-		//print(UserSettings.userName)
-		print(UserSettings.userModel)
+		UserSettings.userModel = userObject // сохраняю в память устройства введенные данные
 
 		listener.openDoctorsSpecialities()
+	}
+
+	private func configureNavigationBar() {
+		self.title = "User Profile"
+		self.navigationController?.navigationBar.isTranslucent = false
+		self.navigationController?.navigationBar.backgroundColor = .orange
+
+		let rightBarBtn = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveButtonAction))
+		self.navigationItem.rightBarButtonItem = rightBarBtn
+		/// пока заглушка чтобы не могли перейти назад
+		self.navigationItem.leftBarButtonItem = UIBarButtonItem()
+	}
+
+	private func showSavedDataInTextFields() {
+		fioTextField.text = UserSettings.userModel.name
+		birthdayTextField.text = UserSettings.userModel.birthdate
+		telephoneTextField.text = UserSettings.userModel.telephone
+		emailTextField.text = UserSettings.userModel.email
+		polisTextField.text = UserSettings.userModel.polis
 	}
 
 	// метод для скрытия клавиатуры при нажатии по экрану
@@ -243,18 +270,22 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 
 	private func setupView() {
 
-		view.addSubview(personalData)
-		view.addSubview(profileImageView)
-		view.addSubview(backgroungProfileView)
-		backgroungProfileView.addSubview(backgroungRoundView)
-		backgroungRoundView.addSubview(fioTextField)
-		backgroungRoundView.addSubview(birthdayTextField)
-		backgroungProfileView.addSubview(telephoneTextField)
-		backgroungProfileView.addSubview(telephoneImageView)
-		backgroungProfileView.addSubview(emailTextField)
-		backgroungProfileView.addSubview(emailImageView)
-		backgroungProfileView.addSubview(polisTextField)
-		backgroungProfileView.addSubview(polisImageView)
+		view.addSubview(scrollView)
+		scrollView.addSubview(contentView)
+
+		contentView.addSubviews(profileImageView,
+						 backgroungProfileView)
+
+		backgroungProfileView.addSubviews(backgroungRoundView,
+										  telephoneTextField,
+										  telephoneImageView,
+										  emailTextField,
+										  emailImageView,
+										  polisTextField,
+										  polisImageView)
+
+		backgroungRoundView.addSubviews(fioTextField,
+										birthdayTextField)
 
 		setupConstraints()
 	}
@@ -265,21 +296,22 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 
 			let screenHeight = screenSize.height
 
+//			scrollView.pinToSuperView()
+
 			NSLayoutConstraint.activate([
 
-				personalData.heightAnchor.constraint(equalToConstant: 25),
-				personalData.topAnchor.constraint(equalTo: view.topAnchor, constant: 45),
-				personalData.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//				self.view.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
 
-				profileImageView.heightAnchor.constraint(equalToConstant: screenHeight / 7),
-				profileImageView.widthAnchor.constraint(equalToConstant: screenHeight / 7),
-				profileImageView.topAnchor.constraint(equalTo: personalData.bottomAnchor, constant: 35),
-				profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+				profileImageView.heightAnchor.constraint(equalToConstant: screenHeight / 5.5),
+				profileImageView.widthAnchor.constraint(equalToConstant: screenHeight / 5.5),
+				profileImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 35),
+				profileImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
 
-				backgroungProfileView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 25),
-				backgroungProfileView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-				backgroungProfileView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-				backgroungProfileView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+				backgroungProfileView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 45),
+				backgroungProfileView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+				backgroungProfileView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+			//	backgroungProfileView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+				backgroungProfileView.heightAnchor.constraint(equalToConstant: 500),
 
 				backgroungRoundView.heightAnchor.constraint(equalToConstant: screenHeight / 6),
 				backgroungRoundView.topAnchor.constraint(equalTo: backgroungProfileView.topAnchor, constant: 45),
@@ -287,32 +319,31 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 				backgroungRoundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
 
 				fioTextField.heightAnchor.constraint(equalToConstant: screenHeight / 17),
-				fioTextField.topAnchor.constraint(equalTo: backgroungRoundView.topAnchor, constant: 10),
-				//fio.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+				fioTextField.topAnchor.constraint(equalTo: backgroungRoundView.topAnchor, constant: 11),
 				fioTextField.leadingAnchor.constraint(equalTo: backgroungRoundView.leadingAnchor, constant: 25),
 				fioTextField.trailingAnchor.constraint(equalTo: backgroungRoundView.trailingAnchor, constant: -25),
 
 				birthdayTextField.heightAnchor.constraint(equalToConstant: screenHeight / 17),
 				birthdayTextField.topAnchor.constraint(equalTo: fioTextField.bottomAnchor, constant: 10),
-				//birthday.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 				birthdayTextField.leadingAnchor.constraint(equalTo: backgroungRoundView.leadingAnchor, constant: 25),
 				birthdayTextField.trailingAnchor.constraint(equalTo: backgroungRoundView.trailingAnchor, constant: -25),
+				backgroungRoundView.bottomAnchor.constraint(equalTo: birthdayTextField.bottomAnchor, constant: 10),
 
 				telephoneTextField.heightAnchor.constraint(equalToConstant: screenHeight / 17),
-				telephoneTextField.topAnchor.constraint(equalTo: backgroungRoundView.bottomAnchor, constant: 45),
-//				telephone.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+				telephoneTextField.topAnchor.constraint(equalTo: backgroungRoundView.bottomAnchor, constant: 35),
 				telephoneTextField.leadingAnchor.constraint(equalTo: telephoneImageView.trailingAnchor, constant: 25),
 				telephoneTextField.trailingAnchor.constraint(equalTo: backgroungRoundView.trailingAnchor, constant: -25),
 
 				telephoneImageView.heightAnchor.constraint(equalToConstant: screenHeight / 17),
 				telephoneImageView.widthAnchor.constraint(equalToConstant: 100),
-				telephoneImageView.topAnchor.constraint(equalTo: backgroungRoundView.bottomAnchor, constant: 45),
+				telephoneImageView.topAnchor.constraint(equalTo: backgroungRoundView.bottomAnchor, constant: 35),
 				telephoneImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 
 
 				emailTextField.heightAnchor.constraint(equalToConstant: screenHeight / 17),
 				emailTextField.topAnchor.constraint(equalTo: telephoneTextField.bottomAnchor, constant: 25),
-				emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+				emailTextField.leadingAnchor.constraint(equalTo: emailImageView.trailingAnchor, constant: 25),
+				emailTextField.trailingAnchor.constraint(equalTo: backgroungRoundView.trailingAnchor, constant: -25),
 
 				emailImageView.heightAnchor.constraint(equalToConstant: screenHeight / 17),
 				emailImageView.widthAnchor.constraint(equalToConstant: 100),
@@ -321,7 +352,8 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 
 				polisTextField.heightAnchor.constraint(equalToConstant: screenHeight / 17),
 				polisTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 25),
-				polisTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+				polisTextField.leadingAnchor.constraint(equalTo: polisImageView.trailingAnchor, constant: 25),
+				polisTextField.trailingAnchor.constraint(equalTo: backgroungRoundView.trailingAnchor, constant: -25),
 
 				polisImageView.heightAnchor.constraint(equalToConstant: screenHeight / 17),
 				polisImageView.widthAnchor.constraint(equalToConstant: 100),

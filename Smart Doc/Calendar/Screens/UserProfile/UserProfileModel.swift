@@ -2,20 +2,25 @@
 //  UserProfileModel.swift
 //  Smart Doc
 //
-//  Created by 17790204 on 09/05/2020.
+//  Created by Vlad Zhokhov on 09/05/2020.
 //  Copyright © 2020 Vlad Zhokhov. All rights reserved.
 //
 
 import Foundation
 
-// Модель содержащая информацию по пользователю
+/// Модель содержащая информацию по пользователю
 class UserProfileModel: NSObject, NSCoding {
 
-	let name: String
-	let birthdate: String
-	let telephone: String
-	let email: String
-	let polis: String
+	/// фио пользователя
+	var name: String = ""
+	/// дата рождения
+	var birthdate: String = ""
+	/// телефон
+	var telephone: String = ""
+	/// почта
+	var email: String = ""
+	/// номер полиса
+	var polis: String = ""
 
 	init(name: String, birthdate: String, telephone: String, email: String, polis: String) {
 		self.name = name
@@ -34,10 +39,10 @@ class UserProfileModel: NSObject, NSCoding {
 	}
 
 	required init?(coder: NSCoder) {
-		name = coder.decodeObject(forKey: "name") as? String ?? ""
-		birthdate = coder.decodeObject(forKey: "birthdate") as? String ?? ""
-		telephone = coder.decodeObject(forKey: "telephone") as? String ?? ""
-		email = coder.decodeObject(forKey: "email") as? String ?? ""
-		polis = coder.decodeObject(forKey: "polis") as? String ?? ""
+		name = coder.decodeObject(forKey: "name") as? String ?? "имя"
+		birthdate = coder.decodeObject(forKey: "birthdate") as? String ?? "дата рождения"
+		telephone = coder.decodeObject(forKey: "telephone") as? String ?? "телефон"
+		email = coder.decodeObject(forKey: "email") as? String ?? "почта"
+		polis = coder.decodeObject(forKey: "polis") as? String ?? "полис"
 	}
 }
