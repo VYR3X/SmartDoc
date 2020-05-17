@@ -2,7 +2,7 @@
 //  LaunchView.swift
 //  Smart Doc
 //
-//  Created by 17790204 on 30/04/2020.
+//  Created by Vlad Zhokhov on 30/04/2020.
 //  Copyright © 2020 Vlad Zhokhov. All rights reserved.
 //
 

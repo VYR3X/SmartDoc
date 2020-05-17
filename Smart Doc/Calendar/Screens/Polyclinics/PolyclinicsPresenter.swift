@@ -2,7 +2,7 @@
 //  PolyclinicsPresenter.swift
 //  Smart Doc
 //
-//  Created by 17790204 on 10/05/2020.
+//  Created by Vlad Zhokhov on 10/05/2020.
 //  Copyright © 2020 Vlad Zhokhov. All rights reserved.
 //
 
