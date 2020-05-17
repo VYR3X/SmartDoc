@@ -8,6 +8,34 @@
 
 import UIKit
 
+/// Интерфейс взаимодействия с вью-контроллером экрана CalendarViewController.
+protocol CalendarViewControllable {}
+
+/// Интерфейс взаимодействия с презентером экрана CalendarViewController.
+protocol CalendarPresentableListener {
+
+	/// Данные загрузились
+	///
+	/// - Parameter viewController: текущий вью контроллер
+	func didLoad(_ viewController: UIViewController)
+
+	/// Информирует листенер о нажатии кнопки назад.
+	///
+	/// - Parameter viewController: Вью-контроллера экрана CalendarViewController.
+	func didPressBack(_ viewController: UIViewController)
+
+	/// Информирует листенер о переходе на экран с врачами
+	func didPressDoctors()
+
+	/// Пользователь выбрал дату в календаре
+	/// - Parameters:
+	///   - date: Выбранная дата
+	///   - resourceID: Выбранная специлизация врача (хирург, терапевт, стоматолог...)
+	func personSelectDate(date: String, resourceID: String)
+
+	func loadData()
+}
+
 /// Выбор темы приложения
 enum MyTheme {
 	case light
@@ -15,15 +43,28 @@ enum MyTheme {
 }
 
 /// Календарь
-final class CalendarViewController: UIViewController {
+class CalendarViewController: UIViewController {
 
 	private var theme = MyTheme.dark
 
+	/// Листенер экрана CalendarViewController
+	var listener: CalendarPresentableListener?
+
+	/// Специализация врача
+	var resourseID: String?
+
+	/// Вью выбора дня в календаре (все дни месяца) 
 	let daysView: UIView = {
 		let view = UIView()
 		view.translatesAutoresizingMaskIntoConstraints = false
-		view.backgroundColor = UIColor(red: 144/255, green: 238/255, blue: 144/255, alpha: 1)
+		view.backgroundColor = .white
 		view.layer.cornerRadius = 20
+		// настойка тени
+		view.layer.shadowColor = UIColor.black.cgColor
+		view.layer.shadowOpacity = 1
+		view.layer.shadowOffset = .zero
+		view.layer.shadowRadius = 3
+
 		return view
 	}()
 
@@ -66,20 +107,24 @@ final class CalendarViewController: UIViewController {
 		daysCollectionView.collectionViewLayout.invalidateLayout()
 	}
 
+	init(listener: CalendarPresentableListener) {
+		super.init(nibName: nil, bundle: nil)
+		self.listener = listener
+	}
+
+	required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.title = "My Calender"
+		listener?.didLoad(self)
+		self.title = "Calendar"
 		self.navigationController?.navigationBar.isTranslucent = false
-		self.view.backgroundColor = Style.bgColor
-		//view.backgroundColor = UIColor(red: 0, green: 255, blue: 127, alpha: 1)
-
-//		let rightBarBtn = UIBarButtonItem(title: "Light", style: .plain, target: self, action: #selector(rightBarBtnAction))
-//		self.navigationItem.rightBarButtonItem = rightBarBtn
 
 		initializeView()
 		setupViews()
 
 	}
+
 
 //	@objc func rightBarBtnAction(sender: UIBarButtonItem) {
 //		if theme == .dark {
@@ -128,7 +173,8 @@ final class CalendarViewController: UIViewController {
 			theme = .dark
 			Style.themeDark()
 		}
-		self.view.backgroundColor = Style.bgColor
+		self.view.backgroundColor = UIColor(red: 175/255, green: 242/255, blue: 250/255, alpha: 1)
+		//self.view.backgroundColor = Style.bgColor
 		changeTheme()
 	}
 
@@ -155,7 +201,6 @@ final class CalendarViewController: UIViewController {
 		view.addSubview(weekdaysView)
 		view.addSubview(daysView)
 		daysView.addSubview(daysCollectionView)
-		//view.addSubview(daysCollectionView)
 
 		NSLayoutConstraint.activate([
 			monthView.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
@@ -171,9 +216,9 @@ final class CalendarViewController: UIViewController {
 			daysView.topAnchor.constraint(equalTo: weekdaysView.bottomAnchor, constant: 0),
 			daysView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
 			daysView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
-			daysView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -400),
+			daysView.heightAnchor.constraint(equalToConstant: 275),
 
-			daysCollectionView.topAnchor.constraint(equalTo: daysView.topAnchor, constant: 0),
+			daysCollectionView.topAnchor.constraint(equalTo: daysView.topAnchor, constant: 15),
 			daysCollectionView.leftAnchor.constraint(equalTo: daysView.leftAnchor, constant: 0),
 			daysCollectionView.rightAnchor.constraint(equalTo: daysView.rightAnchor, constant: 0),
 			daysCollectionView.bottomAnchor.constraint(equalTo: daysView.bottomAnchor, constant: 0),
@@ -216,14 +261,17 @@ extension CalendarViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let cell = collectionView.cellForItem(at: indexPath)
 		cell?.backgroundColor = Colors.darkRed
-		let lbl = cell?.subviews[1] as! UILabel
-		lbl.textColor = UIColor.white
+		let selectDay = cell?.subviews[1] as! UILabel
+		selectDay.textColor = UIColor.white
 
-		///  вынести отображение вью черех координатор
-		let viewController = DoctorsViewController()
-		//navigationController?.pushViewController(viewController, animated: true)
-		//show(viewController, sender: self)
-		present(viewController, animated: true, completion: nil)
+		let bdate = String(selectDay.text!)+"."+String(currentMonthIndex)+"."+String(currentYear)
+		print("Выбранная пользователем дата: \(bdate)")
+
+		listener!.personSelectDate(date: bdate, resourceID: resourseID!)
+
+		listener!.didPressDoctors()
+
+		//listener!.loadData()
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -285,3 +333,5 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
 			return 8.0
 		}
 }
+
+extension CalendarViewController: CalendarViewControllable {}

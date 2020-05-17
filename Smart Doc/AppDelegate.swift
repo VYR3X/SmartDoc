@@ -18,9 +18,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window = UIWindow()
 		window?.makeKeyAndVisible()
 		window?.backgroundColor = .orange
-		let nc = UINavigationController(rootViewController: CalendarViewController())
-//		nc.viewControllers = [firstViewController, secondViewController]
-		window?.rootViewController = nc
+
+		let assembly = ReseptionFlowAssembly()
+
+		#warning("Нет лаунчера и открытие экранов через tab bar")
+
+		let mainNavigationViewController = UINavigationController(rootViewController: LaunchView())
+		//let mainNavigationViewController = UINavigationController(rootViewController: TabBarController())
+		
+		let coordinator = assembly.makeCoordinator(in: mainNavigationViewController)
+//		coordinator.routeToPolyclinics()
+		coordinator.routeToUserProfile()
+
+		window?.rootViewController = mainNavigationViewController
 		return true
 	}
 

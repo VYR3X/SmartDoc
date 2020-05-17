@@ -18,7 +18,7 @@ class DoctorSpecialitiesCell: UITableViewCell {
 		let view = UIView()
 		view.layer.cornerRadius = 10
 		view.translatesAutoresizingMaskIntoConstraints = false
-		view.backgroundColor = UIColor(red: 0, green: 255, blue: 127, alpha: 1)
+		view.backgroundColor = UIColor(red: 175/255, green: 242/255, blue: 250/255, alpha: 1)
 		return view
 	}()
 
@@ -48,10 +48,10 @@ class DoctorSpecialitiesCell: UITableViewCell {
 			cellView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
 			cellView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
 
-			dayLabel.heightAnchor.constraint(equalToConstant: 20),
-			dayLabel.widthAnchor.constraint(equalToConstant: 100),
-			dayLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-			dayLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+			dayLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+			dayLabel.heightAnchor.constraint(equalToConstant: 30),
+			dayLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 25),
+			dayLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -25)
 			])
 	}
 

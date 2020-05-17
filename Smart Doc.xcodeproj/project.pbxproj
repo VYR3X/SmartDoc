@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01048873246DC764000B90D1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01048872246DC764000B90D1 /* TabBarController.swift */; };
+		0104887A24716066000B90D1 /* SpecialitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0104887924716066000B90D1 /* SpecialitiesViewModel.swift */; };
+		01186834244CA0D000609D35 /* TimeTableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01186833244CA0D000609D35 /* TimeTableCollectionViewCell.swift */; };
+		015ED5DD2466BA20002FDB4D /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015ED5DC2466BA20002FDB4D /* UserSettings.swift */; };
+		015ED5DF2466FE34002FDB4D /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015ED5DE2466FE33002FDB4D /* UserProfileModel.swift */; };
+		015ED5E424688C29002FDB4D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015ED5E324688C29002FDB4D /* UIView+Extension.swift */; };
+		015ED5E824689B86002FDB4D /* PolyclinicsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015ED5E524689B86002FDB4D /* PolyclinicsPresenter.swift */; };
+		015ED5E924689B86002FDB4D /* PolyclinicsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015ED5E624689B86002FDB4D /* PolyclinicsInteractor.swift */; };
+		015ED5EA24689B86002FDB4D /* PolyclinicsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015ED5E724689B86002FDB4D /* PolyclinicsModel.swift */; };
+		015ED5EE24689BC5002FDB4D /* PolyclinicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015ED5EC24689BC5002FDB4D /* PolyclinicsViewController.swift */; };
+		015ED5EF24689BC5002FDB4D /* PolyclinicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015ED5ED24689BC5002FDB4D /* PolyclinicsViewModel.swift */; };
+		015ED612246B504F002FDB4D /* SlotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015ED611246B504F002FDB4D /* SlotViewModel.swift */; };
+		018CE3BC24427D230064E3E1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CE3BB24427D230064E3E1 /* Coordinator.swift */; };
+		018CE3BE24427DAF0064E3E1 /* FlowRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CE3BD24427DAF0064E3E1 /* FlowRouting.swift */; };
+		018CE3C024427E920064E3E1 /* FlowCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CE3BF24427E920064E3E1 /* FlowCoordinating.swift */; };
 		01943D8B240C074600DD4237 /* ReceptionFlowAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943D8A240C074600DD4237 /* ReceptionFlowAssembly.swift */; };
 		01943D8D240C084B00DD4237 /* Assembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943D8C240C084B00DD4237 /* Assembly.swift */; };
 		01943D92240C1BB400DD4237 /* CalendarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01943D91240C1BB400DD4237 /* CalendarPresenter.swift */; };
@@ -30,12 +45,40 @@
 		019CC5A323F9A69500CB8D14 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019CC5A223F9A69500CB8D14 /* CalendarViewController.swift */; };
 		019CC5A823F9BE8F00CB8D14 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019CC5A723F9BE8F00CB8D14 /* Style.swift */; };
 		019CC5AA23F9C98A00CB8D14 /* DayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019CC5A923F9C98A00CB8D14 /* DayCollectionViewCell.swift */; };
+		01A16E6F245B4CC40014650C /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E6E245B4CC40014650C /* LaunchView.swift */; };
+		01A16E71245B56000014650C /* DoctorsSpecialitiesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E70245B56000014650C /* DoctorsSpecialitiesPresenter.swift */; };
+		01A16E73245B56160014650C /* DoctorSpecialitiesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E72245B56160014650C /* DoctorSpecialitiesInteractor.swift */; };
+		01A16E75245B59D90014650C /* SpecialitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E74245B59D90014650C /* SpecialitiesModel.swift */; };
+		01A16E8324618D930014650C /* UserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E8024618D930014650C /* UserProfilePresenter.swift */; };
+		01A16E8424618D930014650C /* UserProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E8124618D930014650C /* UserProfileInteractor.swift */; };
+		01A16E8824618DBF0014650C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E8624618DBF0014650C /* UserProfileViewController.swift */; };
+		01A16E8D24618E900014650C /* OperationHistoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E8A24618E900014650C /* OperationHistoryPresenter.swift */; };
+		01A16E8E24618E900014650C /* OperationHistoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E8B24618E900014650C /* OperationHistoryInteractor.swift */; };
+		01A16E8F24618E900014650C /* OperationHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E8C24618E900014650C /* OperationHistoryModel.swift */; };
+		01A16E9224618EE60014650C /* OperationHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E9024618EE60014650C /* OperationHistoryViewController.swift */; };
+		01A16E9324618EE60014650C /* OperationHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E9124618EE60014650C /* OperationHistoryViewModel.swift */; };
 		01BD72A124324E4B0090175E /* DayCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BD72A024324E4B0090175E /* DayCellTableViewCell.swift */; };
 		01BD72A32432523E0090175E /* DoctorSpecialities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BD72A22432523E0090175E /* DoctorSpecialities.swift */; };
 		01BD72A5243252CB0090175E /* DoctorSpecialitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BD72A4243252CB0090175E /* DoctorSpecialitiesCell.swift */; };
+		01CBB7C2246C606A00DB7A03 /* TicketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CBB7C1246C606A00DB7A03 /* TicketModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01048872246DC764000B90D1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		0104887924716066000B90D1 /* SpecialitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialitiesViewModel.swift; sourceTree = "<group>"; };
+		01186833244CA0D000609D35 /* TimeTableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableCollectionViewCell.swift; sourceTree = "<group>"; };
+		015ED5DC2466BA20002FDB4D /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		015ED5DE2466FE33002FDB4D /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
+		015ED5E324688C29002FDB4D /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		015ED5E524689B86002FDB4D /* PolyclinicsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyclinicsPresenter.swift; sourceTree = "<group>"; };
+		015ED5E624689B86002FDB4D /* PolyclinicsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyclinicsInteractor.swift; sourceTree = "<group>"; };
+		015ED5E724689B86002FDB4D /* PolyclinicsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyclinicsModel.swift; sourceTree = "<group>"; };
+		015ED5EC24689BC5002FDB4D /* PolyclinicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyclinicsViewController.swift; sourceTree = "<group>"; };
+		015ED5ED24689BC5002FDB4D /* PolyclinicsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyclinicsViewModel.swift; sourceTree = "<group>"; };
+		015ED611246B504F002FDB4D /* SlotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotViewModel.swift; sourceTree = "<group>"; };
+		018CE3BB24427D230064E3E1 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		018CE3BD24427DAF0064E3E1 /* FlowRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowRouting.swift; sourceTree = "<group>"; };
+		018CE3BF24427E920064E3E1 /* FlowCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinating.swift; sourceTree = "<group>"; };
 		01943D8A240C074600DD4237 /* ReceptionFlowAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceptionFlowAssembly.swift; sourceTree = "<group>"; };
 		01943D8C240C084B00DD4237 /* Assembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembly.swift; sourceTree = "<group>"; };
 		01943D91240C1BB400DD4237 /* CalendarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPresenter.swift; sourceTree = "<group>"; };
@@ -61,9 +104,22 @@
 		019CC5A223F9A69500CB8D14 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		019CC5A723F9BE8F00CB8D14 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		019CC5A923F9C98A00CB8D14 /* DayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCollectionViewCell.swift; sourceTree = "<group>"; };
+		01A16E6E245B4CC40014650C /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		01A16E70245B56000014650C /* DoctorsSpecialitiesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsSpecialitiesPresenter.swift; sourceTree = "<group>"; };
+		01A16E72245B56160014650C /* DoctorSpecialitiesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSpecialitiesInteractor.swift; sourceTree = "<group>"; };
+		01A16E74245B59D90014650C /* SpecialitiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialitiesModel.swift; sourceTree = "<group>"; };
+		01A16E8024618D930014650C /* UserProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePresenter.swift; sourceTree = "<group>"; };
+		01A16E8124618D930014650C /* UserProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInteractor.swift; sourceTree = "<group>"; };
+		01A16E8624618DBF0014650C /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		01A16E8A24618E900014650C /* OperationHistoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationHistoryPresenter.swift; sourceTree = "<group>"; };
+		01A16E8B24618E900014650C /* OperationHistoryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationHistoryInteractor.swift; sourceTree = "<group>"; };
+		01A16E8C24618E900014650C /* OperationHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationHistoryModel.swift; sourceTree = "<group>"; };
+		01A16E9024618EE60014650C /* OperationHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationHistoryViewController.swift; sourceTree = "<group>"; };
+		01A16E9124618EE60014650C /* OperationHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationHistoryViewModel.swift; sourceTree = "<group>"; };
 		01BD72A024324E4B0090175E /* DayCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellTableViewCell.swift; sourceTree = "<group>"; };
 		01BD72A22432523E0090175E /* DoctorSpecialities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSpecialities.swift; sourceTree = "<group>"; };
 		01BD72A4243252CB0090175E /* DoctorSpecialitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSpecialitiesCell.swift; sourceTree = "<group>"; };
+		01CBB7C1246C606A00DB7A03 /* TicketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,12 +133,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		015ED5EB24689B8C002FDB4D /* Polyclinics */ = {
+			isa = PBXGroup;
+			children = (
+				015ED5EC24689BC5002FDB4D /* PolyclinicsViewController.swift */,
+				015ED5ED24689BC5002FDB4D /* PolyclinicsViewModel.swift */,
+				015ED5E524689B86002FDB4D /* PolyclinicsPresenter.swift */,
+				015ED5E624689B86002FDB4D /* PolyclinicsInteractor.swift */,
+				015ED5E724689B86002FDB4D /* PolyclinicsModel.swift */,
+			);
+			path = Polyclinics;
+			sourceTree = "<group>";
+		};
 		01943D88240C052100DD4237 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
 				019CC5A223F9A69500CB8D14 /* CalendarViewController.swift */,
 				01943D91240C1BB400DD4237 /* CalendarPresenter.swift */,
 				01943D94240C1C1B00DD4237 /* CalendarInteractor.swift */,
+				015ED611246B504F002FDB4D /* SlotViewModel.swift */,
+				01CBB7C1246C606A00DB7A03 /* TicketModel.swift */,
 				01943D93240C1BBE00DD4237 /* Views */,
 			);
 			path = MainScreen;
@@ -93,6 +163,10 @@
 			children = (
 				01943D8A240C074600DD4237 /* ReceptionFlowAssembly.swift */,
 				01943D8C240C084B00DD4237 /* Assembly.swift */,
+				018CE3BB24427D230064E3E1 /* Coordinator.swift */,
+				018CE3BD24427DAF0064E3E1 /* FlowRouting.swift */,
+				018CE3BF24427E920064E3E1 /* FlowCoordinating.swift */,
+				01048872246DC764000B90D1 /* TabBarController.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -100,10 +174,14 @@
 		01943D8E240C1B4300DD4237 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				01A16E6D245B4C920014650C /* Launcher */,
+				015ED5EB24689B8C002FDB4D /* Polyclinics */,
+				01A16E7A24618CF10014650C /* UserProfile */,
 				01BD729F243245B40090175E /* DoctorSpecialties */,
 				01943D88240C052100DD4237 /* MainScreen */,
 				01943D8F240C1B5A00DD4237 /* Doctors */,
 				01943D90240C1B7800DD4237 /* TimeTable */,
+				01A16E7D24618D230014650C /* OperationHistory */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -125,6 +203,7 @@
 				01943D9C240C1C6200DD4237 /* TimeTableViewController.swift */,
 				01943D9E240C1C7200DD4237 /* TimeTablePresenter.swift */,
 				01943DA0240C1C8200DD4237 /* TimeTableInteractor.swift */,
+				01186833244CA0D000609D35 /* TimeTableCollectionViewCell.swift */,
 			);
 			path = TimeTable;
 			sourceTree = "<group>";
@@ -143,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				01943DA5240C1E2100DD4237 /* Date+Extension.swift */,
+				015ED5E324688C29002FDB4D /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -238,11 +318,47 @@
 			path = Style;
 			sourceTree = "<group>";
 		};
+		01A16E6D245B4C920014650C /* Launcher */ = {
+			isa = PBXGroup;
+			children = (
+				01A16E6E245B4CC40014650C /* LaunchView.swift */,
+			);
+			path = Launcher;
+			sourceTree = "<group>";
+		};
+		01A16E7A24618CF10014650C /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				01A16E8624618DBF0014650C /* UserProfileViewController.swift */,
+				01A16E8024618D930014650C /* UserProfilePresenter.swift */,
+				01A16E8124618D930014650C /* UserProfileInteractor.swift */,
+				015ED5DC2466BA20002FDB4D /* UserSettings.swift */,
+				015ED5DE2466FE33002FDB4D /* UserProfileModel.swift */,
+			);
+			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		01A16E7D24618D230014650C /* OperationHistory */ = {
+			isa = PBXGroup;
+			children = (
+				01A16E9024618EE60014650C /* OperationHistoryViewController.swift */,
+				01A16E8A24618E900014650C /* OperationHistoryPresenter.swift */,
+				01A16E8B24618E900014650C /* OperationHistoryInteractor.swift */,
+				01A16E9124618EE60014650C /* OperationHistoryViewModel.swift */,
+				01A16E8C24618E900014650C /* OperationHistoryModel.swift */,
+			);
+			path = OperationHistory;
+			sourceTree = "<group>";
+		};
 		01BD729F243245B40090175E /* DoctorSpecialties */ = {
 			isa = PBXGroup;
 			children = (
 				01BD72A22432523E0090175E /* DoctorSpecialities.swift */,
 				01BD72A4243252CB0090175E /* DoctorSpecialitiesCell.swift */,
+				01A16E70245B56000014650C /* DoctorsSpecialitiesPresenter.swift */,
+				01A16E72245B56160014650C /* DoctorSpecialitiesInteractor.swift */,
+				01A16E74245B59D90014650C /* SpecialitiesModel.swift */,
+				0104887924716066000B90D1 /* SpecialitiesViewModel.swift */,
 			);
 			path = DoctorSpecialties;
 			sourceTree = "<group>";
@@ -318,28 +434,56 @@
 			buildActionMask = 2147483647;
 			files = (
 				01BD72A32432523E0090175E /* DoctorSpecialities.swift in Sources */,
+				01A16E9224618EE60014650C /* OperationHistoryViewController.swift in Sources */,
+				01A16E8E24618E900014650C /* OperationHistoryInteractor.swift in Sources */,
+				01A16E8424618D930014650C /* UserProfileInteractor.swift in Sources */,
 				01943D9D240C1C6200DD4237 /* TimeTableViewController.swift in Sources */,
+				01A16E75245B59D90014650C /* SpecialitiesModel.swift in Sources */,
+				01048873246DC764000B90D1 /* TabBarController.swift in Sources */,
+				018CE3C024427E920064E3E1 /* FlowCoordinating.swift in Sources */,
+				015ED5E924689B86002FDB4D /* PolyclinicsInteractor.swift in Sources */,
+				01A16E8D24618E900014650C /* OperationHistoryPresenter.swift in Sources */,
 				01943D9F240C1C7200DD4237 /* TimeTablePresenter.swift in Sources */,
 				01943DAC240C202600DD4237 /* DoctorsService.swift in Sources */,
 				01943D8B240C074600DD4237 /* ReceptionFlowAssembly.swift in Sources */,
 				01943DA8240C1FB100DD4237 /* ServiceAssembly.swift in Sources */,
 				019CC5A823F9BE8F00CB8D14 /* Style.swift in Sources */,
+				015ED5DD2466BA20002FDB4D /* UserSettings.swift in Sources */,
 				019CC5A123F9A67A00CB8D14 /* WeekdaysView.swift in Sources */,
+				0104887A24716066000B90D1 /* SpecialitiesViewModel.swift in Sources */,
 				01943D92240C1BB400DD4237 /* CalendarPresenter.swift in Sources */,
+				015ED5EE24689BC5002FDB4D /* PolyclinicsViewController.swift in Sources */,
+				015ED5EF24689BC5002FDB4D /* PolyclinicsViewModel.swift in Sources */,
+				015ED5DF2466FE34002FDB4D /* UserProfileModel.swift in Sources */,
+				01A16E71245B56000014650C /* DoctorsSpecialitiesPresenter.swift in Sources */,
 				01BD72A5243252CB0090175E /* DoctorSpecialitiesCell.swift in Sources */,
 				01943DAE240C209500DD4237 /* DoctorsServiceModel.swift in Sources */,
+				015ED612246B504F002FDB4D /* SlotViewModel.swift in Sources */,
 				01943DA1240C1C8200DD4237 /* TimeTableInteractor.swift in Sources */,
+				015ED5E424688C29002FDB4D /* UIView+Extension.swift in Sources */,
+				01A16E8324618D930014650C /* UserProfilePresenter.swift in Sources */,
+				018CE3BE24427DAF0064E3E1 /* FlowRouting.swift in Sources */,
+				01A16E6F245B4CC40014650C /* LaunchView.swift in Sources */,
 				01BD72A124324E4B0090175E /* DayCellTableViewCell.swift in Sources */,
 				01943DB0240C214200DD4237 /* NetworkClientServices.swift in Sources */,
+				01CBB7C2246C606A00DB7A03 /* TicketModel.swift in Sources */,
 				01943D8D240C084B00DD4237 /* Assembly.swift in Sources */,
 				01943D9B240C1C5300DD4237 /* DoctorsInteractor.swift in Sources */,
 				01943DA6240C1E2100DD4237 /* Date+Extension.swift in Sources */,
+				018CE3BC24427D230064E3E1 /* Coordinator.swift in Sources */,
+				01A16E8824618DBF0014650C /* UserProfileViewController.swift in Sources */,
+				015ED5EA24689B86002FDB4D /* PolyclinicsModel.swift in Sources */,
+				01A16E8F24618E900014650C /* OperationHistoryModel.swift in Sources */,
 				019CC59F23F9A66300CB8D14 /* MonthView.swift in Sources */,
+				01A16E73245B56160014650C /* DoctorSpecialitiesInteractor.swift in Sources */,
 				019CC5AA23F9C98A00CB8D14 /* DayCollectionViewCell.swift in Sources */,
+				01A16E9324618EE60014650C /* OperationHistoryViewModel.swift in Sources */,
 				01943D99240C1C4000DD4237 /* DoctorsPresenter.swift in Sources */,
 				019CC5A323F9A69500CB8D14 /* CalendarViewController.swift in Sources */,
 				01943D95240C1C1B00DD4237 /* CalendarInteractor.swift in Sources */,
+				015ED5E824689B86002FDB4D /* PolyclinicsPresenter.swift in Sources */,
 				01943D97240C1C3000DD4237 /* DoctorsViewController.swift in Sources */,
+				01186834244CA0D000609D35 /* TimeTableCollectionViewCell.swift in Sources */,
 				019CC58B23F9A4AE00CB8D14 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
