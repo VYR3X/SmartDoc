@@ -9,6 +9,7 @@
 import Foundation
 
 /// Интерфейс взаимодействия с интерактором экрана списка категорий специалистов
+
 protocol DoctorSpecialitiesInteractable {
 
 	func getRequest(completion: @escaping (Result<SpecialitiesModel, Error>) -> Void)
@@ -18,6 +19,7 @@ protocol DoctorSpecialitiesInteractable {
 class DoctorSpecialitiesInteractor: DoctorSpecialitiesInteractable {
 
 	func getRequest(completion: @escaping (Result<SpecialitiesModel, Error>) -> Void) {
+
 		let resource = "RESOURCE"
 		let method = "SEARCH"
 		let params = "{SCHEDULE_ID:A4171FF0268A6E24E0530100007FF2C5}"
@@ -35,7 +37,6 @@ class DoctorSpecialitiesInteractor: DoctorSpecialitiesInteractable {
 			return components.url
 		}
 
-
 		let session = URLSession.shared
 
 		session.dataTask(with: url!) { (data , responce, error) in
@@ -46,11 +47,13 @@ class DoctorSpecialitiesInteractor: DoctorSpecialitiesInteractable {
 
 			guard let data = data else { return }
 
+
 			print("\n\nwin1251String\n\n")
 			let win1251String = String(data: data, encoding: .windowsCP1251)
 
 			guard let win1251Data = win1251String!.data(using: .utf8, allowLossyConversion: true) else {
 				print("could not convert data")
+
 				return
 			}
 
@@ -88,7 +91,6 @@ class DoctorSpecialitiesInteractor: DoctorSpecialitiesInteractable {
 //				print(error)
 //			}
 //		}.resume()
-
 	}
 }
 

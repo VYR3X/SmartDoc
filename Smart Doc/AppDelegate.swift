@@ -24,10 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		#warning("Нет лаунчера и открытие экранов через tab bar")
 
 		let mainNavigationViewController = UINavigationController(rootViewController: LaunchView())
-		//let mainNavigationViewController = UINavigationController(rootViewController: TabBarController())
 		
 		let coordinator = assembly.makeCoordinator(in: mainNavigationViewController)
-//		coordinator.routeToPolyclinics()
+		//coordinator.routeToSpecialities()
 		coordinator.routeToUserProfile()
 
 		window?.rootViewController = mainNavigationViewController

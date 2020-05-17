@@ -120,7 +120,7 @@ class TimeTableViewController: UIViewController {
 			collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25)
 		])
 	}
-
+	
 	private func showAlertButtonTapped() {
 
 		// create the alert
@@ -132,6 +132,7 @@ class TimeTableViewController: UIViewController {
 		// show the alert
 		self.present(alert, animated: true, completion: nil)
 	}
+
 }
 
 extension TimeTableViewController: UICollectionViewDataSource {
@@ -174,7 +175,6 @@ extension TimeTableViewController: UICollectionViewDelegateFlowLayout {
 			phoneNumber: phoneNumber,
 			email: email,
 			polis: polis)
-
 			showAlertButtonTapped()
 		}
 	}

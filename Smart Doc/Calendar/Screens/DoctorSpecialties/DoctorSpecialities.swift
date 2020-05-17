@@ -28,6 +28,7 @@ protocol DoctorSpecialitiesListener {
 	func getDoctorsModel()
 
 	func getviewModel(completion: @escaping (Result<SpecialitiesViewModel, Error>) -> Void)
+
 }
 
 class DoctorSpecialities: UIViewController  {
@@ -144,6 +145,7 @@ extension DoctorSpecialities : UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! DoctorSpecialitiesCell
+		//cell.backgroundColor = UIColor.white
 		cell.dayLabel.text = datasource[indexPath.row]
 		return cell
 	}
