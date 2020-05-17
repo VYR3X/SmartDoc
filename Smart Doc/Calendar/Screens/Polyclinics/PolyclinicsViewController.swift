@@ -16,7 +16,6 @@ protocol PolyclinicsPresentableListener {
 	func didLoad(_ viewController: PolyclinicsViewControllable)
 
 	func openNextViewController()
-
 }
 
 final class PolyclinicsViewController: UIViewController, PolyclinicsViewControllable {

@@ -66,7 +66,8 @@ extension DoctorsSpecialitiesPresenter: DoctorSpecialitiesListener {
 		coordinator.routeToCalendar(resourceID: Resource_ID)
 	}
 
-	func didLoad(_ viewController: UIViewController) {}
+	func didLoad(_ viewController: UIViewController) {
+	}
 
 	func didPressBack(_ viewController: UIViewController) {
 		coordinator.routeBack(from: viewController)

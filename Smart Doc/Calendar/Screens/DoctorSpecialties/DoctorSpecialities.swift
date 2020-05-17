@@ -28,7 +28,6 @@ protocol DoctorSpecialitiesListener {
 	func getDoctorsModel()
 
 	func getviewModel(completion: @escaping (Result<SpecialitiesViewModel, Error>) -> Void)
-
 }
 
 class DoctorSpecialities: UIViewController  {
@@ -43,7 +42,7 @@ class DoctorSpecialities: UIViewController  {
 //	"Педиатр"
 //	]
 
-	var datasource = ["Терапевт", "Хирург"];
+	var datasource = ["Терапевт", "Хирург", "Стоматолог"];
 
 	// стоматологи пока не записывают )
 	let Resource_ID = [ "A417276AC757742CE0530100007F6A68", "7F7DA9355EAAF96FE0530100007F0F8B", "7FA60C0CEEE364F3E0530100007F82C1" ]
@@ -145,7 +144,6 @@ extension DoctorSpecialities : UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! DoctorSpecialitiesCell
-		//cell.backgroundColor = UIColor.white
 		cell.dayLabel.text = datasource[indexPath.row]
 		return cell
 	}

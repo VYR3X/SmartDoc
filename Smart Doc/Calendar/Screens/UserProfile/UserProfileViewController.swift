@@ -316,7 +316,6 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 				birthdayTextField.topAnchor.constraint(equalTo: fioTextField.bottomAnchor, constant: 10),
 				birthdayTextField.leadingAnchor.constraint(equalTo: backgroungRoundView.leadingAnchor, constant: 45),
 				birthdayTextField.trailingAnchor.constraint(equalTo: backgroungRoundView.trailingAnchor, constant: -45),
-
 				backgroungRoundView.bottomAnchor.constraint(equalTo: birthdayTextField.bottomAnchor, constant: 10),
 
 				telephoneTextField.heightAnchor.constraint(equalToConstant: screenHeight / 17),
