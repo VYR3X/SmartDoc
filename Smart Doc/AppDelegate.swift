@@ -20,17 +20,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window?.backgroundColor = .orange
 
 		let assembly = ReseptionFlowAssembly()
+		//#warning("Нет лаунчера и открытие экранов через tab bar")
 
-		#warning("Нет лаунчера и открытие экранов через tab bar")
+//		let mainNavigationViewController = UINavigationController(rootViewController: LaunchView())
+		let mainNavigationViewController = UINavigationController()
 
-		let mainNavigationViewController = UINavigationController(rootViewController: LaunchView())
-		//let mainNavigationViewController = UINavigationController(rootViewController: TabBarController())
-		
 		let coordinator = assembly.makeCoordinator(in: mainNavigationViewController)
-//		coordinator.routeToPolyclinics()
-		coordinator.routeToUserProfile()
+		//coordinator.routeToUserProfile()
+		//window?.rootViewController = mainNavigationViewController
 
-		window?.rootViewController = mainNavigationViewController
+		/// создаю таб бар
+		let item = UITabBarItem()
+		item.title = "Special"
+		let doctorsViewController = assembly.makeSpecialitiesViewController(coordinator: coordinator)
+
+		let item2 = UITabBarItem()
+		item2.title = "History"
+		let polyclinicsViewController = assembly.makeOperationHistoryViewController(coordinator: coordinator)
+
+		let item3 = UITabBarItem()
+		item3.title = "Doc"
+		let userProfile = assembly.makeProfileViewController(coordinator: coordinator)
+
+		let vc1 = coordinator.createNavigationContoller(vc: doctorsViewController)
+        let vc2 = UINavigationController(rootViewController: polyclinicsViewController)
+        let vc3 = UINavigationController(rootViewController: userProfile)
+
+		vc1.tabBarItem = item
+		vc2.tabBarItem = item2
+		vc3.tabBarItem = item3
+
+		let tabBarController = UITabBarController()
+		tabBarController.viewControllers = [vc1, vc2, vc3]
+
+		window?.rootViewController = tabBarController
 		return true
 	}
 

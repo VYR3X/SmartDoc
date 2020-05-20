@@ -6,6 +6,8 @@
 //  Copyright © 2020 Vlad Zhokhov. All rights reserved.
 //
 
+import UIKit
+
 /// Интерфейс взаимодействия с флоу координатором
 protocol FlowCoordinating {
 
@@ -14,4 +16,6 @@ protocol FlowCoordinating {
 
 	/// Закончить флоу
 	func finishFlow()
+
+	func createNavigationContoller(vc: UIViewController) -> UINavigationController
 }

@@ -80,6 +80,11 @@ extension Coordinator: FlowRouting {
 
 extension Coordinator: FlowCoordinating {
 
+	func createNavigationContoller(vc: UIViewController) -> UINavigationController {
+		navigationController?.pushViewController(vc, animated: true)
+		return navigationController!
+	}
+
 	func startFlow() {
 //		rootViewController = navigationController?.topViewController
 //		self.productsModel = productsModel

@@ -10,14 +10,14 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-	let mainNavigationViewController: UINavigationController?
+	let mainNavigationViewController: UINavigationController? = nil
 
 //	init(navController: UINavigationController) {
 //		mainNavigationViewController = navController
 ////		super.init()
 //	}
 
-	required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+//	required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
 	override func viewDidLoad() {
 
@@ -25,14 +25,26 @@ class TabBarController: UITabBarController {
 
 		let coordinator = assembly.makeCoordinator(in: mainNavigationViewController)
 
-		let firstViewController = LaunchView()
-		firstViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
+		//let firstViewController = LaunchView()
+		//firstViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
 
 		let doctorsViewController = assembly.makeDoctorsViewController(coordinator: coordinator)
 		let polyclinicsViewController = assembly.makePolyclinicsViewController(coordinator: coordinator)
+		let userProfile = assembly.makeProfileViewController(coordinator: coordinator)
 
-		let tabBarList = [firstViewController]
+		//let tabBarList = [firstViewController]
 
-		viewControllers = tabBarList
+		let tabBarController = UITabBarController()
+		tabBarController.viewControllers = [doctorsViewController,
+											polyclinicsViewController,
+											userProfile]
+
+		// Use the view controller reference to select the second tab
+		//tabBarController.selectedViewController = polyclinicsViewController
+
+		// Use the array index to select the third tab
+		tabBarController.selectedIndex = 1
+
+		//viewControllers = tabBarList
 	}
 }
