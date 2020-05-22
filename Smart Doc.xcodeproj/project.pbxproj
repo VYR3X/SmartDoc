@@ -280,10 +280,10 @@
 		019CC58923F9A4AE00CB8D14 /* Smart Doc */ = {
 			isa = PBXGroup;
 			children = (
+				019CC5A523F9A71700CB8D14 /* Resources */,
 				019CC58A23F9A4AE00CB8D14 /* AppDelegate.swift */,
 				019CC5A423F9A70000CB8D14 /* Calendar */,
 				019CC5A623F9BE5800CB8D14 /* Style */,
-				019CC5A523F9A71700CB8D14 /* Resources */,
 				019CC59623F9A4AF00CB8D14 /* Info.plist */,
 			);
 			path = "Smart Doc";

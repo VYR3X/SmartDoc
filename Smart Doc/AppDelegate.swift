@@ -22,16 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let assembly = ReseptionFlowAssembly()
 		//#warning("Нет лаунчера и открытие экранов через tab bar")
 
-//		let mainNavigationViewController = UINavigationController(rootViewController: LaunchView())
 		let mainNavigationViewController = UINavigationController()
-
 		let coordinator = assembly.makeCoordinator(in: mainNavigationViewController)
 		//coordinator.routeToUserProfile()
-		//window?.rootViewController = mainNavigationViewController
 
 		/// создаю таб бар
-		let item = UITabBarItem()
-		item.title = "Special"
+		let item = UITabBarItem(title: "Special", image: nil, selectedImage: nil)
 		let doctorsViewController = assembly.makeSpecialitiesViewController(coordinator: coordinator)
 
 		let item2 = UITabBarItem()
@@ -42,16 +38,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		item3.title = "Doc"
 		let userProfile = assembly.makeProfileViewController(coordinator: coordinator)
 
-		let vc1 = coordinator.createNavigationContoller(vc: doctorsViewController)
-        let vc2 = UINavigationController(rootViewController: polyclinicsViewController)
-        let vc3 = UINavigationController(rootViewController: userProfile)
+		let nc1 = coordinator.createNavigationContoller(vc: doctorsViewController)
+		//nc1.title = "Specialities"
+//		nc1.navigationBar.barStyle = .blackTranslucent
+        let nc2 = UINavigationController(rootViewController: polyclinicsViewController)
+        let nc3 = UINavigationController(rootViewController: userProfile)
 
-		vc1.tabBarItem = item
-		vc2.tabBarItem = item2
-		vc3.tabBarItem = item3
+		nc1.tabBarItem = item
+		nc2.tabBarItem = item2
+		nc3.tabBarItem = item3
 
 		let tabBarController = UITabBarController()
-		tabBarController.viewControllers = [vc1, vc2, vc3]
+		tabBarController.viewControllers = [nc1, nc2, nc3]
 
 		window?.rootViewController = tabBarController
 		return true
