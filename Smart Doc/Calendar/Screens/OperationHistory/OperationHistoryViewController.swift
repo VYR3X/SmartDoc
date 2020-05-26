@@ -57,7 +57,8 @@ final class OperationHistoryViewController: UIViewController, OperationHistoryVi
 		// Configuration
 		// didLoad(_:)
 		listener.didLoad(self)
-		view.backgroundColor = UIColor(red: 175/255, green: 242/255, blue: 250/255, alpha: 1)
+		//view.backgroundColor = UIColor(red: 175/255, green: 242/255, blue: 250/255, alpha: 1)
+		view.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
 		view.addSubview(descriptionLabel)
 		view.addSubview(tableView)
 		setupTableView()

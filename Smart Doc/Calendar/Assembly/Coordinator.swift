@@ -13,6 +13,7 @@ final class Coordinator {
 
 	private let assembly: ReseptionFlowAssembly
 	private weak var navigationController: UINavigationController?
+	private weak var progressNavigationController: ProgressNavigationController?
 	private weak var rootViewController: UIViewController?
 
 	var resource_ID: String? // id специальности врача ( терапевт, хирург, стоматолог )
@@ -52,11 +53,13 @@ extension Coordinator: FlowRouting {
 	}
 
 	func routeToSpecialities() {
+		progressView.setProgress(0.2, animated: false)
 		let viewController = assembly.makeSpecialitiesViewController(coordinator: self)
 		navigationController?.pushViewController(viewController, animated: true)
 	}
 
 	func routeToCalendar(resourceID: String) {
+		progressView.setProgress(0.4, animated: false)
 		resource_ID = resourceID
 		let viewController = assembly.makeMainViewController(coordinator: self, resourseID: resourceID)
 		navigationController?.pushViewController(viewController, animated: true)
@@ -64,12 +67,13 @@ extension Coordinator: FlowRouting {
 
 	func routeToDoctors() {
 //		guard let doctors = doctors else { return }
+		progressView.setProgress(0.8, animated: false)
 		let viewController = assembly.makeDoctorsViewController(coordinator: self)
 		navigationController?.pushViewController(viewController, animated: true)
 	}
 
 	func routeToMeetingDoctor() {
-
+		progressView.setProgress(1.0, animated: false)
 		guard let slotModel = slotModel else { return }
 		let viewController = assembly.makeTimeTableViewController(coordinator: self, slotsModel: slotModel)
 		navigationController?.pushViewController(viewController, animated: true)
@@ -84,6 +88,11 @@ extension Coordinator: FlowCoordinating {
 		navigationController?.pushViewController(vc, animated: true)
 		return navigationController!
 	}
+//
+//
+//	func createNavigationContoller(vc: UIViewController) -> UINavigationController {
+//
+//	}
 
 	func startFlow() {
 //		rootViewController = navigationController?.topViewController

@@ -17,7 +17,7 @@ final class DayCollectionViewCell: UICollectionViewCell {
 		label.text = "00"
 		label.textAlignment = .center
 		label.font = UIFont.systemFont(ofSize: 16)
-		label.textColor = Colors.darkGray
+		label.textColor = .black
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()

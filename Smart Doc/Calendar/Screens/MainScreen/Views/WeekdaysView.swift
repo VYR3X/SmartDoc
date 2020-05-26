@@ -31,17 +31,17 @@ class WeekdaysView: UIView {
 
 	private func setupViews() {
 		addSubview(myStackView)
-		myStackView.topAnchor.constraint(equalTo: topAnchor).isActive=true
-		myStackView.leftAnchor.constraint(equalTo: leftAnchor).isActive=true
-		myStackView.rightAnchor.constraint(equalTo: rightAnchor).isActive=true
-		myStackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive=true
+		myStackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+		myStackView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+		myStackView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+		myStackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 
 		for i in 0..<7 {
-			let lbl = UILabel()
-			lbl.text = daysArr[i]
-			lbl.textAlignment = .center
-			lbl.textColor = Style.weekdaysLblColor
-			myStackView.addArrangedSubview(lbl)
+			let label = UILabel()
+			label.text = daysArr[i]
+			label.textAlignment = .center
+//			label.textColor = Style.weekdaysLblColor
+			myStackView.addArrangedSubview(label)
 		}
 	}
 }

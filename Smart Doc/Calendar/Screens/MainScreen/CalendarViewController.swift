@@ -102,6 +102,14 @@ class CalendarViewController: UIViewController {
 		return view
 	}()
 
+	// UI для списка с талонами
+
+	private let timeTableView: TimeTableView = {
+		let view = TimeTableView(frame: .zero)
+		view.translatesAutoresizingMaskIntoConstraints = false
+		return view
+	}()
+
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		daysCollectionView.collectionViewLayout.invalidateLayout()
@@ -119,10 +127,8 @@ class CalendarViewController: UIViewController {
 		listener?.didLoad(self)
 		self.title = "Calendar"
 		self.navigationController?.navigationBar.isTranslucent = false
-
 		initializeView()
 		setupViews()
-
 	}
 
 
@@ -139,6 +145,12 @@ class CalendarViewController: UIViewController {
 //		self.view.backgroundColor = Style.bgColor
 //		changeTheme()
 //	}
+
+	@objc private func refresh(sender: UIRefreshControl) {
+		// TO: DO - добавить выгрузку данных
+		//listener.getData
+		sender.endRefreshing()
+	}
 
 	func initializeView() {
 
@@ -173,7 +185,8 @@ class CalendarViewController: UIViewController {
 			theme = .dark
 			Style.themeDark()
 		}
-		self.view.backgroundColor = UIColor(red: 175/255, green: 242/255, blue: 250/255, alpha: 1)
+		self.view.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1) // филлетовый
+		//self.view.backgroundColor = UIColor(red: 175/255, green: 242/255, blue: 250/255, alpha: 1) // голубой 
 		//self.view.backgroundColor = Style.bgColor
 		changeTheme()
 	}
@@ -181,12 +194,13 @@ class CalendarViewController: UIViewController {
 	private func changeTheme() {
 		daysCollectionView.reloadData()
 
-		monthView.currentMonthLabel.textColor = Style.monthViewLblColor
-		monthView.rightNavigationBarButton.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
+		monthView.currentMonthLabel.textColor = .white//Style.monthViewLblColor
+		
+		monthView.rightNavigationBarButton.setTitleColor(.yellow, for: .normal)
 		monthView.leftNavigationBarButton.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
 
 		for i in 0..<7 {
-			(weekdaysView.myStackView.subviews[i] as! UILabel).textColor = Style.weekdaysLblColor
+			(weekdaysView.myStackView.subviews[i] as! UILabel).textColor = .yellow //Style.weekdaysLblColor
 		}
 	}
 
@@ -197,10 +211,10 @@ class CalendarViewController: UIViewController {
 
 	private func setupViews() {
 
-		view.addSubview(monthView)
-		view.addSubview(weekdaysView)
-		view.addSubview(daysView)
+		view.addSubviews(monthView, weekdaysView, daysView)
 		daysView.addSubview(daysCollectionView)
+
+		view.addSubview(timeTableView)
 
 		NSLayoutConstraint.activate([
 			monthView.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
@@ -209,19 +223,25 @@ class CalendarViewController: UIViewController {
 			monthView.heightAnchor.constraint(equalToConstant: 35),
 
 			weekdaysView.topAnchor.constraint(equalTo: monthView.bottomAnchor),
-			weekdaysView.leftAnchor.constraint(equalTo: view.leftAnchor),
-			weekdaysView.rightAnchor.constraint(equalTo: view.rightAnchor),
+			weekdaysView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
+			weekdaysView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25),
 			weekdaysView.heightAnchor.constraint(equalToConstant: 30),
 
 			daysView.topAnchor.constraint(equalTo: weekdaysView.bottomAnchor, constant: 0),
-			daysView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
-			daysView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+			daysView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
+			daysView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25),
 			daysView.heightAnchor.constraint(equalToConstant: 275),
 
 			daysCollectionView.topAnchor.constraint(equalTo: daysView.topAnchor, constant: 15),
 			daysCollectionView.leftAnchor.constraint(equalTo: daysView.leftAnchor, constant: 0),
 			daysCollectionView.rightAnchor.constraint(equalTo: daysView.rightAnchor, constant: 0),
 			daysCollectionView.bottomAnchor.constraint(equalTo: daysView.bottomAnchor, constant: 0),
+
+			timeTableView.topAnchor.constraint(equalTo: daysView.bottomAnchor, constant: 25),
+//			collectionView.heightAnchor.constraint(equalToConstant: 250),
+			timeTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+			timeTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			timeTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
 		])
 	}
 

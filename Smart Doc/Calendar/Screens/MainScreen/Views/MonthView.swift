@@ -21,20 +21,20 @@ final class MonthView: UIView {
 
 	/// свойство отображающее название месяца и год
 	let currentMonthLabel: UILabel = {
-		let lbl = UILabel()
-		lbl.text = "Default Month Year text"
-		lbl.textColor = Style.monthViewLblColor
-		lbl.textAlignment = .center
-		lbl.font = UIFont.boldSystemFont(ofSize: 16)
-		lbl.translatesAutoresizingMaskIntoConstraints=false
-		return lbl
+		let label = UILabel()
+		label.text = "Default Month Year text"
+		label.textColor = .white
+		label.textAlignment = .center
+		label.font = UIFont.boldSystemFont(ofSize: 16)
+		label.translatesAutoresizingMaskIntoConstraints=false
+		return label
 	}()
 
 	/// правая кнопка навигационного бара
 	let rightNavigationBarButton: UIButton = {
 		let btn = UIButton()
 		btn.setTitle(">", for: .normal)
-		btn.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
+		btn.setTitleColor(.white, for: .normal)
 		btn.translatesAutoresizingMaskIntoConstraints = false
 		btn.addTarget(self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
 		return btn
@@ -44,7 +44,7 @@ final class MonthView: UIView {
 	let leftNavigationBarButton: UIButton = {
 		let btn = UIButton()
 		btn.setTitle("<", for: .normal)
-		btn.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
+		btn.setTitleColor(.white, for: .normal)
 		btn.translatesAutoresizingMaskIntoConstraints = false
 		btn.addTarget(self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
 		btn.setTitleColor(UIColor.lightGray, for: .disabled)

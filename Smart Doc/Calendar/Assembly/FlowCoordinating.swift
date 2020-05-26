@@ -17,5 +17,5 @@ protocol FlowCoordinating {
 	/// Закончить флоу
 	func finishFlow()
 
-	func createNavigationContoller(vc: UIViewController) -> UINavigationController
+	func createNavigationContoller(vc: UIViewController) -> UINavigationController //UINavigationController
 }

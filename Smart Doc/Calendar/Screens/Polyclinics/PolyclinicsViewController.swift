@@ -61,6 +61,9 @@ final class PolyclinicsViewController: UIViewController, PolyclinicsViewControll
 		// Configuration
 		// didLoad(_:)
 		listener.didLoad(self)
+
+		//progressView.setProgress(0.1, animated: false)
+
 		view.addSubview(descriptionLabel)
 		view.addSubview(collectionView)
 		setupView()

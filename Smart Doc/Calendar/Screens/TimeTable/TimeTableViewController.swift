@@ -73,7 +73,7 @@ class TimeTableViewController: UIViewController {
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		collectionView.showsVerticalScrollIndicator = false
-		collectionView.backgroundColor = .white
+		collectionView.backgroundColor = Colors.mainColor
 		collectionView.clipsToBounds = true // false
 		collectionView.delegate = self
 		collectionView.dataSource = self
@@ -94,7 +94,8 @@ class TimeTableViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		view.backgroundColor = .white
+		view.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
+		//view.backgroundColor = .white
 		view.addSubview(descriptionLabel)
 		view.addSubview(collectionView)
 		setupView()

@@ -17,13 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		window = UIWindow()
 		window?.makeKeyAndVisible()
-		window?.backgroundColor = .orange
+		window?.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
 
 		let assembly = ReseptionFlowAssembly()
 		//#warning("Нет лаунчера и открытие экранов через tab bar")
 
 		let mainNavigationViewController = UINavigationController()
 		let coordinator = assembly.makeCoordinator(in: mainNavigationViewController)
+
+//		let navigationController = ProgressNavigationController()
+//		let progresscoordinator = assembly.makeCoordinator(in: navigationController)
 		//coordinator.routeToUserProfile()
 
 		/// создаю таб бар
@@ -37,6 +40,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let item3 = UITabBarItem()
 		item3.title = "Doc"
 		let userProfile = assembly.makeProfileViewController(coordinator: coordinator)
+
+
+//		let firstViewController = //ViewController {
+//				  ProgressViewController(flowProgress: 0.1) {
+//					  ProgressViewController(flowProgress: 0.5) {
+//					  }
+//				  }
 
 		let nc1 = coordinator.createNavigationContoller(vc: doctorsViewController)
 		//nc1.title = "Specialities"

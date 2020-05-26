@@ -18,7 +18,9 @@ class DoctorSpecialitiesCell: UITableViewCell {
 		let view = UIView()
 		view.layer.cornerRadius = 10
 		view.translatesAutoresizingMaskIntoConstraints = false
-		view.backgroundColor = UIColor(red: 175/255, green: 242/255, blue: 250/255, alpha: 1)
+		//view.backgroundColor = UIColor(red: 144/255, green: 238/255, blue: 144/255, alpha: 1)
+		//view.backgroundColor = UIColor(red: 175/255, green: 242/255, blue: 250/255, alpha: 1)
+		view.backgroundColor = .white
 		return view
 	}()
 
@@ -33,7 +35,7 @@ class DoctorSpecialitiesCell: UITableViewCell {
 
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+		backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
 		addSubview(cellView)
 		cellView.addSubview(dayLabel)
 		setupView()

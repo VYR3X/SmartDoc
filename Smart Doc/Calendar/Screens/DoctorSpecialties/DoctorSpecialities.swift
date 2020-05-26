@@ -42,6 +42,8 @@ class DoctorSpecialities: UIViewController  {
 //	"Педиатр"
 //	]
 
+	private var finishedLoadingInitialTableCells = false
+
 	var datasource = ["Терапевт", "Хирург", "Стоматолог"];
 
 	// стоматологи пока не записывают )
@@ -51,9 +53,10 @@ class DoctorSpecialities: UIViewController  {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = UIFont.boldSystemFont(ofSize: 25)
-		label.textColor = .gray
+		label.textColor = .white //.gray
 		label.text = "Выберите врача из списка:"
-		label.backgroundColor = .white
+		//label.backgroundColor = .white
+		label.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
 		return label
 	}()
 
@@ -62,11 +65,13 @@ class DoctorSpecialities: UIViewController  {
 		refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
 		refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
 		refreshControl.backgroundColor = .clear // если не будет фона то анимация будет залезать на таблицу
+		refreshControl.tintColor = .white
 		return refreshControl
 	}()
 
 	private lazy var tableView : UITableView = {
 		let tableView = UITableView()
+		tableView.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
 		tableView.translatesAutoresizingMaskIntoConstraints = false
 		tableView.delegate = self
 		tableView.dataSource = self
@@ -90,8 +95,9 @@ class DoctorSpecialities: UIViewController  {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
-		view.backgroundColor = .white
+		//self.view.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
+//		view.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
+		//view.backgroundColor = .white
 		view.addSubview(descriptionLabel)
 		view.addSubview(tableView)
 		setupTableView()
@@ -109,7 +115,8 @@ class DoctorSpecialities: UIViewController  {
 //			state = 1
 		}
 		sender.endRefreshing()
-		self.tableView.reloadData()
+		tableView.reloadData()
+		finishedLoadingInitialTableCells = false
 //		if (state == 1 ) {
 //			sender.endRefreshing()
 //			self.tableView.reloadData()
@@ -118,7 +125,7 @@ class DoctorSpecialities: UIViewController  {
 //		}
 	}
 
-	func setupTableView (){
+	func setupTableView () {
 		NSLayoutConstraint.activate([
 
 			descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 45),
@@ -150,6 +157,34 @@ extension DoctorSpecialities : UITableViewDataSource {
 }
 
 extension DoctorSpecialities : UITableViewDelegate {
+
+	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+		var lastInitialDisplayableCell = false
+
+		//change flag as soon as last displayable cell is being loaded (which will mean table has initially loaded)
+		if datasource.count > 0 && !finishedLoadingInitialTableCells {
+			if let indexPathsForVisibleRows = tableView.indexPathsForVisibleRows,
+				let lastIndexPath = indexPathsForVisibleRows.last, lastIndexPath.row == indexPath.row {
+				lastInitialDisplayableCell = true
+			}
+		}
+
+		if !finishedLoadingInitialTableCells {
+
+			if lastInitialDisplayableCell {
+				finishedLoadingInitialTableCells = true
+			}
+
+			//animates the cell as it is being displayed for the first time
+			cell.transform = CGAffineTransform(translationX: 0, y: 100/2)
+			cell.alpha = 0
+
+			UIView.animate(withDuration: 0.5, delay: 0.05*Double(indexPath.row), options: [.curveEaseInOut], animations: {
+				cell.transform = CGAffineTransform(translationX: 0, y: 0)
+				cell.alpha = 1
+			}, completion: nil)
+		}
+	}
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 100
