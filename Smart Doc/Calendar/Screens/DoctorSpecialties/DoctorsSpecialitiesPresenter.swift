@@ -32,7 +32,7 @@ final class DoctorsSpecialitiesPresenter: DoctorsSpecialitiesPresentable {
 
 extension DoctorsSpecialitiesPresenter: DoctorSpecialitiesListener {
 
-	func getviewModel(completion: @escaping (Result<SpecialitiesViewModel, Error>) -> Void) {
+	func getSpecialitiesList(completion: @escaping (Result<SpecialitiesViewModel, Error>) -> Void) {
 
 		interactor.getRequest(completion: { productsModelResult in
 			switch productsModelResult {

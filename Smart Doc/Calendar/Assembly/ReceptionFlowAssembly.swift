@@ -48,7 +48,7 @@ final class ReseptionFlowAssembly {
 		let interactor = DoctorSpecialitiesInteractor()
 		let presenter = DoctorsSpecialitiesPresenter(interactor: interactor,
 															   coordinator: coordinator)
-		let viewController = DoctorSpecialities(listener: presenter)
+		let viewController = DoctorSpecialitiesViewController(listener: presenter)
 		presenter.viewController = viewController
 		return viewController
 	}

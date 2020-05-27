@@ -131,28 +131,13 @@ class CalendarViewController: UIViewController {
 		setupViews()
 	}
 
-
-//	@objc func rightBarBtnAction(sender: UIBarButtonItem) {
-//		if theme == .dark {
-//			sender.title = "Dark"
-//			theme = .light
-//			Style.themeLight()
-//		} else {
-//			sender.title = "Light"
-//			theme = .dark
-//			Style.themeDark()
-//		}
-//		self.view.backgroundColor = Style.bgColor
-//		changeTheme()
-//	}
-
 	@objc private func refresh(sender: UIRefreshControl) {
 		// TO: DO - добавить выгрузку данных
 		//listener.getData
 		sender.endRefreshing()
 	}
 
-	func initializeView() {
+	private func initializeView() {
 
 		setupStyleInApplication()
 

@@ -16,7 +16,7 @@ protocol FlowRouting {
 	func routeBack(from viewController: UIViewController)
 
 	/// Перекинуть на список со специальностями врачей
-	func routeToSpecialities()
+	func routeToSpecialitiesList()
 
 	/// Перекинуть на экран календарь
 	func routeToCalendar(resourceID: String)

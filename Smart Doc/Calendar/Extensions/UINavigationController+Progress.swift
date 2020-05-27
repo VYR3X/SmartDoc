@@ -2,29 +2,41 @@
 //  UINavigationController+Progress.swift
 //  Smart Doc
 //
-//  Created by 17790204 on 22/05/2020.
+//  Created by Vlad Zhokhov on 22/05/2020.
 //  Copyright © 2020 Vlad Zhokhov. All rights reserved.
 //
 
 import UIKit
 
-public let progressView = UIProgressView(progressViewStyle: .bar)
-
-/// Работает но не супер выглядит
+/// Вью прогресса отображения экранов во флоу оформления записи к врсчу
+public let progressView: UIProgressView = {
+	let view = UIProgressView(progressViewStyle: .bar)
+	view.translatesAutoresizingMaskIntoConstraints = false
+	view.trackTintColor = Colors.mainColor
+	view.progressTintColor = Colors.ligthGreenColor
+	view.setProgress(0.2, animated: false)
+	return view
+}()
 
 extension UINavigationController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
+		setupView()
+    }
 
-        self.view.addSubview(progressView)
+	private func setupView() {
+		self.view.addSubview(progressView)
         let navBar = self.navigationBar
+		progressView.bottomAnchor.constraint(equalTo: navBar.bottomAnchor).isActive = true
+		progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+		progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+		progressView.heightAnchor.constraint(equalToConstant: 7).isActive = true
+	}
+}
 
-		self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[navBar]-0-[progressView]",
-																options: .directionLeadingToTrailing, metrics: nil, views: ["progressView" : progressView, "navBar" : navBar]))
-		self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[progressView]|",
-																options: .directionLeadingToTrailing, metrics: nil, views: ["progressView" : progressView]))
-        progressView.translatesAutoresizingMaskIntoConstraints = false
-        progressView.setProgress(0.1, animated: false)
+extension UINavigationBar {
+    open override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width, height: 151)
     }
 }

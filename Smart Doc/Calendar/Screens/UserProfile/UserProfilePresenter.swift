@@ -35,7 +35,7 @@ final class UserProfilePresenter: UserProfilePresentable {
 extension UserProfilePresenter: UserProfilePresentableListener {
 
 	func openDoctorsSpecialities() {
-		coordinator.routeToSpecialities()
+		coordinator.routeToSpecialitiesList()
 	}
 
 	func didLoad(_ viewController: UserProfileViewControllable) {}

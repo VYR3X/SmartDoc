@@ -25,12 +25,13 @@ protocol DoctorSpecialitiesListener {
 	/// - Parameter Resource_ID: id выбранной специализации врача
 	func didOpenCalendar(Resource_ID: String)
 
-	func getDoctorsModel()
-
-	func getviewModel(completion: @escaping (Result<SpecialitiesViewModel, Error>) -> Void)
+	/// Получить спискок специальностей
+	/// - Parameter completion: комплишн блок
+	func getSpecialitiesList(completion: @escaping (Result<SpecialitiesViewModel, Error>) -> Void)
 }
 
-class DoctorSpecialities: UIViewController  {
+/// Экран со списком всех доступных специальностей врачей
+final class DoctorSpecialitiesViewController: UIViewController {
 
 //	var datasource = [
 //	"Стоматолог", // A417276AC757742CE0530100007F6A68
@@ -42,28 +43,32 @@ class DoctorSpecialities: UIViewController  {
 //	"Педиатр"
 //	]
 
-	private var finishedLoadingInitialTableCells = false
+	private struct Constants {
+		static let cellHeight: CGFloat = 84
+	}
 
 	var datasource = ["Терапевт", "Хирург", "Стоматолог"];
 
 	// стоматологи пока не записывают )
 	let Resource_ID = [ "A417276AC757742CE0530100007F6A68", "7F7DA9355EAAF96FE0530100007F0F8B", "7FA60C0CEEE364F3E0530100007F82C1" ]
 
+	/// Переменная для анимации отображения ячейки
+	private var finishedLoadingInitialTableCells = false
+
 	private let descriptionLabel: UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = UIFont.boldSystemFont(ofSize: 25)
-		label.textColor = .white //.gray
+		label.textColor = .white
 		label.text = "Выберите врача из списка:"
-		//label.backgroundColor = .white
-		label.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
+		label.backgroundColor = .clear
 		return label
 	}()
 
-	let refreshControl: UIRefreshControl = {
+	private let refreshControl: UIRefreshControl = {
 		let refreshControl = UIRefreshControl()
 		refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
-		refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+		//refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
 		refreshControl.backgroundColor = .clear // если не будет фона то анимация будет залезать на таблицу
 		refreshControl.tintColor = .white
 		return refreshControl
@@ -71,20 +76,19 @@ class DoctorSpecialities: UIViewController  {
 
 	private lazy var tableView : UITableView = {
 		let tableView = UITableView()
-		tableView.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
+		tableView.backgroundColor = .clear
 		tableView.translatesAutoresizingMaskIntoConstraints = false
 		tableView.delegate = self
 		tableView.dataSource = self
 		tableView.separatorStyle = .none
-//		tableView.allowsSelection = false
-//		tableView.scrollIndicatorInsets.bottom = 64
 		tableView.register(DoctorSpecialitiesCell.self, forCellReuseIdentifier: "cellId")
 		//tableView.refreshControl = refreshControl
 		tableView.addSubview(refreshControl)
 		return tableView
 	}()
 
-	var listener: DoctorSpecialitiesListener?
+	/// Листенер для экрана DoctorSpecialities
+	private var listener: DoctorSpecialitiesListener?
 
 	init(listener: DoctorSpecialitiesListener) {
 		super.init(nibName: nil, bundle: nil)
@@ -95,17 +99,33 @@ class DoctorSpecialities: UIViewController  {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		//self.view.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
-//		view.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
-		//view.backgroundColor = .white
-		view.addSubview(descriptionLabel)
-		view.addSubview(tableView)
+		view.addSubviews(descriptionLabel, tableView)
+		self.title = "Запись"
+		navigationController?.navigationBar.barTintColor = Colors.mainColor
+		navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+		//tabBarController?.tabBar.barTintColor = Colors.mainColor
 		setupTableView()
+		setGradient()
+	}
+
+	private func setGradient() {
+		let gradient: CAGradientLayer = CAGradientLayer()
+
+		let leftColor = Colors.mainColor
+		let rightColor = UIColor.purple
+
+		gradient.colors = [leftColor.cgColor, rightColor.cgColor]
+		gradient.locations = [0.0 , 1.0]
+		gradient.startPoint = CGPoint(x: 0.4, y: 0.6)
+		gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
+		gradient.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
+
+		view.layer.insertSublayer(gradient, at: 0)
 	}
 
 	@objc private func refresh(sender: UIRefreshControl) {
 //		var state = 0
-		listener!.getviewModel { (result) in
+		listener!.getSpecialitiesList { (result) in
 			switch result {
 			case .success(let types):
 				self.datasource = types.specialitiesNames
@@ -125,7 +145,7 @@ class DoctorSpecialities: UIViewController  {
 //		}
 	}
 
-	func setupTableView () {
+	private func setupTableView () {
 		NSLayoutConstraint.activate([
 
 			descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 45),
@@ -142,7 +162,9 @@ class DoctorSpecialities: UIViewController  {
 
 }
 
-extension DoctorSpecialities : UITableViewDataSource {
+// MARK: - UITableViewDataSource
+
+extension DoctorSpecialitiesViewController: UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return datasource.count
@@ -151,12 +173,14 @@ extension DoctorSpecialities : UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! DoctorSpecialitiesCell
-		cell.dayLabel.text = datasource[indexPath.row]
+		cell.specialitiesNameLabel.text = datasource[indexPath.row]
 		return cell
 	}
 }
 
-extension DoctorSpecialities : UITableViewDelegate {
+// MARK: - UITableViewDelegate
+
+extension DoctorSpecialitiesViewController: UITableViewDelegate {
 
 	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		var lastInitialDisplayableCell = false
@@ -176,10 +200,10 @@ extension DoctorSpecialities : UITableViewDelegate {
 			}
 
 			//animates the cell as it is being displayed for the first time
-			cell.transform = CGAffineTransform(translationX: 0, y: 100/2)
+			cell.transform = CGAffineTransform(translationX: 0, y: Constants.cellHeight / 2)
 			cell.alpha = 0
 
-			UIView.animate(withDuration: 0.5, delay: 0.05*Double(indexPath.row), options: [.curveEaseInOut], animations: {
+			UIView.animate(withDuration: 0.5, delay: 0.05 * Double(indexPath.row), options: [.curveEaseInOut], animations: {
 				cell.transform = CGAffineTransform(translationX: 0, y: 0)
 				cell.alpha = 1
 			}, completion: nil)
@@ -187,7 +211,7 @@ extension DoctorSpecialities : UITableViewDelegate {
 	}
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 100
+		return Constants.cellHeight
 	}
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

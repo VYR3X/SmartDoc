@@ -8,23 +8,15 @@
 
 import UIKit
 
+/// Ячейка со специальностью врача
 class DoctorSpecialitiesCell: UITableViewCell {
 
-	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
+	private struct Constants {
+		static let standardOffset: CGFloat = 25
 	}
 
-	let cellView: UIView = {
-		let view = UIView()
-		view.layer.cornerRadius = 10
-		view.translatesAutoresizingMaskIntoConstraints = false
-		//view.backgroundColor = UIColor(red: 144/255, green: 238/255, blue: 144/255, alpha: 1)
-		//view.backgroundColor = UIColor(red: 175/255, green: 242/255, blue: 250/255, alpha: 1)
-		view.backgroundColor = .white
-		return view
-	}()
-
-	let dayLabel: UILabel = {
+	/// Название специальности врача
+	let specialitiesNameLabel: UILabel = {
 		let label = UILabel()
 		label.sizeToFit()
 		label.textColor = UIColor.gray
@@ -33,28 +25,37 @@ class DoctorSpecialitiesCell: UITableViewCell {
 		return label
 	}()
 
+	private let cellView: UIView = {
+		let view = UIView()
+		view.layer.cornerRadius = 10
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.backgroundColor = .white
+		return view
+	}()
+
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
-		backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
+		backgroundColor = .clear
 		addSubview(cellView)
-		cellView.addSubview(dayLabel)
+		cellView.addSubview(specialitiesNameLabel)
 		setupView()
 	}
+
+	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
 	func setupView() {
 
 		NSLayoutConstraint.activate([
+			cellView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+			cellView.rightAnchor.constraint(equalTo: rightAnchor, constant: -Constants.standardOffset),
+			cellView.leftAnchor.constraint(equalTo: leftAnchor, constant: Constants.standardOffset),
+			cellView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
 
-			cellView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-			cellView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10),
-			cellView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-			cellView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
-
-			dayLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-			dayLabel.heightAnchor.constraint(equalToConstant: 30),
-			dayLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 25),
-			dayLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -25)
-			])
+			specialitiesNameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+			specialitiesNameLabel.heightAnchor.constraint(equalToConstant: 30),
+			specialitiesNameLabel.leftAnchor.constraint(equalTo: cellView.leftAnchor, constant: Constants.standardOffset),
+			specialitiesNameLabel.rightAnchor.constraint(equalTo: cellView.rightAnchor, constant: -Constants.standardOffset)
+		])
 	}
 
 }

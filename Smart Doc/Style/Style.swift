@@ -11,7 +11,10 @@ import UIKit
 struct Colors {
 	static var darkGray = #colorLiteral(red: 0.3764705882, green: 0.3647058824, blue: 0.3647058824, alpha: 1)
 	static var darkRed = #colorLiteral(red: 0.5019607843, green: 0.1529411765, blue: 0.1764705882, alpha: 1)
-	static var mainColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1) // филлетовый
+	/// Основной цвет приложения темно-фиолетовый цвет
+	static var mainColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
+	/// Светло зеленый цвет
+	static var ligthGreenColor = UIColor(red: 144/255, green: 238/255, blue: 144/255, alpha: 1)
 }
 
 /// Стиль приложения

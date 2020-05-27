@@ -59,16 +59,15 @@ class DoctorsViewController: UIViewController  {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = UIFont.boldSystemFont(ofSize: 25)
-		label.textColor = .gray
+		label.textColor = .white
 		label.text = "Выберите врача из списка:"
-		label.backgroundColor = .white
+		label.backgroundColor = .clear
 		return label
 	}()
 
-	let refreshControl: UIRefreshControl = {
+	private let refreshControl: UIRefreshControl = {
 		let refreshControl = UIRefreshControl()
 		refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
-		//refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
 		refreshControl.backgroundColor = .clear
 		return refreshControl
 	}()

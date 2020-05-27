@@ -52,7 +52,7 @@ extension Coordinator: FlowRouting {
 		navigationController?.pushViewController(viewController, animated: true)
 	}
 
-	func routeToSpecialities() {
+	func routeToSpecialitiesList() {
 		progressView.setProgress(0.2, animated: false)
 		let viewController = assembly.makeSpecialitiesViewController(coordinator: self)
 		navigationController?.pushViewController(viewController, animated: true)
@@ -88,11 +88,6 @@ extension Coordinator: FlowCoordinating {
 		navigationController?.pushViewController(vc, animated: true)
 		return navigationController!
 	}
-//
-//
-//	func createNavigationContoller(vc: UIViewController) -> UINavigationController {
-//
-//	}
 
 	func startFlow() {
 //		rootViewController = navigationController?.topViewController

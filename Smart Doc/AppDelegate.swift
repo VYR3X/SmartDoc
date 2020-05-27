@@ -25,10 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let mainNavigationViewController = UINavigationController()
 		let coordinator = assembly.makeCoordinator(in: mainNavigationViewController)
 
-//		let navigationController = ProgressNavigationController()
-//		let progresscoordinator = assembly.makeCoordinator(in: navigationController)
-		//coordinator.routeToUserProfile()
-
 		/// создаю таб бар
 		let item = UITabBarItem(title: "Special", image: nil, selectedImage: nil)
 		let doctorsViewController = assembly.makeSpecialitiesViewController(coordinator: coordinator)
@@ -41,25 +37,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		item3.title = "Doc"
 		let userProfile = assembly.makeProfileViewController(coordinator: coordinator)
 
-
-//		let firstViewController = //ViewController {
-//				  ProgressViewController(flowProgress: 0.1) {
-//					  ProgressViewController(flowProgress: 0.5) {
-//					  }
-//				  }
-
-		let nc1 = coordinator.createNavigationContoller(vc: doctorsViewController)
-		//nc1.title = "Specialities"
-//		nc1.navigationBar.barStyle = .blackTranslucent
-        let nc2 = UINavigationController(rootViewController: polyclinicsViewController)
-        let nc3 = UINavigationController(rootViewController: userProfile)
+        let nc1 = UINavigationController(rootViewController: polyclinicsViewController)
+        let nc2 = UINavigationController(rootViewController: userProfile)
+		let nc3 = coordinator.createNavigationContoller(vc: doctorsViewController)
 
 		nc1.tabBarItem = item
 		nc2.tabBarItem = item2
 		nc3.tabBarItem = item3
 
 		let tabBarController = UITabBarController()
-		tabBarController.viewControllers = [nc1, nc2, nc3]
+		tabBarController.viewControllers = [nc3, nc1, nc2]
 
 		window?.rootViewController = tabBarController
 		return true
