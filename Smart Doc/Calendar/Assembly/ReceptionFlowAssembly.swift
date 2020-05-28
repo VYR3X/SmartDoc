@@ -23,6 +23,16 @@ final class ReseptionFlowAssembly {
 
 	init() {}
 
+	/// Метод для сборки главного экрана
+	func makeMainViewController(coordinator: Coordinator) -> UIViewController {
+		let interactor = MainScreenInteractor()
+		let presenter = MainScreenPresenter(interactor: interactor,
+													 coordinator: coordinator)
+		let viewController = MainScreenViewController(listener: presenter)
+		presenter.viewController = viewController
+		return viewController
+	}
+
 	/// Метод для сборки экрана Поликлиники
 	func makePolyclinicsViewController(coordinator: Coordinator) -> UIViewController {
 		let interactor = PolyclinicsInteractor()

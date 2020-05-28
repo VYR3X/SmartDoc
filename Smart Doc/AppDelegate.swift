@@ -15,6 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+		// TO:DO - разабраться что происходит с отображением контроллеров
+		// как устанавливабются items
+		// почему push первого контроллера с косяками
+		// перенести найтроку навигационного контроллера в отдельный класс ( сделать кастомнвый контроллер)
+		// почистить appdelegate
+		// tabbar установить иконки и вообще сделать настройку
+
 		window = UIWindow()
 		window?.makeKeyAndVisible()
 		window?.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
@@ -26,20 +33,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let coordinator = assembly.makeCoordinator(in: mainNavigationViewController)
 
 		/// создаю таб бар
-		let item = UITabBarItem(title: "Special", image: nil, selectedImage: nil)
-		let doctorsViewController = assembly.makeSpecialitiesViewController(coordinator: coordinator)
+		let item = UITabBarItem(title: "История", image: nil, selectedImage: nil)
+		//et specialitiesViewController = assembly.makeSpecialitiesViewController(coordinator: coordinator)
+		let mainscreen = assembly.makeMainViewController(coordinator: coordinator)
 
 		let item2 = UITabBarItem()
-		item2.title = "History"
-		let polyclinicsViewController = assembly.makeOperationHistoryViewController(coordinator: coordinator)
+		item2.title = "Профиль"
+		let historyViewController = assembly.makeOperationHistoryViewController(coordinator: coordinator)
 
 		let item3 = UITabBarItem()
-		item3.title = "Doc"
-		let userProfile = assembly.makeProfileViewController(coordinator: coordinator)
+		item3.title = "Профиль"
+		let userProfileViewController = assembly.makeProfileViewController(coordinator: coordinator)
 
-        let nc1 = UINavigationController(rootViewController: polyclinicsViewController)
-        let nc2 = UINavigationController(rootViewController: userProfile)
-		let nc3 = coordinator.createNavigationContoller(vc: doctorsViewController)
+        let nc1 = UINavigationController(rootViewController: historyViewController)
+        let nc2 = UINavigationController(rootViewController: userProfileViewController)
+		let nc3 = coordinator.createNavigationContoller(vc: mainscreen)
 
 		nc1.tabBarItem = item
 		nc2.tabBarItem = item2
@@ -73,7 +81,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func applicationWillTerminate(_ application: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 	}
-
-
 }
 

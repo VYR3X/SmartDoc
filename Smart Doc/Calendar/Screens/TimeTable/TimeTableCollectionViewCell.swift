@@ -34,6 +34,7 @@ final class TimeTableCollectionViewCell: UICollectionViewCell {
 		titleLabel.translatesAutoresizingMaskIntoConstraints = false
 		titleLabel.textColor = .white
 		titleLabel.numberOfLines = 0
+		titleLabel.textAlignment = .center
 		return titleLabel
 	}()
 

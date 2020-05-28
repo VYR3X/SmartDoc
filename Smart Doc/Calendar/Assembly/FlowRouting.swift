@@ -15,6 +15,9 @@ protocol FlowRouting {
 	/// - Parameter from: с вью контроллера
 	func routeBack(from viewController: UIViewController)
 
+	/// Перекинуть на главный экран
+	func routeToMainScreen()
+
 	/// Перекинуть на список со специальностями врачей
 	func routeToSpecialitiesList()
 

@@ -65,6 +65,18 @@
 		01BD72A5243252CB0090175E /* DoctorSpecialitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BD72A4243252CB0090175E /* DoctorSpecialitiesCell.swift */; };
 		01CBB7C2246C606A00DB7A03 /* TicketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CBB7C1246C606A00DB7A03 /* TicketModel.swift */; };
 		01F48DC1247D82B6007CBFA5 /* TimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DC0247D82B6007CBFA5 /* TimeTableView.swift */; };
+		01F48DDB247FCF85007CBFA5 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DD9247FCF85007CBFA5 /* MainScreenViewController.swift */; };
+		01F48DDC247FCF85007CBFA5 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DDA247FCF85007CBFA5 /* MainScreenViewModel.swift */; };
+		01F48DE0247FCF9D007CBFA5 /* MainScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DDD247FCF9D007CBFA5 /* MainScreenPresenter.swift */; };
+		01F48DE1247FCF9D007CBFA5 /* MainScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DDE247FCF9D007CBFA5 /* MainScreenInteractor.swift */; };
+		01F48DE2247FCF9D007CBFA5 /* MainScreenasdfModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DDF247FCF9D007CBFA5 /* MainScreenasdfModel.swift */; };
+		01F48DE4247FD4CF007CBFA5 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DE3247FD4CF007CBFA5 /* Color+Extension.swift */; };
+		01F48DE6247FE1C0007CBFA5 /* DoctorsPhotoCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DE5247FE1C0007CBFA5 /* DoctorsPhotoCollectionViewDelegate.swift */; };
+		01F48DE8247FE1D4007CBFA5 /* DoctorSpecialitiesCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DE7247FE1D4007CBFA5 /* DoctorSpecialitiesCollectionDelegate.swift */; };
+		01F48DEA247FE1FF007CBFA5 /* GenreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DE9247FE1FF007CBFA5 /* GenreCollectionViewCell.swift */; };
+		01F48DEC247FE219007CBFA5 /* DoctorsPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DEB247FE219007CBFA5 /* DoctorsPhotoCollectionViewCell.swift */; };
+		01F48DEE247FE239007CBFA5 /* NewsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DED247FE239007CBFA5 /* NewsViewCell.swift */; };
+		01F48DF0247FE254007CBFA5 /* NearbyPolyclinicsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DEF247FE254007CBFA5 /* NearbyPolyclinicsViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +140,18 @@
 		01BD72A4243252CB0090175E /* DoctorSpecialitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSpecialitiesCell.swift; sourceTree = "<group>"; };
 		01CBB7C1246C606A00DB7A03 /* TicketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketModel.swift; sourceTree = "<group>"; };
 		01F48DC0247D82B6007CBFA5 /* TimeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableView.swift; sourceTree = "<group>"; };
+		01F48DD9247FCF85007CBFA5 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		01F48DDA247FCF85007CBFA5 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
+		01F48DDD247FCF9D007CBFA5 /* MainScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenPresenter.swift; sourceTree = "<group>"; };
+		01F48DDE247FCF9D007CBFA5 /* MainScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenInteractor.swift; sourceTree = "<group>"; };
+		01F48DDF247FCF9D007CBFA5 /* MainScreenasdfModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenasdfModel.swift; sourceTree = "<group>"; };
+		01F48DE3247FD4CF007CBFA5 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		01F48DE5247FE1C0007CBFA5 /* DoctorsPhotoCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsPhotoCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		01F48DE7247FE1D4007CBFA5 /* DoctorSpecialitiesCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSpecialitiesCollectionDelegate.swift; sourceTree = "<group>"; };
+		01F48DE9247FE1FF007CBFA5 /* GenreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreCollectionViewCell.swift; sourceTree = "<group>"; };
+		01F48DEB247FE219007CBFA5 /* DoctorsPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		01F48DED247FE239007CBFA5 /* NewsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewCell.swift; sourceTree = "<group>"; };
+		01F48DEF247FE254007CBFA5 /* NearbyPolyclinicsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyPolyclinicsViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +194,7 @@
 			path = Polyclinics;
 			sourceTree = "<group>";
 		};
-		01943D88240C052100DD4237 /* MainScreen */ = {
+		01943D88240C052100DD4237 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
 				019CC5A223F9A69500CB8D14 /* CalendarViewController.swift */,
@@ -181,7 +205,7 @@
 				01F48DC0247D82B6007CBFA5 /* TimeTableView.swift */,
 				01943D93240C1BBE00DD4237 /* Views */,
 			);
-			path = MainScreen;
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 		01943D89240C070F00DD4237 /* Assembly */ = {
@@ -200,11 +224,12 @@
 		01943D8E240C1B4300DD4237 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				01F48DD8247FCF62007CBFA5 /* MainScreen */,
 				01A16E6D245B4C920014650C /* Launcher */,
 				015ED5EB24689B8C002FDB4D /* Polyclinics */,
 				01A16E7A24618CF10014650C /* UserProfile */,
 				01BD729F243245B40090175E /* DoctorSpecialties */,
-				01943D88240C052100DD4237 /* MainScreen */,
+				01943D88240C052100DD4237 /* Calendar */,
 				01943D8F240C1B5A00DD4237 /* Doctors */,
 				01943D90240C1B7800DD4237 /* TimeTable */,
 				01A16E7D24618D230014650C /* OperationHistory */,
@@ -250,6 +275,7 @@
 				01943DA5240C1E2100DD4237 /* Date+Extension.swift */,
 				015ED5E324688C29002FDB4D /* UIView+Extension.swift */,
 				0101AE7E2478746000584A99 /* UINavigationController+Progress.swift */,
+				01F48DE3247FD4CF007CBFA5 /* Color+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -391,6 +417,40 @@
 			path = DoctorSpecialties;
 			sourceTree = "<group>";
 		};
+		01F48DD8247FCF62007CBFA5 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				01F48DD9247FCF85007CBFA5 /* MainScreenViewController.swift */,
+				01F48DDA247FCF85007CBFA5 /* MainScreenViewModel.swift */,
+				01F48DDD247FCF9D007CBFA5 /* MainScreenPresenter.swift */,
+				01F48DDE247FCF9D007CBFA5 /* MainScreenInteractor.swift */,
+				01F48DDF247FCF9D007CBFA5 /* MainScreenasdfModel.swift */,
+				01F48DE5247FE1C0007CBFA5 /* DoctorsPhotoCollectionViewDelegate.swift */,
+				01F48DEB247FE219007CBFA5 /* DoctorsPhotoCollectionViewCell.swift */,
+				01F48DED247FE239007CBFA5 /* NewsViewCell.swift */,
+				01F48DF1247FE703007CBFA5 /* LocationPolyclinic */,
+				01F48DEF247FE254007CBFA5 /* NearbyPolyclinicsViewCell.swift */,
+				01F48DF2247FE737007CBFA5 /* Specialities */,
+				01F48DE7247FE1D4007CBFA5 /* DoctorSpecialitiesCollectionDelegate.swift */,
+				01F48DE9247FE1FF007CBFA5 /* GenreCollectionViewCell.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		01F48DF1247FE703007CBFA5 /* LocationPolyclinic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LocationPolyclinic;
+			sourceTree = "<group>";
+		};
+		01F48DF2247FE737007CBFA5 /* Specialities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Specialities;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -468,6 +528,7 @@
 				01943D9D240C1C6200DD4237 /* TimeTableViewController.swift in Sources */,
 				01A16E75245B59D90014650C /* SpecialitiesModel.swift in Sources */,
 				01048873246DC764000B90D1 /* TabBarController.swift in Sources */,
+				01F48DDC247FCF85007CBFA5 /* MainScreenViewModel.swift in Sources */,
 				018CE3C024427E920064E3E1 /* FlowCoordinating.swift in Sources */,
 				0101AE7F2478746000584A99 /* UINavigationController+Progress.swift in Sources */,
 				015ED5E924689B86002FDB4D /* PolyclinicsInteractor.swift in Sources */,
@@ -476,6 +537,7 @@
 				01943DAC240C202600DD4237 /* DoctorsService.swift in Sources */,
 				01943D8B240C074600DD4237 /* ReceptionFlowAssembly.swift in Sources */,
 				01943DA8240C1FB100DD4237 /* ServiceAssembly.swift in Sources */,
+				01F48DE8247FE1D4007CBFA5 /* DoctorSpecialitiesCollectionDelegate.swift in Sources */,
 				019CC5A823F9BE8F00CB8D14 /* Style.swift in Sources */,
 				015ED5DD2466BA20002FDB4D /* UserSettings.swift in Sources */,
 				019CC5A123F9A67A00CB8D14 /* WeekdaysView.swift in Sources */,
@@ -483,20 +545,27 @@
 				01943D92240C1BB400DD4237 /* CalendarPresenter.swift in Sources */,
 				015ED5EE24689BC5002FDB4D /* PolyclinicsViewController.swift in Sources */,
 				0149163C24792415001F3C2C /* ProgressNavigationController.swift in Sources */,
+				01F48DEC247FE219007CBFA5 /* DoctorsPhotoCollectionViewCell.swift in Sources */,
+				01F48DE4247FD4CF007CBFA5 /* Color+Extension.swift in Sources */,
 				015ED5EF24689BC5002FDB4D /* PolyclinicsViewModel.swift in Sources */,
 				015ED5DF2466FE34002FDB4D /* UserProfileModel.swift in Sources */,
 				01A16E71245B56000014650C /* DoctorsSpecialitiesPresenter.swift in Sources */,
 				01BD72A5243252CB0090175E /* DoctorSpecialitiesCell.swift in Sources */,
 				01943DAE240C209500DD4237 /* DoctorsServiceModel.swift in Sources */,
+				01F48DF0247FE254007CBFA5 /* NearbyPolyclinicsViewCell.swift in Sources */,
+				01F48DE6247FE1C0007CBFA5 /* DoctorsPhotoCollectionViewDelegate.swift in Sources */,
 				015ED612246B504F002FDB4D /* SlotViewModel.swift in Sources */,
 				01943DA1240C1C8200DD4237 /* TimeTableInteractor.swift in Sources */,
+				01F48DDB247FCF85007CBFA5 /* MainScreenViewController.swift in Sources */,
 				015ED5E424688C29002FDB4D /* UIView+Extension.swift in Sources */,
 				01A16E8324618D930014650C /* UserProfilePresenter.swift in Sources */,
 				018CE3BE24427DAF0064E3E1 /* FlowRouting.swift in Sources */,
+				01F48DEA247FE1FF007CBFA5 /* GenreCollectionViewCell.swift in Sources */,
 				01A16E6F245B4CC40014650C /* LaunchView.swift in Sources */,
 				01BD72A124324E4B0090175E /* DayCellTableViewCell.swift in Sources */,
 				01943DB0240C214200DD4237 /* NetworkClientServices.swift in Sources */,
 				01CBB7C2246C606A00DB7A03 /* TicketModel.swift in Sources */,
+				01F48DEE247FE239007CBFA5 /* NewsViewCell.swift in Sources */,
 				01943D8D240C084B00DD4237 /* Assembly.swift in Sources */,
 				01943D9B240C1C5300DD4237 /* DoctorsInteractor.swift in Sources */,
 				01943DA6240C1E2100DD4237 /* Date+Extension.swift in Sources */,
@@ -506,9 +575,12 @@
 				01A16E8F24618E900014650C /* OperationHistoryModel.swift in Sources */,
 				019CC59F23F9A66300CB8D14 /* MonthView.swift in Sources */,
 				01A16E73245B56160014650C /* DoctorSpecialitiesInteractor.swift in Sources */,
+				01F48DE2247FCF9D007CBFA5 /* MainScreenasdfModel.swift in Sources */,
+				01F48DE0247FCF9D007CBFA5 /* MainScreenPresenter.swift in Sources */,
 				019CC5AA23F9C98A00CB8D14 /* DayCollectionViewCell.swift in Sources */,
 				01A16E9324618EE60014650C /* OperationHistoryViewModel.swift in Sources */,
 				01943D99240C1C4000DD4237 /* DoctorsPresenter.swift in Sources */,
+				01F48DE1247FCF9D007CBFA5 /* MainScreenInteractor.swift in Sources */,
 				01F48DC1247D82B6007CBFA5 /* TimeTableView.swift in Sources */,
 				019CC5A323F9A69500CB8D14 /* CalendarViewController.swift in Sources */,
 				01943D95240C1C1B00DD4237 /* CalendarInteractor.swift in Sources */,

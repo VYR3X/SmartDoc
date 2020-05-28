@@ -42,6 +42,11 @@ extension Coordinator: FlowRouting {
 		navigationController?.popViewController(animated: true)
 	}
 
+	func routeToMainScreen() {
+		let viewController = assembly.makeMainViewController(coordinator: self)
+		navigationController?.pushViewController(viewController, animated: true)
+	}
+
 	func routeToPolyclinics() {
 		let viewController = assembly.makePolyclinicsViewController(coordinator: self)
 		navigationController?.pushViewController(viewController, animated: true)

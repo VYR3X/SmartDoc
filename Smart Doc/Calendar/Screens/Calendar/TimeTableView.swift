@@ -10,6 +10,9 @@ import UIKit
 
 final class TimeTableView: UIView {
 
+	var datasource = ["8:00", "8:20", "8:40", "9:00", "9.20",
+					  "9.40", "10:00", "10.20", "10.40", "11:00"];
+
 	private let refreshControl: UIRefreshControl = {
 		let refreshControl = UIRefreshControl()
 		refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
@@ -80,7 +83,7 @@ final class TimeTableView: UIView {
 extension TimeTableView: UICollectionViewDataSource {
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 10 //datasourse?.row.count ?? 0
+		return datasource.count
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -92,6 +95,7 @@ extension TimeTableView: UICollectionViewDataSource {
 		//			if datasourse?.row[indexPath.row].STATE == 1 { cell.cellView.backgroundColor = .red }
 		//			print(datasourse?.row[indexPath.row].TIME_SHOW)
 
+		cell.titleLabel.text = datasource[indexPath.row]
 		return cell
 	}
 }

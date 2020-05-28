@@ -154,7 +154,7 @@ extension TimeTableViewController: UICollectionViewDataSource {
 	}
 }
 
-extension TimeTableViewController: UICollectionViewDelegateFlowLayout {
+extension TimeTableViewController: UICollectionViewDelegate {
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
@@ -178,6 +178,10 @@ extension TimeTableViewController: UICollectionViewDelegateFlowLayout {
 			showAlertButtonTapped()
 		}
 	}
+
+}
+
+extension TimeTableViewController: UICollectionViewDelegateFlowLayout {
 
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,

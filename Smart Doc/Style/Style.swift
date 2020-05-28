@@ -27,7 +27,6 @@ struct Style {
 	static var activeCellLblColorHighlighted = UIColor.black
 	static var weekdaysLblColor = UIColor.white
 
-
 	/// Темная тема приложения
 	static func themeDark() {
 		bgColor = Colors.darkGray
