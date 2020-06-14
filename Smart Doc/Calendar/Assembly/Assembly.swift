@@ -9,6 +9,11 @@
 /// Сборщик всех флоу координаторов модуля
 final class Assembly {
 
+	/// Создает сервис для работы с банком.
+//	func makePolyclinicService() -> BankServiceProtocol {
+//		return PolyclinicService()
+//	}
+
 //	private lazy var services = ServiceAssembly()
 //
 //	private(set) lazy var purchase = PurchaseFlowAssembly(services: services)

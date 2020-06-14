@@ -2,13 +2,13 @@
 //  NearbyCinemaTableViewCell.swift
 //  Smart Doc
 //
-//  Created by 17790204 on 28/05/2020.
+//  Created by Vlad Zhokhov on 28/05/2020.
 //  Copyright © 2020 Vlad Zhokhov. All rights reserved.
 //
 
 import UIKit
 
-class NearbyPolyclinicsViewCell: UITableViewCell {
+final class NearbyPolyclinicsViewCell: UITableViewCell {
 
 	let fullPolyclinicLocationInformationView : UIView = {
 		let view = UIView()
@@ -31,12 +31,12 @@ class NearbyPolyclinicsViewCell: UITableViewCell {
 		return view
 	}()
 
-	let polyclinicNameLabel : UILabel = {
+	lazy var polyclinicNameLabel: UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = label.font.withSize(17)
 		label.font = UIFont.boldSystemFont(ofSize: 20.0)
-		label.text = "Зеленоградская гор. больница №1"
+		label.text = ""
 		label.textAlignment = .left
 		return label
 	}()
@@ -74,23 +74,24 @@ class NearbyPolyclinicsViewCell: UITableViewCell {
 		return label
 	}()
 
-	let subwayStationColorPointImageView : UIImageView = {
-		let image = UIImage(named: "heart")!
-		let imageView = UIImageView(image: image)
-		imageView.translatesAutoresizingMaskIntoConstraints = false
-		return imageView
+	let subwayStationColorPointImageView: UIView = {
+		let view = UIView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.backgroundColor = .blue
+		view.layer.cornerRadius = 8
+		return view
 	}()
 
 	let movietheaterRatingImageView : UIImageView = {
 
-		let image = UIImage(named: "heart")!
+		let image = UIImage(named: "stars")
 		let imageView = UIImageView(image: image)
 		imageView.translatesAutoresizingMaskIntoConstraints = false
 		return imageView
 	}()
 
 	let navigationImageView : UIImageView = {
-		let image = UIImage(named: "heart")!
+		let image = UIImage(named: "heart")
 		let imageView = UIImageView(image: image)
 		imageView.translatesAutoresizingMaskIntoConstraints = false
 		return imageView
@@ -194,9 +195,6 @@ class NearbyPolyclinicsViewCell: UITableViewCell {
 		])
 	}
 
-    required init?(coder aDecoder: NSCoder) {
-
-        super.init(coder: aDecoder)
-    }
+    required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder) }
 
 }

@@ -19,10 +19,11 @@ protocol FlowRouting {
 	func routeToMainScreen()
 
 	/// Перекинуть на список со специальностями врачей
-	func routeToSpecialitiesList()
+	/// - Parameter resourceID: id выбранной поликлиники
+	func routeToSpecialitiesList(polyclinicID: String?)
 
 	/// Перекинуть на экран календарь
-	func routeToCalendar(resourceID: String)
+	func routeToCalendar(resourceID: String,  specialization: String)
 
 	/// Перекинуть на экран c именами врачей
 	func routeToDoctors()

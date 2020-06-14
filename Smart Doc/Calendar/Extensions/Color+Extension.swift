@@ -29,9 +29,11 @@ extension UIColor {
 	static let gray3Alpha = UIColor(red: 0, green: 0, blue: 0.078, alpha: 0.12)
 	static let gray4Alpha = UIColor(red: 0, green: 0, blue: 0.078, alpha: 0.04)
 
+	/// Стандартный белый цвет (чем больше индекс тем темнее)
 	static let white1 = UIColor.white
 	static let white2 = UIColor(white: 0.74, alpha: 1)
 	static let white3 = UIColor(white: 0.32, alpha: 1)
+	/// черный цвет
 	static let white4 = UIColor(white: 0.05, alpha: 1)
 
 	static let white2Alpha = UIColor(red: 1, green: 1, blue: 1, alpha: 0.74)

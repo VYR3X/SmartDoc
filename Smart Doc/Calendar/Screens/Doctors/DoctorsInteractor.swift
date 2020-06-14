@@ -10,4 +10,15 @@
 protocol DoctorsInteractable {}
 
 /// Интерактор экрана со списком имен врачей
-final class DoctorsInteractor: DoctorsInteractable {}
+final class DoctorsInteractor: DoctorsInteractable {
+
+	/// Сервис для работы с дип линками
+	private let doctorsService: DoctorsServiceProtocol
+
+	/// Конструктор интерактора экрана доп информации по поликлиникам
+	/// - Parameter polyclinicService: серви для поликлиник
+	init(doctorsService: DoctorsServiceProtocol) {
+		self.doctorsService = doctorsService
+	}
+	
+}

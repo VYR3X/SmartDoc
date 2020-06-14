@@ -11,11 +11,12 @@ import UIKit
 /// Ячейка с фотографией врача
 class DoctorsPhotoCollectionViewCell: UICollectionViewCell {
 
-	private let trailerImageView: UIImageView = {
+	let trailerImageView: UIImageView = {
 		let image = UIImageView()
 		image.translatesAutoresizingMaskIntoConstraints = false
 		image.layer.cornerRadius = 16
 		image.backgroundColor = .ligthGreenColor
+		image.clipsToBounds = true
 		return image
 	}()
 

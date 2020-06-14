@@ -8,13 +8,22 @@
 
 import UIKit
 
+
+/// Интерфейс взаимодействия с вью-контроллером экрана MainScreen.
+protocol DoctorSpecialitiesControllable: UIViewController {
+
+	func bind(specialitiesNames: [String], specialitiesID: [String])
+}
+
+
 /// Интерфейс взаимодействия с презентером экрана TransferToAnotherPerson.
 protocol DoctorSpecialitiesListener {
 
 	/// Данные загрузились
 	///
 	/// - Parameter viewController: текущий вью контроллер
-	func didLoad(_ viewController: UIViewController)
+	func didLoad(_ viewController: UIViewController, polyclinicID: String?)
+	//func didLoad(_ viewController: UIViewController)
 
 	/// Информирует листенер о нажатии кнопки назад.
 	///
@@ -23,15 +32,15 @@ protocol DoctorSpecialitiesListener {
 
 	/// Информирует листенер о переходе на экран календарь
 	/// - Parameter Resource_ID: id выбранной специализации врача
-	func didOpenCalendar(Resource_ID: String)
+	func didOpenCalendar(Resource_ID: String, specialization: String)
 
 	/// Получить спискок специальностей
 	/// - Parameter completion: комплишн блок
-	func getSpecialitiesList(completion: @escaping (Result<SpecialitiesViewModel, Error>) -> Void)
+	func getSpecialitiesList(polyclinicID: String?, completion: @escaping (Result<SpecialitiesViewModel, Error>) -> Void)
 }
 
 /// Экран со списком всех доступных специальностей врачей
-final class DoctorSpecialitiesViewController: UIViewController {
+final class DoctorSpecialitiesViewController: UIViewController, DoctorSpecialitiesControllable{
 
 //	var datasource = [
 //	"Стоматолог", // A417276AC757742CE0530100007F6A68
@@ -50,7 +59,10 @@ final class DoctorSpecialitiesViewController: UIViewController {
 	var datasource = ["Терапевт", "Хирург", "Стоматолог"];
 
 	// стоматологи пока не записывают )
-	let Resource_ID = [ "A417276AC757742CE0530100007F6A68", "7F7DA9355EAAF96FE0530100007F0F8B", "7FA60C0CEEE364F3E0530100007F82C1" ]
+	var Resource_ID = ["7F7DA9355EAAF96FE0530100007F0F8B", "7FA60C0CEEE364F3E0530100007F82C1", "7F7DA9355EAAF96FE0530100007F0F8B"]
+
+	/// хз тороплюсь ) 
+	var polyclinicID = "0000"
 
 	/// Переменная для анимации отображения ячейки
 	private var finishedLoadingInitialTableCells = false
@@ -99,6 +111,7 @@ final class DoctorSpecialitiesViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		listener?.didLoad(self, polyclinicID: polyclinicID)
 		view.addSubviews(descriptionLabel, tableView)
 		self.title = "Запись"
 		navigationController?.navigationBar.barTintColor = Colors.mainColor
@@ -106,7 +119,24 @@ final class DoctorSpecialitiesViewController: UIViewController {
 		//tabBarController?.tabBar.barTintColor = Colors.mainColor
 		setupTableView()
 		setGradient()
+		//loadData()
 	}
+
+//	func didLoad(_ viewController: MainScreenViewControllable) {
+
+//		listener.getPolyclicModel(completion: {result in
+//			switch result {
+//			case .success(let model):
+//				DispatchQueue.main.async {
+//					let vm = PolyclinicsViewModel(model: model)
+//					viewController.bind(polyclinics: vm.organizations, polyclinicsId: vm.organizatiosId)
+//				}
+//			case .failure(let error):
+//				print("error: \n \(error)")
+//			}
+//		})
+
+//	}
 
 	private func setGradient() {
 		let gradient: CAGradientLayer = CAGradientLayer()
@@ -123,9 +153,15 @@ final class DoctorSpecialitiesViewController: UIViewController {
 		view.layer.insertSublayer(gradient, at: 0)
 	}
 
+	func bind(specialitiesNames: [String], specialitiesID: [String]) {
+		self.datasource = specialitiesNames
+		self.Resource_ID = specialitiesID
+		self.tableView.reloadData()
+	}
+
 	@objc private func refresh(sender: UIRefreshControl) {
 //		var state = 0
-		listener!.getSpecialitiesList { (result) in
+		listener!.getSpecialitiesList(polyclinicID: polyclinicID) { (result) in
 			switch result {
 			case .success(let types):
 				self.datasource = types.specialitiesNames
@@ -216,9 +252,10 @@ extension DoctorSpecialitiesViewController: UITableViewDelegate {
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-		let selectDoctor = Resource_ID[indexPath.row];
-		print("Выбранная специализация врача: \(selectDoctor) - Resourse_ID")
-		listener?.didOpenCalendar(Resource_ID: selectDoctor)
+		let specializationID = Resource_ID[indexPath.row]
+		let specializationName = datasource[indexPath.row]
+		print("Выбранная специализация врача: \(specializationName) - ID: \(specializationID)")
+		listener?.didOpenCalendar(Resource_ID: specializationID, specialization: specializationName)
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
 }

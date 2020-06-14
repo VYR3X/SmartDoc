@@ -33,6 +33,15 @@ protocol TimeTableInteractable {
 /// Интерактор c расписанием врача
 final class TimeTableInteractor: TimeTableInteractable {
 
+	/// Сервис для работы с дип линками
+	private let timeTableService: TimeTableServiceProtocol
+
+	/// Конструктор интерактора экрана доп информации по поликлиникам
+	/// - Parameter polyclinicService: серви для поликлиник
+	init(timeTableService: TimeTableServiceProtocol) {
+		self.timeTableService = timeTableService
+	}
+
 	func createAppointment(slotId: String,
 						   firstName: String,
 						   birthday: String,
@@ -40,56 +49,14 @@ final class TimeTableInteractor: TimeTableInteractable {
 						   email: String,
 						   polis: String,
 						   completion: @escaping (Result<Any, Error>) -> Void) {
-
-		print("Post button tapped")
-
-		let resource = "APPOINTMENT"
-		let method = "CREATE"
-		let params = "{SLOT_ID:\"\(slotId)\",PATIENT_NAME:\"\(firstName)\",PATIENT_LASTNAME:\"\(firstName)\",PATIENT_BIRTHDAY:\"\(birthday)\",PATIENT_PHONE:\"\(phoneNumber)\",PATIENT_EMAIL:\"\(email)\",PATIENT_POLICY:\"\(polis)\"}"
-
-		var url: URL? {
-			var components = URLComponents()
-			components.scheme = "https"
-			components.host =  "services.interin.ru"
-			components.path = "/wix.registry_api"
-			components.queryItems = [
-				URLQueryItem(name: "p_resource", value: resource),
-				URLQueryItem(name: "p_method", value: method),
-				URLQueryItem(name: "p_params", value: params)
-			]
-			return components.url
-		}
-
-//		let parametrs = ["SLOT_ID": "A47EFFADC5C0715BE0530100007F9634", "PATIENT_NAME": "ДМИТРИЙ", "PATIENT_LASTNAME": "Иванов"]
-//
-//		print(url)
-//
-		var request = URLRequest(url: url!)
-		request.httpMethod = "POST"
-//
-//		guard let httpBody = try? JSONSerialization.data(withJSONObject: parametrs, options: []) else { return }
-//
-//		request.httpBody = httpBody
-
-		let session = URLSession.shared
-
-		session.dataTask(with: request) { (data , responce, error) in
-			if let responce = responce {
-				print(responce)
-			}
-
-			guard let data = data else { return }
-
-			do {
-				let interinData = try JSONSerialization.jsonObject(with: data, options: [])
-				//print(interinData)
-				completion(.success(interinData))
-
-			} catch let jsonError {
-				//print(error)
-				completion(.failure(jsonError))
-			}
-		}.resume()
+		timeTableService.createAppointment(slotId: slotId,
+										   firstName: firstName,
+										   birthday: birthday,
+										   phoneNumber: phoneNumber,
+										   email: email, polis: polis,
+										   completion: { result in
+											completion(result)
+		})
 	}
 
 }

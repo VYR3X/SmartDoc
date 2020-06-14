@@ -9,7 +9,24 @@
 /// Вью-модель экрана OperationHistory.
 struct OperationHistoryViewModel {
 
-	/// Вью-модель для обновления экрана.
-	struct Update {
+	var doctorSpecislities: [String] = []
+
+	var starts: [String] = []
+
+	var books: [Book] = []
+
+	init(model: OperationHistoryModel) {
+
+		for row in model.row {
+			for book in row.book! {
+				starts.append(book.START)
+				doctorSpecislities.append(row.SPECIALITY)
+				//specialitiesID.append(resourceId)
+				print("Начало приема: \(book.START) специальность врача: \(row.SPECIALITY)")
+			}
+		}
 	}
+
+
+	
 }

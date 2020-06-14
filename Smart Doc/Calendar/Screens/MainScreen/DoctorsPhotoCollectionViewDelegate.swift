@@ -13,6 +13,11 @@ class DoctorsPhotoCollectionViewDelegate : NSObject {
 
 	private let listener: MainScreenPresentableListener?
 
+	private let doctorsPhotos = ["doc", "doc", "doc",
+								 "doc", "doc", "doc",
+								 "doc", "doc", "doc",
+								 "doc", "doc"]
+
 	init(listener: MainScreenPresentableListener) {
 		self.listener = listener
 	}
@@ -33,11 +38,12 @@ extension DoctorsPhotoCollectionViewDelegate : UICollectionViewDataSource {
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pikachu",for: indexPath) as? DoctorsPhotoCollectionViewCell else {
 			return UICollectionViewCell()
 		}
+		cell.trailerImageView.image = UIImage(named: doctorsPhotos[indexPath.row])
 		return cell
 	}
 
 	public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 10
+		return doctorsPhotos.count
 	}
 }
 

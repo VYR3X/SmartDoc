@@ -35,7 +35,10 @@ final class UserProfilePresenter: UserProfilePresentable {
 extension UserProfilePresenter: UserProfilePresentableListener {
 
 	func openDoctorsSpecialities() {
-		coordinator.routeToSpecialitiesList()
+		/// TO:DO переделать вместо nil добавить enum
+		// типа в polyclinicID мы узнаем о специалистах из конкретоной поликлиники
+		// nil означает что нам пофиг какаяч поликлиники нужны просто специалисты )
+		coordinator.routeToSpecialitiesList(polyclinicID: nil)
 	}
 
 	func didLoad(_ viewController: UserProfileViewControllable) {}

@@ -9,7 +9,11 @@
 import UIKit
 
 /// Интерфейс взаимодействия с вью-контроллером экрана MainScreen.
-protocol MainScreenViewControllable: UIViewController {}
+protocol MainScreenViewControllable: UIViewController {
+
+	func bind(polyclinics: [String], polyclinicsId: [String])
+
+}
 
 protocol MainScreenPresentableListener {
 
@@ -20,6 +24,12 @@ protocol MainScreenPresentableListener {
 	func didTapSpecialitiesCell(resourceID: String)
 
 	func didTapDoctorsPhoto()
+
+	func getPolyclinicList(completion: @escaping (Result<PolyclinicsViewModel, Error>) -> Void)
+
+	func didTapOnPoliclynic(id: String)
+
+	func didLoadDoctorName()
 }
 
 final class MainScreenViewController: UIViewController, MainScreenViewControllable {
@@ -50,6 +60,15 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 		view.backgroundColor = .clear
 		return view
 	}()
+
+	private let newsImageNames = ["tass", "moscowCity", "rbk", "putin", "corona"]
+	private let newsTitles = ["В москве с 9 июня отменяется пропуска и режим самоизоляции",
+							  "Москва лучший город России",
+							  "Помочь врачам или переложить плитку",
+							  "Путин на месте и уходить некуда не собирается",
+							  "Врачи ШУЕ уже выехаил "]
+
+	private let newSubTitles = ["ТАСС", "РИА НОВОСТИ", "РБК", "LENTA.RU", "RAMBLER"]
 
 	/// Контейнер вью для шапки экрана (новости, интерин, москва)
 	private let newsContainerView : UIView = {
@@ -98,6 +117,11 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 	}()
 
 	//MARK: - Second view
+
+	/// Название поликлиник
+	var polyclinics: [String] = []
+	/// ID поликлиник
+	var polyclinicsId: [String] = []
 
 	private let containerViewWithRoundedView : UIView = {
 		let view = UIView()
@@ -176,6 +200,7 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 		label.text = "Поликлиники рядом"
 		label.font = label.font.withSize(15)
 		label.font = UIFont.boldSystemFont(ofSize: 20.0)
+//		label.backgroundColor = .orange
 		label.textAlignment = .left
 
 		var imageView: UIImageView?
@@ -188,7 +213,8 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 		return label
 	}()
 
-	private lazy var cinemaTableView : UITableView = {
+	/// Полиниклиники рядом список
+	lazy var cinemaTableView : UITableView = {
 		let table = UITableView()
 		table.delegate = self
 		table.dataSource = self
@@ -198,7 +224,7 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 		return table
 	}()
 
-	private let allMovieTheatersButton : UIButton = {
+	private let allMovieTheatersButton: UIButton = {
 		let button = UIButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.backgroundColor = UIColor(red: 0, green: 0, blue: 0.078, alpha: 0.04)
@@ -224,7 +250,7 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
+		listener.didLoad(self)
 		let scrollView = UIScrollView(frame: self.view.bounds)
 		scrollView.showsVerticalScrollIndicator = false
 		scrollView.refreshControl = refreshControl
@@ -247,7 +273,7 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 
 		view.addSubview(scrollView)
 		scrollView.addSubview(massiveContainerView)
-		scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 350 )
+		scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 450 )
 
 		setupConstraint()
 		setupConstraintForSecondViewController()
@@ -259,10 +285,28 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 		listener.openListOfDoctors()
 	}
 
+	func bind(polyclinics: [String], polyclinicsId: [String]) {
+		self.polyclinics = polyclinics
+		self.polyclinicsId = polyclinicsId
+		self.cinemaTableView.reloadData()
+	}
+
 	@objc private func refresh(sender: UIRefreshControl) {
 		// TO:DO самая жопа тут вообще нужно послать как минумум 4 запроса
 		// все распарсить и отобразить заново
 		// хз одним разом или последовательно
+		listener.getPolyclinicList { (result) in
+					switch result {
+					case .success(let result):
+						print(result)
+						self.polyclinics = result.organizations
+						self.polyclinicsId = result.organizatiosId
+					case .failure(_):
+						print("Я хз чи шо, You Know ??? ")
+					}
+		//			state = 1
+				}
+		self.cinemaTableView.reloadData()
 		sender.endRefreshing()
 	}
 
@@ -295,21 +339,17 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 
 				newsContainerView.heightAnchor.constraint(equalToConstant: 336),
 				newsContainerView.widthAnchor.constraint(equalToConstant: view.frame.width),
-				newsContainerView.topAnchor.constraint(equalTo: massiveContainerView.topAnchor, constant: 0), // от вершины шторки
+				newsContainerView.topAnchor.constraint(equalTo: massiveContainerView.topAnchor, constant: 0),
 
-				cinemaLabel.heightAnchor.constraint(equalToConstant: 343),
 				cinemaLabel.widthAnchor.constraint(equalToConstant: 28),
 				cinemaLabel.topAnchor.constraint(equalTo: newsContainerView.topAnchor, constant: 32),
 				cinemaLabel.rightAnchor.constraint(equalTo: newsContainerView.rightAnchor, constant: -16),
-				cinemaLabel.bottomAnchor.constraint(equalTo: newsContainerView.bottomAnchor, constant: -276),
-				cinemaLabel.leftAnchor.constraint(equalTo: newsContainerView.leftAnchor, constant: 16),
+				cinemaLabel.leftAnchor.constraint(equalTo: newsContainerView.leftAnchor, constant: 20),
 
 				locationLabel.heightAnchor.constraint(equalToConstant: 20),
-				locationLabel.widthAnchor.constraint(equalToConstant: 292),
 				locationLabel.topAnchor.constraint(equalTo: newsContainerView.topAnchor, constant: 64),
 				locationLabel.rightAnchor.constraint(equalTo: newsContainerView.rightAnchor, constant: -67),
-				locationLabel.bottomAnchor.constraint(equalTo: newsContainerView.bottomAnchor, constant: -252),
-				locationLabel.leftAnchor.constraint(equalTo: newsContainerView.leftAnchor, constant: 16)
+				locationLabel.leftAnchor.constraint(equalTo: newsContainerView.leftAnchor, constant: 20)
 				])
 		}
 
@@ -322,16 +362,14 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 				containerViewWithRoundedView.widthAnchor.constraint(equalToConstant: self.view.frame.width),
 
 				roundedView.topAnchor.constraint(equalTo: containerViewWithRoundedView.topAnchor, constant: 0),
-				roundedView.heightAnchor.constraint(equalToConstant: view.frame.height),
-				roundedView.widthAnchor.constraint(equalToConstant: self.view.frame.width),
-				roundedView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
-				roundedView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+				roundedView.heightAnchor.constraint(equalToConstant: view.frame.height + 250),
+				roundedView.leftAnchor.constraint(equalTo: view.leftAnchor),
+				roundedView.rightAnchor.constraint(equalTo: view.rightAnchor),
 
 				allMoviesLabel.bottomAnchor.constraint(equalTo: movieGenresCollectionView.topAnchor, constant: -4),
 				allMoviesLabel.heightAnchor.constraint(equalToConstant: 28),
-				allMoviesLabel.widthAnchor.constraint(equalToConstant: 343),
-				allMoviesLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-				allMoviesLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
+				allMoviesLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
+				allMoviesLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25),
 
 				movieGenresCollectionView.bottomAnchor.constraint(equalTo: doctorPhotoCardCollectionView.topAnchor, constant: 0),
 				movieGenresCollectionView.heightAnchor.constraint(equalToConstant: 68),
@@ -343,14 +381,12 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 
 				allMoviesButton.topAnchor.constraint(equalTo: doctorPhotoCardCollectionView.bottomAnchor, constant: 8),
 				allMoviesButton.heightAnchor.constraint(equalToConstant: 44),
-				allMoviesButton.widthAnchor.constraint(equalToConstant: 343),
-				allMoviesButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+				allMoviesButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
 				allMoviesButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
 
-				nearbyCinemasLabel.bottomAnchor.constraint(equalTo: cinemaTableView.topAnchor, constant: 0),
+				nearbyCinemasLabel.bottomAnchor.constraint(equalTo: cinemaTableView.topAnchor, constant: -10),
 				nearbyCinemasLabel.heightAnchor.constraint(equalToConstant: 22),
-				nearbyCinemasLabel.widthAnchor.constraint(equalToConstant: 343),
-				nearbyCinemasLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+				nearbyCinemasLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
 				nearbyCinemasLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
 
 				cinemaTableView.topAnchor.constraint(equalTo: doctorPhotoCardCollectionView.bottomAnchor, constant: 112),
@@ -365,28 +401,36 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 		}
 	}
 
-extension MainScreenViewController : UICollectionViewDataSource {
+// MARK: - UICollectionViewDataSource
+
+extension MainScreenViewController: UICollectionViewDataSource {
 
 	public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 10
+		return newSubTitles.count
 	}
 
 	public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
 		guard let cell = newsCollectionView.dequeueReusableCell(withReuseIdentifier: "filmCollectionView",for: indexPath) as? NewsViewCell else { return UICollectionViewCell() }
-		// TO:DO добавить новости
+
+		cell.trailerImageView.image = UIImage(named: newsImageNames[indexPath.row])
+		cell.titleLabel.text = newsTitles[indexPath.row]
+		cell.subtitleLabel.text = newSubTitles[indexPath.row]
+		//cell.layer.cornerRadius = 10
 		return cell
 	}
 }
 
-extension MainScreenViewController : UICollectionViewDelegateFlowLayout {
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension MainScreenViewController: UICollectionViewDelegateFlowLayout {
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: 248, height: 190 )
+		return CGSize(width: 248, height: 190)
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-		return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+		return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 16)
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -394,22 +438,37 @@ extension MainScreenViewController : UICollectionViewDelegateFlowLayout {
 	}
 }
 
+// MARK: - UITableViewDataSource
+
 extension MainScreenViewController : UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 3
+		return polyclinics.count
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-		let cell: UITableViewCell = cinemaTableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! NearbyPolyclinicsViewCell
+		let cell = cinemaTableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! NearbyPolyclinicsViewCell
+
+		cell.polyclinicNameLabel.text = polyclinics[indexPath.row]
 		return cell
 	}
 }
 
-extension MainScreenViewController : UITableViewDelegate {
+// MARK: - UITableViewDelegate
+
+extension MainScreenViewController: UITableViewDelegate {
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 96
+	}
+
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+		let selectPolyclinic = polyclinics[indexPath.row];
+		let polyclinicsID = polyclinicsId[indexPath.row];
+		print("Выбранная поликлиника: \(selectPolyclinic) с присвоенным ID: \(polyclinicsID)")
+		listener.didTapOnPoliclynic(id: polyclinicsID)
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 }

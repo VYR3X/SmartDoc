@@ -6,6 +6,8 @@
 //  Copyright © 2020 Vlad Zhokhov. All rights reserved.
 //
 
+import UIKit
+
 /// Интерфейс взаимодействия с презентером экрана OperationHistory во флоу asdf.
 protocol OperationHistoryPresentable {}
 
@@ -32,5 +34,23 @@ final class OperationHistoryPresenter: OperationHistoryPresentable {
 
 extension OperationHistoryPresenter: OperationHistoryPresentableListener {
 
-	func didLoad(_ viewController: OperationHistoryViewControllable) {}
+	func didLoad(_ viewController: OperationHistoryViewControllable, resourceID: String) {
+
+		interactor.getHistory(resourceID: resourceID, completion: {productsModelResult in
+			switch productsModelResult {
+			case .success(let history):
+				DispatchQueue.main.async {
+					//print("\nПолучили специализацию врачей: \n\(doctorsModel)")
+					let vm = OperationHistoryViewModel(model: history)
+					self.viewController?.bind(dateTimeLabels: vm.starts,
+											  specialitiesNameLabels: vm.doctorSpecislities)
+					print("количество записей : \(vm.books.count)\n")
+					print("специализации: \(vm.doctorSpecislities)\n")
+					print("время приема: \(vm.starts)\n")
+				}
+			case .failure(let error):
+				print("error: \n \(error)")
+			}
+		})
+	}
 }

@@ -7,17 +7,22 @@
 //
 import UIKit
 
+/// массив с выбранными специализациями врачей для формирования талонов
+public var specializationNames: [String] = []
+public var selectTime: [String] = [] // массив времен на которые записался пациент
+
 /// Координатор
 /// Реализует композицию двух протоколов – FlowCoordinating & FlowRouting
 final class Coordinator {
 
 	private let assembly: ReseptionFlowAssembly
 	private weak var navigationController: UINavigationController?
-	private weak var progressNavigationController: ProgressNavigationController?
+	private var receptionNavigationController: ReceptionNavigationController? // нав контроллер основгоно флоу записи
 	private weak var rootViewController: UIViewController?
 
 	var resource_ID: String? // id специальности врача ( терапевт, хирург, стоматолог )
 	var slotModel: TicketModel?
+	var currentSpecialist: String? // выбрали специалиста на экране список врачей и не закончили запись
 
 	/// Конструктор
 	///
@@ -45,6 +50,7 @@ extension Coordinator: FlowRouting {
 	func routeToMainScreen() {
 		let viewController = assembly.makeMainViewController(coordinator: self)
 		navigationController?.pushViewController(viewController, animated: true)
+		rootViewController = viewController
 	}
 
 	func routeToPolyclinics() {
@@ -57,16 +63,23 @@ extension Coordinator: FlowRouting {
 		navigationController?.pushViewController(viewController, animated: true)
 	}
 
-	func routeToSpecialitiesList() {
+	func routeToSpecialitiesList(polyclinicID: String?) {
 		progressView.setProgress(0.2, animated: false)
-		let viewController = assembly.makeSpecialitiesViewController(coordinator: self)
+		let viewController = assembly.makeSpecialitiesViewController(coordinator: self, polyclinicID: polyclinicID)
+//		receptionNavigationController = ReceptionNavigationController(rootViewController: viewController)
+	//	guard let receptionNavigationController = receptionNavigationController else { return }
 		navigationController?.pushViewController(viewController, animated: true)
+		//receptionNavigationController.pushViewController(viewController, animated: true)
 	}
 
-	func routeToCalendar(resourceID: String) {
+	func routeToCalendar(resourceID: String,  specialization: String) {
 		progressView.setProgress(0.4, animated: false)
 		resource_ID = resourceID
-		let viewController = assembly.makeMainViewController(coordinator: self, resourseID: resourceID)
+		currentSpecialist = specialization
+		//specializationNames.append(specialization)
+		let viewController = assembly.makeCalendarViewController(coordinator: self, resourseID: resourceID)
+		//receptionNavigationController?.navigationBar.backgroundColor = .orange
+		//receptionNavigationController!.pushViewController(viewController, animated: true)
 		navigationController?.pushViewController(viewController, animated: true)
 	}
 
@@ -97,13 +110,17 @@ extension Coordinator: FlowCoordinating {
 	func startFlow() {
 //		rootViewController = navigationController?.topViewController
 //		self.productsModel = productsModel
-//		let mainViewController = assembly.makePaymentsAndTransfersViewController(productsModel: productsModel,
+		let mainViewController = assembly.makeSpecialitiesViewController(coordinator: self, polyclinicID: nil)
 //																				 coordinator: self)
-//		navigationController?.pushViewController(mainViewController, animated: true)
+		navigationController?.pushViewController(mainViewController, animated: true)
 	}
 
-	func finishFlow() {
-//		guard let rootViewController = rootViewController else { return }
-//		navigationController?.popToViewController(rootViewController, animated: true)
+	func finishFlow(time: String) {
+		specializationNames.append(currentSpecialist!)
+		selectTime.append(time)
+		print("Записались на такие часы: \(selectTime)")
+		print("Записались к таким специалистам: \(specializationNames)")
+		guard let rootViewController = rootViewController else { return }
+		navigationController?.popToViewController(rootViewController, animated: true)
 	}
 }

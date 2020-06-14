@@ -6,6 +6,8 @@
 //  Copyright © 2020 Vlad Zhokhov. All rights reserved.
 //
 
+import Foundation
+
 /// Интерфейс взаимодействия с презентером экрана MainScreen.
 protocol MainScreenPresentable {}
 
@@ -30,18 +32,56 @@ final class MainScreenPresenter: MainScreenPresentable {
 
 extension MainScreenPresenter: MainScreenPresentableListener {
 
+	func didLoadDoctorName() {
+		// бэк возвращает одну фамилию так что оставим мок
+	}
+
+	func didTapOnPoliclynic(id: String) {
+		coordinator.routeToSpecialitiesList(polyclinicID: id)
+	}
+
 	func didTapDoctorsPhoto() {
-		coordinator.routeToSpecialitiesList()
+		coordinator.routeToSpecialitiesList(polyclinicID: nil)
 	}
 
 	func didTapSpecialitiesCell(resourceID: String) {
-		coordinator.routeToCalendar(resourceID: resourceID)
+		coordinator.routeToCalendar(resourceID: resourceID, specialization: "специалист")
 	}
 
 	func openListOfDoctors() {
 		coordinator.routeToDoctors()
 	}
 
-	func didLoad(_ viewController: MainScreenViewControllable) {}
+	func didLoad(_ viewController: MainScreenViewControllable) {
+
+		interactor.getPolyclicModel(completion: {result in
+			switch result {
+			case .success(let model):
+				DispatchQueue.main.async {
+					let vm = PolyclinicsViewModel(model: model)
+					viewController.bind(polyclinics: vm.organizations, polyclinicsId: vm.organizatiosId)
+				}
+			case .failure(let error):
+				print("error: \n \(error)")
+			}
+		})
+
+	}
+
+	func getPolyclinicList(completion: @escaping (Result<PolyclinicsViewModel, Error>) -> Void) {
+
+		interactor.getPolyclicModel(completion: {result in
+			switch result {
+			case .success(let model):
+				DispatchQueue.main.async {
+					let vm = PolyclinicsViewModel(model: model)
+					completion(.success(vm))
+				}
+			case .failure(let error):
+				print("error: \n \(error)")
+				completion(.failure(error))
+			}
+		})
+	}
 
 }

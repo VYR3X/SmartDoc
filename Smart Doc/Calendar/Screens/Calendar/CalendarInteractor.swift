@@ -47,6 +47,8 @@ final class CalendarInteractor: CalendarInteractable {
 
 		let session = URLSession.shared
 
+		print("URL:\(url)\n")
+
 		session.dataTask(with: url!) { (data , responce, error) in
 
 			if let responce = responce {

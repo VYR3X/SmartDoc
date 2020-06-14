@@ -31,6 +31,10 @@ final class TimeTablePresenter: TimeTablePresentable {
 
 extension TimeTablePresenter: TimeTablePresentableListener {
 
+	func didTapOkButton(time: String) {
+		coordinator.finishFlow(time: time)
+	}
+
 	func createAppointment(slotID: String,
 						   firstName: String,
 						   birthday: String,
@@ -51,6 +55,12 @@ extension TimeTablePresenter: TimeTablePresentableListener {
 											print("\nПроизошла ошибка при созданни записи:\n\(error)")
 										}
 		}
+
+
+		func didTapOkButton(time: String) {
+			coordinator.finishFlow(time: time)
+		}
+
 	}
 
 	func didLoad(_ viewController: UIViewController) {}

@@ -18,6 +18,7 @@ final class NewsViewCell: UICollectionViewCell {
 		image.contentMode = .scaleAspectFill
 		image.layer.cornerRadius = 16
 		image.backgroundColor = UIColor.white
+		image.clipsToBounds = true
 		return image
 	}()
 

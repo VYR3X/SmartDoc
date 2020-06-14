@@ -12,10 +12,7 @@ final class ReseptionFlowAssembly {
 
 	//private weak var coordinator: Coordinator?
 	private var orderID: String?
-
-	private let services: ServiceAssembly? = nil
-
-	//private weak var coordinator: PurchaseFlowCoordinator?
+	private let services = ServiceAssembly()
 
 	//	init(services: ServiceAssembly) {
 	//		self.services = services
@@ -25,7 +22,8 @@ final class ReseptionFlowAssembly {
 
 	/// Метод для сборки главного экрана
 	func makeMainViewController(coordinator: Coordinator) -> UIViewController {
-		let interactor = MainScreenInteractor()
+		let polyclicService = services.makePolyclinicService()
+		let interactor = MainScreenInteractor(polyclinicService: polyclicService)
 		let presenter = MainScreenPresenter(interactor: interactor,
 													 coordinator: coordinator)
 		let viewController = MainScreenViewController(listener: presenter)
@@ -35,6 +33,7 @@ final class ReseptionFlowAssembly {
 
 	/// Метод для сборки экрана Поликлиники
 	func makePolyclinicsViewController(coordinator: Coordinator) -> UIViewController {
+		//let polyclicService = services.makePolyclinicService()
 		let interactor = PolyclinicsInteractor()
 		let presenter = PolyclinicsPresenter(interactor: interactor,
 													 coordinator: coordinator)
@@ -54,18 +53,21 @@ final class ReseptionFlowAssembly {
 	}
 
 	/// Метод для сборки экрана со списком специальностей врачей
-	func makeSpecialitiesViewController(coordinator: Coordinator) -> UIViewController {
-		let interactor = DoctorSpecialitiesInteractor()
+	func makeSpecialitiesViewController(coordinator: Coordinator, polyclinicID: String?) -> UIViewController {
+		let specialitiesService = services.makeDoctorSpesialitiesService()
+		let interactor = DoctorSpecialitiesInteractor(specialitiesService: specialitiesService)
 		let presenter = DoctorsSpecialitiesPresenter(interactor: interactor,
 															   coordinator: coordinator)
 		let viewController = DoctorSpecialitiesViewController(listener: presenter)
+		viewController.polyclinicID = polyclinicID ?? "7F7DA9355EAAF96FE0530100007F0F8B"
 		presenter.viewController = viewController
 		return viewController
 	}
 
 	/// Метод для сборки экрана со списком Докторов
 	func makeDoctorsViewController(coordinator: Coordinator) -> UIViewController {
-		let interactor = DoctorsInteractor()
+		let doctorsService = services.makeDoctorsService()
+		let interactor = DoctorsInteractor(doctorsService: doctorsService)
 		let presenter = DoctorsPresenter(interactor: interactor,
 															   coordinator: coordinator)
 		let viewController = DoctorsViewController(listener: presenter)
@@ -74,7 +76,7 @@ final class ReseptionFlowAssembly {
 	}
 
 	/// Метод для сборки экрана с каленадарем
-	func makeMainViewController(coordinator: Coordinator, resourseID: String) -> UIViewController {
+	func makeCalendarViewController(coordinator: Coordinator, resourseID: String) -> UIViewController {
 		let interactor = CalendarInteractor()
 		let presenter = CalendarPresenter(interactor: interactor,
 															   coordinator: coordinator)
@@ -86,7 +88,8 @@ final class ReseptionFlowAssembly {
 
 	/// Метод для сборки экрана со списком свободного времени для записи
 	func makeTimeTableViewController(coordinator: Coordinator, slotsModel: TicketModel) -> UIViewController {
-		let interactor = TimeTableInteractor()
+		let timeTableService = services.makeTimeTableService()
+		let interactor = TimeTableInteractor(timeTableService: timeTableService)
 		let presenter = TimeTablePresenter(interactor: interactor,
 															   coordinator: coordinator)
 		let viewController = TimeTableViewController(listener: presenter)
@@ -97,7 +100,8 @@ final class ReseptionFlowAssembly {
 
 	/// Метод для сборки экрана История записи к врачу
 	func makeOperationHistoryViewController(coordinator: Coordinator) -> UIViewController {
-		let interactor = OperationHistoryInteractor()
+		let operationHistoryService = services.makeOperationHistoryService()
+		let interactor = OperationHistoryInteractor(operationHistoryService: operationHistoryService)
 		let presenter = OperationHistoryPresenter(interactor: interactor,
 													 coordinator: coordinator)
 		let viewController = OperationHistoryViewController(listener: presenter)

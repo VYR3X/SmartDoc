@@ -9,7 +9,11 @@
 /// Вью-модель экрана Polyclinics.
 struct PolyclinicsViewModel {
 
-	/// Вью-модель для обновления экрана.
-	struct Update {
+	var organizations: [String]
+	var organizatiosId: [String]
+
+	init(model: PolyclinicModel) {
+		organizations = model.rows.map { $0.organization }
+		organizatiosId = model.rows.map { $0.id }
 	}
 }

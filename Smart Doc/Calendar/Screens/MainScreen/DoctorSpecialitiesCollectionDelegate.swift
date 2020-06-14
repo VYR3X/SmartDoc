@@ -11,7 +11,7 @@ import UIKit
 /// Делегат для коллекшн вью со списком специальностей на главном экране
 final class DoctorSpecialitiesCollectionDelegate: NSObject {
 
-	let genresArray : [String] = ["Терапевт", "Хирург", "Стоматолог",
+	let genresArray : [String] = ["Все", "Терапевт", "Хирург", "Стоматолог",
 								  "Невролог", "Офтальмолог", "Оториноларинголог",
 								  "Педиатр"];
 
@@ -32,6 +32,11 @@ extension DoctorSpecialitiesCollectionDelegate: UICollectionViewDelegate {
 		// пока передаем терапевта для теста
 		listener?.didTapSpecialitiesCell(resourceID: "7F7DA9355EAAF96FE0530100007F0F8B")
 		print("Выбранная специализация врача: 7F7DA9355EAAF96FE0530100007F0F8B")
+		collectionView.cellForItem(at: indexPath)?.backgroundColor = .orange
+	}
+
+	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+		collectionView.cellForItem(at: indexPath)?.backgroundColor = .gray4
 	}
 
 }
@@ -68,12 +73,12 @@ extension DoctorSpecialitiesCollectionDelegate : UICollectionViewDelegateFlowLay
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 
-			return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+			return UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 0)
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
 
-		return 16
+		return 20
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

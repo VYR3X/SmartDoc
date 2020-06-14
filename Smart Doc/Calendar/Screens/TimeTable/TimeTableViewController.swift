@@ -9,7 +9,9 @@
 import UIKit
 
 /// Интерфейс взаимодействия с вью-контроллером экрана TimeTableViewController.
-protocol TimeTableControllable {}
+protocol TimeTableControllable {
+
+}
 
 // TO DO : viewcontroller - все через протокол CalendarViewControllable
 // убрать UIViewController
@@ -41,13 +43,17 @@ protocol TimeTablePresentableListener {
 						   phoneNumber: String,
 						   email: String,
 						   polis: String)
+
+	func didTapOkButton(time: String)
 }
 
 /// Расписание
-class TimeTableViewController: UIViewController {
+class TimeTableViewController: UIViewController, TimeTableControllable {
 
 	/// Талоны
 	var datasourse: TicketModel?
+
+	private var selectTime: String = ""
 
 	private let descriptionLabel: UILabel = {
 		let label = UILabel()
@@ -128,10 +134,14 @@ class TimeTableViewController: UIViewController {
 		let alert = UIAlertController(title: "", message: "Запись прошла успешно", preferredStyle: UIAlertController.Style.alert)
 
 		// add an action (button)
-		alert.addAction(UIAlertAction(title: "ОК", style: UIAlertAction.Style.default, handler: nil))
+		alert.addAction(UIAlertAction(title: "ОК", style: UIAlertAction.Style.default, handler: alertHandler))
 
 		// show the alert
 		self.present(alert, animated: true, completion: nil)
+	}
+
+	func alertHandler(alert: UIAlertAction!) {
+		listener?.didTapOkButton(time: selectTime)
 	}
 }
 
@@ -175,6 +185,9 @@ extension TimeTableViewController: UICollectionViewDelegate {
 			phoneNumber: phoneNumber,
 			email: email,
 			polis: polis)
+
+			selectTime = (datasourse?.row[indexPath.row].TIME_SHOW)!
+			print("Время приема: \(selectTime)")
 			showAlertButtonTapped()
 		}
 	}
