@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+var dataStoreManager = DataStoreManager()
+
 /// Интерфейс взаимодействия с вью-контроллером экрана OperationHistory.
 protocol OperationHistoryViewControllable: UIViewController {
 
@@ -28,11 +30,8 @@ final class OperationHistoryViewController: UIViewController, OperationHistoryVi
 		static let cellHeight: CGFloat = 150
 	}
 
-	var dataStoreManager = DataStoreManager()
-
-	var dateTimeLabels: [String] = []
-	//var dateTimeLabels: [NSManagedObject] = []
-	var specialitiesNameLabels: [String] = []
+	private var tickets: [Ticket] = []
+	//var slots = [NSManagedObject]()
 
     private let listener: OperationHistoryPresentableListener
 
@@ -73,19 +72,12 @@ final class OperationHistoryViewController: UIViewController, OperationHistoryVi
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true)
-//		guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-//		let managedContext = appDelegate.persistentContainer.viewContext
-//		let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Slot")
-//		do {
-//			dateTimeLabels = try managedContext.fetch(fetchRequest)
-//		} catch let error as NSError {
-//			print("Failed to fetch atributes")
-//		}
 	}
 
     init(listener: OperationHistoryPresentableListener) {
         self.listener = listener
         super.init(nibName: nil, bundle: nil)
+
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -98,42 +90,19 @@ final class OperationHistoryViewController: UIViewController, OperationHistoryVi
 		view.addSubview(tableView)
 		setupTableView()
 		setGradient()
+		tickets = dataStoreManager.fetchTicketsFromCoreData()
     }
 
 	@objc private func refresh(sender: UIRefreshControl) {
-//			listener!.getSpecialitiesList { (result) in
-//				switch result {
-//				case .success(let types):
-//					self.datasource = types.specialitiesNames
-//				case .failure(_):
-//					print("Я хз чи шо, You Know ??? ")
-//				}
-//			}
 			sender.endRefreshing()
+			tickets = dataStoreManager.fetchTicketsFromCoreData()
 			tableView.reloadData()
 			finishedLoadingInitialTableCells = false
 		}
 
 	func bind(dateTimeLabels: [String], specialitiesNameLabels: [String]) {
-		self.dateTimeLabels = dateTimeLabels
-		//self.save(dateTimeLabels) // core data
-		self.specialitiesNameLabels = specialitiesNameLabels
 		self.tableView.reloadData()
 	}
-
-//	func save(_ dateTime: [String]) {
-//		guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-//		let managedContext = appDelegate.persistentContainer.viewContext
-//		let entity = NSEntityDescription.entity(forEntityName: "Slot", in: managedContext)!
-//		let item = NSManagedObject(entity: entity, insertInto: managedContext)
-//		item.setValue(dateTime, forKey: "date")
-//		do {
-//			try managedContext.save()
-//			dateTimeLabels.append(item)
-//		} catch let error as NSError {
-//			print("Failed to save an item", error)
-//		}
-//	}
 
 	private func setGradient() {
 		let gradient: CAGradientLayer = CAGradientLayer()
@@ -169,26 +138,28 @@ final class OperationHistoryViewController: UIViewController, OperationHistoryVi
 extension OperationHistoryViewController : UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 1 //specializationNames.count
+		return tickets.count
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "operationHistory", for: indexPath) as? OperationHistoryCell else { return UITableViewCell() }
 
-
-		let slot = dataStoreManager.obtainPersonTicket()
-
 		cell.profileImageView.image = UIImage(named: "doctorM")
-		// тут пока говно public свойства просто тороплюсь но надо как то перекинуть )
-		// public specializationNames, selectTime смотри в coordinator
-		// там дичь
+		cell.dateTimeLabel.text = tickets[indexPath.row].date
+		cell.specialitiesNameLabel.text = tickets[indexPath.row].specialitie
+		cell.addressPolyclicsLabel.text = tickets[indexPath.row].polyclinic
 
-		//let item = dateTimeLabels[indexPath.row]
-		cell.dateTimeLabel.text = slot.date//selectTime[indexPath.row] //item.value(forKey: "date") as! String  //"28.05.2020 8:20"
-			cell.specialitiesNameLabel.text = slot.specialitie//specializationNames[indexPath.row] //"Терапевт"
-		cell.addressPolyclicsLabel.text = slot.polyclinic
 		return cell
+	}
+
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+	  if editingStyle == .delete {
+		print("Deleted")
+		tickets.remove(at: indexPath.row)
+		self.tableView.deleteRows(at: [indexPath], with: .automatic)
+		dataStoreManager.deleteData()
+	  }
 	}
 }
 
@@ -198,7 +169,7 @@ extension OperationHistoryViewController : UITableViewDelegate {
 		var lastInitialDisplayableCell = false
 
 		//change flag as soon as last displayable cell is being loaded (which will mean table has initially loaded)
-		if specializationNames.count > 0 && !finishedLoadingInitialTableCells {
+		if tickets.count > 0 && !finishedLoadingInitialTableCells {
 			if let indexPathsForVisibleRows = tableView.indexPathsForVisibleRows,
 				let lastIndexPath = indexPathsForVisibleRows.last, lastIndexPath.row == indexPath.row {
 				lastInitialDisplayableCell = true

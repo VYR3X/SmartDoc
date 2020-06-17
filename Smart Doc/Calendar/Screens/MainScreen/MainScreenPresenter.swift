@@ -36,12 +36,12 @@ extension MainScreenPresenter: MainScreenPresentableListener {
 		// бэк возвращает одну фамилию так что оставим мок
 	}
 
-	func didTapOnPoliclynic(id: String) {
-		coordinator.routeToSpecialitiesList(polyclinicID: id)
+	func didTapOnPoliclynic(id: String, name: String) {
+		coordinator.routeToSpecialitiesList(polyclinicID: id, name: name)
 	}
 
 	func didTapDoctorsPhoto() {
-		coordinator.routeToSpecialitiesList(polyclinicID: nil)
+		coordinator.routeToSpecialitiesList(polyclinicID: nil, name: nil)
 	}
 
 	func didTapSpecialitiesCell(resourceID: String) {

@@ -44,24 +44,31 @@ protocol TimeTablePresentableListener {
 						   email: String,
 						   polis: String)
 
-	func didTapOkButton(time: String)
+
+	/// Нажали на ОК при успешной записи на прием
+	/// - Parameters:
+	///   - time: Время приема
+	///   - date: Дата приема
+	func didTapOkButton(time: String, date: String)
 }
 
 /// Расписание
 class TimeTableViewController: UIViewController, TimeTableControllable {
 
 	/// Талоны
-	var datasourse: TicketModel?
+	var datasourse: SlotViewModel?
 
 	private var selectTime: String = ""
+
+	private var minutes: String = ""
 
 	private let descriptionLabel: UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = UIFont.boldSystemFont(ofSize: 25)
-		label.textColor = .gray
+		label.textColor = .white
 		label.text = "Выберите свободное время:"
-		label.backgroundColor = .white
+		label.backgroundColor = .clear
 		return label
 	}()
 
@@ -141,24 +148,22 @@ class TimeTableViewController: UIViewController, TimeTableControllable {
 	}
 
 	func alertHandler(alert: UIAlertAction!) {
-		listener?.didTapOkButton(time: selectTime)
+		listener?.didTapOkButton(time: minutes, date: selectTime)
 	}
 }
 
 extension TimeTableViewController: UICollectionViewDataSource {
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return datasourse?.row.count ?? 0
+		return datasourse?.timeShow.count ?? 0
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! TimeTableCollectionViewCell
 
-		cell.titleLabel.text = datasourse?.row[indexPath.row].TIME_SHOW
-
-		if datasourse?.row[indexPath.row].STATE == 1 { cell.cellView.backgroundColor = .red }
-		print(datasourse?.row[indexPath.row].TIME_SHOW)
+		cell.titleLabel.text = datasourse?.timeShow[indexPath.row]
+		if datasourse?.state![indexPath.row] == 1 { cell.cellView.backgroundColor = .red }
 
 		return cell
 	}
@@ -174,9 +179,9 @@ extension TimeTableViewController: UICollectionViewDelegate {
 		let email = UserSettings.userModel.email
 		let polis = UserSettings.userModel.polis
 
-		let slotID = datasourse?.row[indexPath.row].id ?? "0000"
+		let slotID = datasourse?.doctorSpecislitiesID[indexPath.row] ?? "0000"
 
-		if datasourse?.row[indexPath.row].STATE == 1 {
+		if datasourse?.state![indexPath.row] == 1 {
 			print("Данное время занято, Выберите пожалуйста другое время для записи к врачу")
 		} else {
 			listener!.createAppointment(slotID: slotID,
@@ -186,8 +191,16 @@ extension TimeTableViewController: UICollectionViewDelegate {
 			email: email,
 			polis: polis)
 
-			selectTime = (datasourse?.row[indexPath.row].TIME_SHOW)!
-			print("Время приема: \(selectTime)")
+			/// здесь сразу перекращиваю ячеку при выборе даты
+			let cell = collectionView.cellForItem(at: indexPath) as! TimeTableCollectionViewCell
+			cell.cellView.backgroundColor = .red
+			datasourse?.state![indexPath.row] = 1
+
+			selectTime = (datasourse?.dateShow[indexPath.row])!
+			minutes = (datasourse?.timeShow[indexPath.row])!
+			print("Время приема: \(selectTime), \(minutes)")
+
+			//print("ДАТА :\(datasourse?.dateShow)")
 			showAlertButtonTapped()
 		}
 	}

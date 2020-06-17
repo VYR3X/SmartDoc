@@ -86,6 +86,7 @@
 		01F48DEE247FE239007CBFA5 /* NewsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DED247FE239007CBFA5 /* NewsViewCell.swift */; };
 		01F48DF0247FE254007CBFA5 /* NearbyPolyclinicsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DEF247FE254007CBFA5 /* NearbyPolyclinicsViewCell.swift */; };
 		01F48DF624803E40007CBFA5 /* OperationHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F48DF524803E40007CBFA5 /* OperationHistoryCell.swift */; };
+		01FAC6552496B50200071A87 /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FAC6542496B50200071A87 /* Ticket.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -170,6 +171,7 @@
 		01F48DED247FE239007CBFA5 /* NewsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewCell.swift; sourceTree = "<group>"; };
 		01F48DEF247FE254007CBFA5 /* NearbyPolyclinicsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyPolyclinicsViewCell.swift; sourceTree = "<group>"; };
 		01F48DF524803E40007CBFA5 /* OperationHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationHistoryCell.swift; sourceTree = "<group>"; };
+		01FAC6542496B50200071A87 /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 		01491637247923CE001F3C2C /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				019CC5A623F9BE5800CB8D14 /* Style */,
 				0149163A247923F0001F3C2C /* NavigationController */,
 			);
 			path = DesignSystem;
@@ -340,13 +343,13 @@
 		019CC58923F9A4AE00CB8D14 /* Smart Doc */ = {
 			isa = PBXGroup;
 			children = (
+				011CB91B249667F000C49E86 /* CoreData */,
 				019CC5A523F9A71700CB8D14 /* Resources */,
 				019CC58A23F9A4AE00CB8D14 /* AppDelegate.swift */,
 				011CB92C24966E3700C49E86 /* Ticket+CoreDataClass.swift */,
 				011CB92D24966E3700C49E86 /* Ticket+CoreDataProperties.swift */,
 				011CB91C249669BF00C49E86 /* DataStoreManager.swift */,
 				019CC5A423F9A70000CB8D14 /* Calendar */,
-				019CC5A623F9BE5800CB8D14 /* Style */,
 				019CC59623F9A4AF00CB8D14 /* Info.plist */,
 			);
 			path = "Smart Doc";
@@ -359,7 +362,6 @@
 				01943D89240C070F00DD4237 /* Assembly */,
 				01943D8E240C1B4300DD4237 /* Screens */,
 				01943DA3240C1DC800DD4237 /* API */,
-				011CB91B249667F000C49E86 /* CoreData */,
 				01943DA2240C1DA200DD4237 /* Extensions */,
 			);
 			path = Calendar;
@@ -411,6 +413,7 @@
 				01A16E9124618EE60014650C /* OperationHistoryViewModel.swift */,
 				01A16E8C24618E900014650C /* OperationHistoryModel.swift */,
 				01F48DF524803E40007CBFA5 /* OperationHistoryCell.swift */,
+				01FAC6542496B50200071A87 /* Ticket.swift */,
 			);
 			path = OperationHistory;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				015ED5E424688C29002FDB4D /* UIView+Extension.swift in Sources */,
 				011CB92E24966E3700C49E86 /* Ticket+CoreDataClass.swift in Sources */,
 				01A16E8324618D930014650C /* UserProfilePresenter.swift in Sources */,
+				01FAC6552496B50200071A87 /* Ticket.swift in Sources */,
 				018CE3BE24427DAF0064E3E1 /* FlowRouting.swift in Sources */,
 				01F48DEA247FE1FF007CBFA5 /* GenreCollectionViewCell.swift in Sources */,
 				01A16E6F245B4CC40014650C /* LaunchView.swift in Sources */,

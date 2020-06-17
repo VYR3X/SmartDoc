@@ -31,8 +31,8 @@ final class TimeTablePresenter: TimeTablePresentable {
 
 extension TimeTablePresenter: TimeTablePresentableListener {
 
-	func didTapOkButton(time: String) {
-		coordinator.finishFlow(time: time)
+	func didTapOkButton(time: String, date: String) {
+		coordinator.finishFlow(time: time, date: date)
 	}
 
 	func createAppointment(slotID: String,
@@ -56,10 +56,6 @@ extension TimeTablePresenter: TimeTablePresentableListener {
 										}
 		}
 
-
-		func didTapOkButton(time: String) {
-			coordinator.finishFlow(time: time)
-		}
 
 	}
 

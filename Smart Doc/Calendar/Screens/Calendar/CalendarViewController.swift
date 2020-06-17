@@ -199,7 +199,7 @@ class CalendarViewController: UIViewController {
 		view.addSubviews(monthView, weekdaysView, daysView)
 		daysView.addSubview(daysCollectionView)
 
-		view.addSubview(timeTableView)
+//		view.addSubview(timeTableView)
 
 		NSLayoutConstraint.activate([
 			monthView.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
@@ -220,13 +220,13 @@ class CalendarViewController: UIViewController {
 			daysCollectionView.topAnchor.constraint(equalTo: daysView.topAnchor, constant: 15),
 			daysCollectionView.leftAnchor.constraint(equalTo: daysView.leftAnchor, constant: 0),
 			daysCollectionView.rightAnchor.constraint(equalTo: daysView.rightAnchor, constant: 0),
-			daysCollectionView.bottomAnchor.constraint(equalTo: daysView.bottomAnchor, constant: 0),
+			daysCollectionView.bottomAnchor.constraint(equalTo: daysView.bottomAnchor, constant: 0)
 
-			timeTableView.topAnchor.constraint(equalTo: daysView.bottomAnchor, constant: 25),
-//			collectionView.heightAnchor.constraint(equalToConstant: 250),
-			timeTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-			timeTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-			timeTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+//			timeTableView.topAnchor.constraint(equalTo: daysView.bottomAnchor, constant: 25),
+////			collectionView.heightAnchor.constraint(equalToConstant: 250),
+//			timeTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//			timeTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//			timeTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
 		])
 	}
 

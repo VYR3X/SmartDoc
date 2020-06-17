@@ -19,8 +19,10 @@ protocol FlowRouting {
 	func routeToMainScreen()
 
 	/// Перекинуть на список со специальностями врачей
-	/// - Parameter resourceID: id выбранной поликлиники
-	func routeToSpecialitiesList(polyclinicID: String?)
+	/// - Parameters:
+	///   - polyclinicID: id выбранной поликлиники
+	///   - name: название поликлиники
+	func routeToSpecialitiesList(polyclinicID: String?, name: String?)
 
 	/// Перекинуть на экран календарь
 	func routeToCalendar(resourceID: String,  specialization: String)
@@ -36,7 +38,7 @@ protocol FlowRouting {
 
 	//var model: SlotModel { get set }
 
-	func setTicketModel(model: TicketModel)
+	func setTicketModel(model: SlotViewModel)
 
 }
 

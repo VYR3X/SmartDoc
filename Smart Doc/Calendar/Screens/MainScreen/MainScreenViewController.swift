@@ -27,7 +27,7 @@ protocol MainScreenPresentableListener {
 
 	func getPolyclinicList(completion: @escaping (Result<PolyclinicsViewModel, Error>) -> Void)
 
-	func didTapOnPoliclynic(id: String)
+	func didTapOnPoliclynic(id: String, name: String)
 
 	func didLoadDoctorName()
 }
@@ -468,7 +468,7 @@ extension MainScreenViewController: UITableViewDelegate {
 		let selectPolyclinic = polyclinics[indexPath.row];
 		let polyclinicsID = polyclinicsId[indexPath.row];
 		print("Выбранная поликлиника: \(selectPolyclinic) с присвоенным ID: \(polyclinicsID)")
-		listener.didTapOnPoliclynic(id: polyclinicsID)
+		listener.didTapOnPoliclynic(id: polyclinicsID, name: selectPolyclinic)
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
 }

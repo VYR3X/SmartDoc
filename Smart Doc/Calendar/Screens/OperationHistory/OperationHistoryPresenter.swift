@@ -40,7 +40,6 @@ extension OperationHistoryPresenter: OperationHistoryPresentableListener {
 			switch productsModelResult {
 			case .success(let history):
 				DispatchQueue.main.async {
-					//print("\nПолучили специализацию врачей: \n\(doctorsModel)")
 					let vm = OperationHistoryViewModel(model: history)
 					self.viewController?.bind(dateTimeLabels: vm.starts,
 											  specialitiesNameLabels: vm.doctorSpecislities)

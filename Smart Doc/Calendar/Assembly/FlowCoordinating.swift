@@ -15,7 +15,10 @@ protocol FlowCoordinating {
 	func startFlow()
 
 	/// Закончить флоу
-	func finishFlow(time: String)
+	/// - Parameters:
+	///   - time: время hh:mm
+	///   - date: дата приема к врачу
+	func finishFlow(time: String, date: String)
 
 	func createNavigationContoller(vc: UIViewController) -> UINavigationController //UINavigationController
 }

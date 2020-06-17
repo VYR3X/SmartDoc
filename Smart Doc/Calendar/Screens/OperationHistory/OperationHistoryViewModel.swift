@@ -27,6 +27,4 @@ struct OperationHistoryViewModel {
 		}
 	}
 
-
-	
 }

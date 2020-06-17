@@ -56,24 +56,27 @@ final class DoctorSpecialitiesViewController: UIViewController, DoctorSpecialiti
 		static let cellHeight: CGFloat = 84
 	}
 
-	var datasource = ["Терапевт", "Хирург", "Стоматолог"];
+	var datasource: [String] = [] //["Терапевт", "Хирург", "Стоматолог"];
 
 	// стоматологи пока не записывают )
-	var Resource_ID = ["7F7DA9355EAAF96FE0530100007F0F8B", "7FA60C0CEEE364F3E0530100007F82C1", "7F7DA9355EAAF96FE0530100007F0F8B"]
+	var Resource_ID: [String] = [] //["7F7DA9355EAAF96FE0530100007F0F8B", "7FA60C0CEEE364F3E0530100007F82C1", "7F7DA9355EAAF96FE0530100007F0F8B"]
 
 	/// хз тороплюсь ) 
 	var polyclinicID = "0000"
+
+	var polyclinicName = "Поликлиника №1"
 
 	/// Переменная для анимации отображения ячейки
 	private var finishedLoadingInitialTableCells = false
 
 	private let descriptionLabel: UILabel = {
 		let label = UILabel()
+		label.sizeToFit()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = UIFont.boldSystemFont(ofSize: 25)
 		label.textColor = .white
-		label.text = "Выберите врача из списка:"
 		label.backgroundColor = .clear
+		label.numberOfLines = 0
 		return label
 	}()
 
@@ -117,6 +120,7 @@ final class DoctorSpecialitiesViewController: UIViewController, DoctorSpecialiti
 		navigationController?.navigationBar.barTintColor = Colors.mainColor
 		navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
 		//tabBarController?.tabBar.barTintColor = Colors.mainColor
+		descriptionLabel.text = "Специалисты из \"\(polyclinicName)\""
 		setupTableView()
 		setGradient()
 		//loadData()
@@ -185,11 +189,11 @@ final class DoctorSpecialitiesViewController: UIViewController, DoctorSpecialiti
 		NSLayoutConstraint.activate([
 
 			descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 45),
-			descriptionLabel.heightAnchor.constraint(equalToConstant: 45),
+			//descriptionLabel.heightAnchor.constraint(equalToConstant: 45),
 			descriptionLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
 			descriptionLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
 
-			tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+			tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 35),
 			tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 			tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
 			tableView.leftAnchor.constraint(equalTo: view.leftAnchor)

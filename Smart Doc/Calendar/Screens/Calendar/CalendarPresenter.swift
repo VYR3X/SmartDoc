@@ -41,7 +41,7 @@ extension CalendarPresenter: CalendarPresentableListener {
 				print("\nУспешно выполнен запрос на получение талонов :\n\(slots)")
 				self.viewModel = SlotViewModel(model: slots)
 				//print("\nПолучает вью модель:\n\(self.viewModel)")
-				self.openNextView(slots: slots)
+				self.openNextView(slots: self.viewModel!)
 
 			case .failure(let error):
 				print("error: \n \(error)")
@@ -49,7 +49,7 @@ extension CalendarPresenter: CalendarPresentableListener {
 		}
 	}
 
-	func openNextView(slots: TicketModel) {
+	func openNextView(slots: SlotViewModel) {
 		coordinator.setTicketModel(model: slots)
 	}
 

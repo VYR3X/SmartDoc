@@ -53,13 +53,14 @@ final class ReseptionFlowAssembly {
 	}
 
 	/// Метод для сборки экрана со списком специальностей врачей
-	func makeSpecialitiesViewController(coordinator: Coordinator, polyclinicID: String?) -> UIViewController {
+	func makeSpecialitiesViewController(coordinator: Coordinator, polyclinicID: String?, polyclinicName: String?) -> UIViewController {
 		let specialitiesService = services.makeDoctorSpesialitiesService()
 		let interactor = DoctorSpecialitiesInteractor(specialitiesService: specialitiesService)
 		let presenter = DoctorsSpecialitiesPresenter(interactor: interactor,
 															   coordinator: coordinator)
 		let viewController = DoctorSpecialitiesViewController(listener: presenter)
 		viewController.polyclinicID = polyclinicID ?? "7F7DA9355EAAF96FE0530100007F0F8B"
+		viewController.polyclinicName = polyclinicName ?? "Первая городская"
 		presenter.viewController = viewController
 		return viewController
 	}
@@ -87,7 +88,7 @@ final class ReseptionFlowAssembly {
 	}
 
 	/// Метод для сборки экрана со списком свободного времени для записи
-	func makeTimeTableViewController(coordinator: Coordinator, slotsModel: TicketModel) -> UIViewController {
+	func makeTimeTableViewController(coordinator: Coordinator, slotsModel: SlotViewModel) -> UIViewController {
 		let timeTableService = services.makeTimeTableService()
 		let interactor = TimeTableInteractor(timeTableService: timeTableService)
 		let presenter = TimeTablePresenter(interactor: interactor,

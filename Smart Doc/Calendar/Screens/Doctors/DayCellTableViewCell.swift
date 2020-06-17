@@ -12,8 +12,8 @@ import UIKit
 /// TODO:  поменять название вообще не понтно что тут написано 
 class DayCellTableViewCell: UITableViewCell {
 
-	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
+	private struct Constants {
+		static let standardOffset: CGFloat = 25
 	}
 
 	let cellView: UIView = {
@@ -60,13 +60,15 @@ class DayCellTableViewCell: UITableViewCell {
 		setupView()
 	}
 
-	func setupView() {
+	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+	private func setupView() {
 
 		NSLayoutConstraint.activate([
 
 			cellView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-			cellView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10),
-			cellView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
+			cellView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -Constants.standardOffset),
+			cellView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: Constants.standardOffset),
 			cellView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
 
 			picture.heightAnchor.constraint(equalToConstant: 56),
