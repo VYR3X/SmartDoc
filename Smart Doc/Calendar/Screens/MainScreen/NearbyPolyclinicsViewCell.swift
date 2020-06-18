@@ -8,49 +8,56 @@
 
 import UIKit
 
+/// Ячейка содержащая описание поликлиники
 final class NearbyPolyclinicsViewCell: UITableViewCell {
 
-	let fullPolyclinicLocationInformationView : UIView = {
+	private let fullPolyclinicLocationInformationView : UIView = {
 		let view = UIView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 		view.backgroundColor = .clear
 		return view
 	}()
 
-	let subviewWithRating : UIView = {
+	/// Закругленная вью содержащая в себе рейтинг и картинку звезды
+	private let subviewWithRating: UIView = {
+		let view = UIView()
+		view.sizeToFit()
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.backgroundColor = UIColor(red: 0, green: 0, blue: 0.078, alpha: 0.05)
+		view.layer.cornerRadius = 7
+		return view
+	}()
+
+	private let addressView : UIView = {
 		let view = UIView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 		view.backgroundColor = .clear
 		return view
 	}()
 
-	let addressView : UIView = {
-		let view = UIView()
-		view.translatesAutoresizingMaskIntoConstraints = false
-		view.backgroundColor = .clear
-		return view
-	}()
-
+	/// Название поликлиники
 	lazy var polyclinicNameLabel: UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = label.font.withSize(17)
 		label.font = UIFont.boldSystemFont(ofSize: 20.0)
-		label.text = ""
+		label.text = "Поликлиника №1"
 		label.textAlignment = .left
 		return label
 	}()
 
+	/// Адресс поликлиники
 	let polyclinicAddressLabel : UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = label.font.withSize(15)
-		label.text = "Пресненская набережная, 2"
+		label.text = "ул. Строителей"
 		label.textAlignment = .left
 		return label
 	}()
 
-	let distanceToThePolyclinicLabel : UILabel = {
+	/// Расстояние до поликлиники
+	let distanceToPolyclinicLabel: UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = label.font.withSize(15)
@@ -58,15 +65,8 @@ final class NearbyPolyclinicsViewCell: UITableViewCell {
 		return label
 	}()
 
-	let subwayStationLabel : UILabel = {
-		let label = UILabel()
-		label.translatesAutoresizingMaskIntoConstraints = false
-		label.text = "Трубная"
-		label.font = label.font.withSize(15)
-		return label
-	}()
-
-	let movietheaterRatingLabel : UILabel = {
+	/// Рейтинг поликлиники по шкале от 1 до 5
+	let polyclinicRatingLabel : UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = UIFont.boldSystemFont(ofSize: 14) // 14 -> 15
@@ -74,24 +74,17 @@ final class NearbyPolyclinicsViewCell: UITableViewCell {
 		return label
 	}()
 
-	let subwayStationColorPointImageView: UIView = {
-		let view = UIView()
-		view.translatesAutoresizingMaskIntoConstraints = false
-		view.backgroundColor = .blue
-		view.layer.cornerRadius = 8
-		return view
-	}()
-
-	let movietheaterRatingImageView : UIImageView = {
-
+	/// Картинка рейтинга - звезда
+	private let polyclinicRatingImageView : UIImageView = {
 		let image = UIImage(named: "stars")
 		let imageView = UIImageView(image: image)
 		imageView.translatesAutoresizingMaskIntoConstraints = false
 		return imageView
 	}()
 
-	let navigationImageView : UIImageView = {
-		let image = UIImage(named: "heart")
+	/// Картинка навигации - компас
+	private let navigationImageView : UIImageView = {
+		let image = UIImage(named: "compass")
 		let imageView = UIImageView(image: image)
 		imageView.translatesAutoresizingMaskIntoConstraints = false
 		return imageView
@@ -99,18 +92,18 @@ final class NearbyPolyclinicsViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
 		setupConstraint()
-
     }
+
+	required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder) }
 
 	func setupConstraint() {
 
 		addSubview(fullPolyclinicLocationInformationView)
 		addSubview(subviewWithRating)
 
-		subviewWithRating.addSubview(movietheaterRatingLabel)
-		subviewWithRating.addSubview(movietheaterRatingImageView)
+		subviewWithRating.addSubview(polyclinicRatingLabel)
+		subviewWithRating.addSubview(polyclinicRatingImageView)
 
 		fullPolyclinicLocationInformationView.addSubview(addressView)
 
@@ -118,10 +111,7 @@ final class NearbyPolyclinicsViewCell: UITableViewCell {
 		addressView.addSubview(polyclinicAddressLabel)
 
 		fullPolyclinicLocationInformationView.addSubview(navigationImageView)
-		fullPolyclinicLocationInformationView.addSubview(distanceToThePolyclinicLabel)
-
-		fullPolyclinicLocationInformationView.addSubview(subwayStationColorPointImageView)
-		fullPolyclinicLocationInformationView.addSubview(subwayStationLabel)
+		fullPolyclinicLocationInformationView.addSubview(distanceToPolyclinicLabel)
 
 		NSLayoutConstraint.activate([
 
@@ -133,22 +123,21 @@ final class NearbyPolyclinicsViewCell: UITableViewCell {
 			fullPolyclinicLocationInformationView.rightAnchor.constraint(equalTo: rightAnchor, constant: -59),
 
 			subviewWithRating.widthAnchor.constraint(equalToConstant: 59),
-			subviewWithRating.heightAnchor.constraint(equalToConstant: 96),
-			subviewWithRating.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-			subviewWithRating.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-			subviewWithRating.rightAnchor.constraint(equalTo: rightAnchor, constant: 0),
+			subviewWithRating.topAnchor.constraint(equalTo: polyclinicNameLabel.topAnchor, constant: 0),
+			subviewWithRating.bottomAnchor.constraint(equalTo: polyclinicAddressLabel.topAnchor, constant: 0),
+			subviewWithRating.rightAnchor.constraint(equalTo: rightAnchor, constant: -5),
 
-			movietheaterRatingImageView.widthAnchor.constraint(equalToConstant: 16),
-			movietheaterRatingImageView.heightAnchor.constraint(equalToConstant: 16),
-			movietheaterRatingImageView.topAnchor.constraint(equalTo: topAnchor, constant: 14),
-			movietheaterRatingImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -43),
-			movietheaterRatingImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -66),
+			polyclinicRatingImageView.widthAnchor.constraint(equalToConstant: 16),
+			polyclinicRatingImageView.heightAnchor.constraint(equalToConstant: 16),
+			polyclinicRatingImageView.topAnchor.constraint(equalTo: topAnchor, constant: 14),
+			polyclinicRatingImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -43),
+			polyclinicRatingImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -66),
 
-			movietheaterRatingLabel.widthAnchor.constraint(equalToConstant: 23),
-			movietheaterRatingLabel.heightAnchor.constraint(equalToConstant: 18),
-			movietheaterRatingLabel.topAnchor.constraint(equalTo: topAnchor, constant: 13),
-			movietheaterRatingLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
-			movietheaterRatingLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -65),
+			polyclinicRatingLabel.widthAnchor.constraint(equalToConstant: 23),
+			polyclinicRatingLabel.heightAnchor.constraint(equalToConstant: 18),
+			polyclinicRatingLabel.topAnchor.constraint(equalTo: topAnchor, constant: 13),
+			polyclinicRatingLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+			polyclinicRatingLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -65),
 
 			addressView.widthAnchor.constraint(equalToConstant: 303),
 			addressView.heightAnchor.constraint(equalToConstant: 60),
@@ -170,31 +159,14 @@ final class NearbyPolyclinicsViewCell: UITableViewCell {
 
 			navigationImageView.widthAnchor.constraint(equalToConstant: 16),
 			navigationImageView.heightAnchor.constraint(equalToConstant: 16),
-			navigationImageView.topAnchor.constraint(equalTo: topAnchor, constant: 62),
 			navigationImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
 			navigationImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -18),
 
-			distanceToThePolyclinicLabel.widthAnchor.constraint(equalToConstant: 43),
-			distanceToThePolyclinicLabel.heightAnchor.constraint(equalToConstant: 18),
-			distanceToThePolyclinicLabel.topAnchor.constraint(equalTo: topAnchor, constant: 61),
-			distanceToThePolyclinicLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -240),
-			distanceToThePolyclinicLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 36),
-
-			subwayStationColorPointImageView.widthAnchor.constraint(equalToConstant: 16),
-			subwayStationColorPointImageView.heightAnchor.constraint(equalToConstant: 16),
-			subwayStationColorPointImageView.topAnchor.constraint(equalTo: topAnchor, constant: 62),
-			subwayStationColorPointImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 87),
-			subwayStationColorPointImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -18),
-
-			subwayStationLabel.widthAnchor.constraint(equalToConstant: 60),
-			subwayStationLabel.heightAnchor.constraint(equalToConstant: 18),
-			subwayStationLabel.topAnchor.constraint(equalTo: topAnchor, constant: 61),
-			subwayStationLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -17),
-			subwayStationLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 107)
+			distanceToPolyclinicLabel.widthAnchor.constraint(equalToConstant: 43),
+			distanceToPolyclinicLabel.heightAnchor.constraint(equalToConstant: 18),
+			distanceToPolyclinicLabel.topAnchor.constraint(equalTo: topAnchor, constant: 61),
+			distanceToPolyclinicLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 36),
 
 		])
 	}
-
-    required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder) }
-
 }

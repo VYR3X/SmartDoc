@@ -8,6 +8,14 @@
 
 import UIKit
 
+/// Тип отображенного алерта
+enum AlertType {
+	/// Успешно прошла запись
+	case success
+	/// Записаться невозможно
+	case error
+}
+
 /// Интерфейс взаимодействия с вью-контроллером экрана TimeTableViewController.
 protocol TimeTableControllable {
 
@@ -45,11 +53,14 @@ protocol TimeTablePresentableListener {
 						   polis: String)
 
 
-	/// Нажали на ОК при успешной записи на прием
+	/// Нажали на продложить при успешной записи на прием
 	/// - Parameters:
 	///   - time: Время приема
 	///   - date: Дата приема
-	func didTapOkButton(time: String, date: String)
+	func didTapContinue(time: String, date: String)
+
+	/// Нажили повторить запись при успешной записи на прием
+	func didTapRepeat()
 }
 
 /// Расписание
@@ -58,16 +69,20 @@ class TimeTableViewController: UIViewController, TimeTableControllable {
 	/// Талоны
 	var datasourse: SlotViewModel?
 
+	var currentPolyclinic: String = ""
+
 	private var selectTime: String = ""
 
 	private var minutes: String = ""
 
-	private let descriptionLabel: UILabel = {
+	let descriptionLabel: UILabel = {
 		let label = UILabel()
+		label.sizeToFit()
+		label.numberOfLines = 0
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = UIFont.boldSystemFont(ofSize: 25)
 		label.textColor = .white
-		label.text = "Выберите свободное время:"
+//		label.text = "Выберите свободное время: Время приема: \(datasourse?.dateShow.last), \(datasourse?.timeShow.last)"
 		label.backgroundColor = .clear
 		return label
 	}()
@@ -86,7 +101,7 @@ class TimeTableViewController: UIViewController, TimeTableControllable {
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		collectionView.showsVerticalScrollIndicator = false
-		collectionView.backgroundColor = Colors.mainColor
+		collectionView.backgroundColor = .clear //Colors.mainColor
 		collectionView.clipsToBounds = true // false
 		collectionView.delegate = self
 		collectionView.dataSource = self
@@ -107,11 +122,25 @@ class TimeTableViewController: UIViewController, TimeTableControllable {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		view.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
-		//view.backgroundColor = .white
-		view.addSubview(descriptionLabel)
-		view.addSubview(collectionView)
+		view.addSubviews(descriptionLabel, collectionView)
+//		view.addSubview(collectionView)
 		setupView()
+		setGradient()
+	}
+
+	private func setGradient() {
+		let gradient: CAGradientLayer = CAGradientLayer()
+
+		let leftColor = Colors.mainColor
+		let rightColor = UIColor.purple
+
+		gradient.colors = [leftColor.cgColor, rightColor.cgColor]
+		gradient.locations = [0.0 , 1.0]
+		gradient.startPoint = CGPoint(x: 0.4, y: 0.6)
+		gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
+		gradient.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
+
+		view.layer.insertSublayer(gradient, at: 0)
 	}
 
 	@objc private func refresh(sender: UIRefreshControl) {
@@ -124,31 +153,41 @@ class TimeTableViewController: UIViewController, TimeTableControllable {
 		NSLayoutConstraint.activate([
 
 			descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 35),
-			descriptionLabel.heightAnchor.constraint(equalToConstant: 45),
 			descriptionLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
 			descriptionLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
 
-			collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+			collectionView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 25),
 			collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 			collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
 			collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25)
 		])
 	}
 
-	private func showAlertButtonTapped() {
+	private func showAlertButtonTapped(type: AlertType) {
 
-		// create the alert
-		let alert = UIAlertController(title: "", message: "Запись прошла успешно", preferredStyle: UIAlertController.Style.alert)
+		var alert: UIAlertController = UIAlertController()
 
-		// add an action (button)
-		alert.addAction(UIAlertAction(title: "ОК", style: UIAlertAction.Style.default, handler: alertHandler))
+		if type == .success {
+			// create the alert
+			alert = UIAlertController(title: "Успех", message: "Вы записались на прием", preferredStyle: UIAlertController.Style.alert)
+			// add an action (button)
+			alert.addAction(UIAlertAction(title: "Продолжить", style: UIAlertAction.Style.default, handler: didTapСontinue))
+			alert.addAction(UIAlertAction(title: "Повторить", style: UIAlertAction.Style.cancel, handler: didTapRepeat))
+		} else if type == .error {
+			alert = UIAlertController(title: "Произошла ошибка", message: "Выберите другое время для записи", preferredStyle: UIAlertController.Style.alert)
+			alert.addAction(UIAlertAction(title: "ОК", style: UIAlertAction.Style.default, handler: nil))
+		}
 
 		// show the alert
 		self.present(alert, animated: true, completion: nil)
 	}
 
-	func alertHandler(alert: UIAlertAction!) {
-		listener?.didTapOkButton(time: minutes, date: selectTime)
+	private func didTapСontinue(alert: UIAlertAction!) {
+		listener?.didTapContinue(time: minutes, date: selectTime)
+	}
+
+	private func didTapRepeat(alert: UIAlertAction!) {
+		listener?.didTapRepeat()
 	}
 }
 
@@ -183,6 +222,7 @@ extension TimeTableViewController: UICollectionViewDelegate {
 
 		if datasourse?.state![indexPath.row] == 1 {
 			print("Данное время занято, Выберите пожалуйста другое время для записи к врачу")
+			showAlertButtonTapped(type: .error)
 		} else {
 			listener!.createAppointment(slotID: slotID,
 			firstName: firstName,
@@ -201,7 +241,7 @@ extension TimeTableViewController: UICollectionViewDelegate {
 			print("Время приема: \(selectTime), \(minutes)")
 
 			//print("ДАТА :\(datasourse?.dateShow)")
-			showAlertButtonTapped()
+			showAlertButtonTapped(type: .success)
 		}
 	}
 

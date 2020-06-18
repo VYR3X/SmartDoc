@@ -67,7 +67,7 @@ final class TimeTableView: UIView {
 		])
 	}
 
-	private func showAlertButtonTapped() {
+	private func showAlertButtonTapped(type: AlertType) {
 
 		// create the alert
 		let alert = UIAlertController(title: "", message: "Запись прошла успешно", preferredStyle: UIAlertController.Style.alert)

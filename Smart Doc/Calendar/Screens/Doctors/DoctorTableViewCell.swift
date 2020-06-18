@@ -9,19 +9,17 @@
 import UIKit
 
 /// Ячейка с врачами
-/// TODO:  поменять название вообще не понтно что тут написано 
-class DayCellTableViewCell: UITableViewCell {
+class DoctorTableViewCell: UITableViewCell {
 
 	private struct Constants {
 		static let standardOffset: CGFloat = 25
 	}
 
-	let cellView: UIView = {
+	private let cellView: UIView = {
 		let view = UIView()
-		view.backgroundColor = UIColor.blue
 		view.layer.cornerRadius = 10
 		view.translatesAutoresizingMaskIntoConstraints = false
-		view.backgroundColor = UIColor(red: 144/255, green: 238/255, blue: 144/255, alpha: 1)
+		view.backgroundColor = .ligthGreenColor
 		return view
 	}()
 
@@ -52,11 +50,9 @@ class DayCellTableViewCell: UITableViewCell {
 
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+		backgroundColor = .clear
 		addSubview(cellView)
-		cellView.addSubview(picture)
-		cellView.addSubview(dayLabel)
-		cellView.addSubview(descrioption)
+		cellView.addSubviews(picture, dayLabel, descrioption)
 		setupView()
 	}
 
@@ -85,9 +81,6 @@ class DayCellTableViewCell: UITableViewCell {
 			descrioption.widthAnchor.constraint(equalToConstant: 200),
 			descrioption.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 4),
 			descrioption.leftAnchor.constraint(equalTo: picture.rightAnchor, constant: 20),
-
 			])
 	}
-
 }
-

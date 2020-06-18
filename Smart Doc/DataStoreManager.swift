@@ -2,7 +2,7 @@
 //  DataStoreManager.swift
 //  Smart Doc
 //
-//  Created by 17790204 on 14/06/2020.
+//  Created by Vlad Zhokhov on 14/06/2020.
 //  Copyright © 2020 Vlad Zhokhov. All rights reserved.
 //
 
@@ -145,5 +145,4 @@ final class DataStoreManager {
 			catch { print(error) }
 		} catch { print(error) }
 	}
-
 }

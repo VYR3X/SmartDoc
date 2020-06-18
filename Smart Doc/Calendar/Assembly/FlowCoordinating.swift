@@ -21,4 +21,7 @@ protocol FlowCoordinating {
 	func finishFlow(time: String, date: String)
 
 	func createNavigationContoller(vc: UIViewController) -> UINavigationController //UINavigationController
+
+	/// Костыль для того чтобы еще раз начать запись ( просто 3 раза вызываю pop ) 
+	func repeateReseption()
 }

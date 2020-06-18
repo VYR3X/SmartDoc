@@ -31,8 +31,12 @@ final class TimeTablePresenter: TimeTablePresentable {
 
 extension TimeTablePresenter: TimeTablePresentableListener {
 
-	func didTapOkButton(time: String, date: String) {
+	func didTapContinue(time: String, date: String) {
 		coordinator.finishFlow(time: time, date: date)
+	}
+
+	func didTapRepeat() {
+		coordinator.repeateReseption()
 	}
 
 	func createAppointment(slotID: String,

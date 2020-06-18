@@ -96,6 +96,8 @@ final class ReseptionFlowAssembly {
 		let viewController = TimeTableViewController(listener: presenter)
 		presenter.viewController = viewController
 		viewController.datasourse = slotsModel
+		let selectDate = slotsModel.dateShow.last
+		viewController.descriptionLabel.text = "Выберите свободное время на " + (selectDate ?? "выбранную дату")
 		return viewController
 	}
 
@@ -116,5 +118,10 @@ final class ReseptionFlowAssembly {
 	/// - Returns: координатор
 	func makeCoordinator(in context: UINavigationController?) -> Coordinator {
 		return Coordinator(assembly: self, navigationController: context)
+	}
+
+	 // костыль с ассембли проблема в MainTabBarController и Appdelegate
+	func makeCoordinator(nav: UINavigationController, assembly: ReseptionFlowAssembly) -> Coordinator {
+		return Coordinator(assembly: assembly, navigationController: nav)
 	}
 }

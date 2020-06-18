@@ -29,7 +29,7 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 	/// Скролл вью
 	private lazy var scrollView: UIScrollView = {
 		let scrollView = UIScrollView(frame: view.bounds)
-		scrollView.backgroundColor = .orange
+		//scrollView.backgroundColor = .orange
 		scrollView.contentSize = contentViewSize
 		scrollView.showsVerticalScrollIndicator = false
 		//scrollView.alwaysBounceVertical = true //???
@@ -39,7 +39,7 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 	///  Вью содержащее весь контент
 	private lazy var contentView: UIView = {
 		let view = UIView()
-		view.backgroundColor = .orange
+		view.backgroundColor = .clear
 		view.frame.size = contentViewSize
 		return view
 	}()
@@ -85,7 +85,7 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 		view.layer.cornerRadius = 45
 		//view.backgroundColor = UIColor(red: 182/255, green: 250/255, blue: 244/255, alpha: 1)
 		//view.backgroundColor = .white
-		view.backgroundColor = .orange
+		view.backgroundColor = Colors.mainColor
 		view.layer.shadowColor = UIColor.black.cgColor
 		view.layer.shadowOpacity = 1
 		view.layer.shadowOffset = .zero
@@ -133,8 +133,9 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 		let color = UIColor.white
 		textField.attributedPlaceholder = NSAttributedString(string: "Введите номер телефона", attributes: [NSAttributedString.Key.foregroundColor : color])
 		textField.borderStyle = UITextField.BorderStyle.roundedRect
-		textField.backgroundColor = .orange
+		textField.backgroundColor = Colors.mainColor
 		textField.delegate = self
+		textField.textColor = .white2
 		return textField
 	}()
 
@@ -151,13 +152,14 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 		let textField = UITextField()
 		textField.sizeToFit()
 		textField.translatesAutoresizingMaskIntoConstraints = false
-		textField.backgroundColor = .orange
+		textField.backgroundColor = Colors.mainColor
 		textField.keyboardType = .emailAddress
 
 		let color = UIColor.white
 		textField.attributedPlaceholder = NSAttributedString(string: "Введите почту", attributes: [NSAttributedString.Key.foregroundColor : color])
 		textField.borderStyle = UITextField.BorderStyle.roundedRect
 		textField.delegate = self
+		textField.textColor = .white2
 
 		return textField
 	}()
@@ -178,8 +180,9 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 		let color = UIColor.white
 		textField.attributedPlaceholder = NSAttributedString(string: "Введите полис", attributes: [NSAttributedString.Key.foregroundColor : color])
 		textField.borderStyle = UITextField.BorderStyle.roundedRect
+		textField.textColor = .white2
 		textField.delegate = self
-		textField.backgroundColor = .orange
+		textField.backgroundColor = Colors.mainColor
 		return textField
 	}()
 
@@ -201,15 +204,32 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
     override func viewDidLoad() {
         super.viewDidLoad()
 		listener.didLoad(self)
-		view.backgroundColor = UIColor(red: 175/255, green: 242/255, blue: 250/255, alpha: 1)
+		//view.backgroundColor = UIColor(red: 175/255, green: 242/255, blue: 250/255, alpha: 1)
 
 		configureNavigationBar()
 		setupView()
 		configureTapGestureToCloseKeyBoard()
+		setGradient()
 
 		if UserSettings.userModel != nil {
 			showSavedDataInTextFields()
 		}
+	}
+
+	private func setGradient() {
+		let gradient: CAGradientLayer = CAGradientLayer()
+
+		let leftColor = Colors.mainColor
+		let rightColor = UIColor.purple
+
+		gradient.colors = [leftColor.cgColor, rightColor.cgColor]
+		gradient.locations = [0.0 , 1.0]
+		gradient.startPoint = CGPoint(x: 0.4, y: 0.6)
+		gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
+		gradient.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
+
+		view.layer.insertSublayer(gradient, at: 0)
+		//backgroungRoundView.layer.insertSublayer(gradient, at: 0)
 	}
 
 	@objc func saveButtonAction(sender: UIBarButtonItem) {
@@ -233,12 +253,11 @@ final class UserProfileViewController: UIViewController, UserProfileViewControll
 	}
 
 	private func configureNavigationBar() {
-		self.title = "User Profile"
+		self.title = "Профиль"
 		self.navigationController?.navigationBar.isTranslucent = false
 		self.navigationController?.navigationBar.backgroundColor = .orange
-		//
-		//
-		let rightBarBtn = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveButtonAction))
+
+		let rightBarBtn = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveButtonAction))
 		self.navigationItem.rightBarButtonItem = rightBarBtn
 		/// пока заглушка чтобы не могли перейти назад
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem()

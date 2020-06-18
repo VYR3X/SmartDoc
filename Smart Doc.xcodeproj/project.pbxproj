@@ -17,6 +17,7 @@
 		011CB92F24966E3700C49E86 /* Ticket+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011CB92D24966E3700C49E86 /* Ticket+CoreDataProperties.swift */; };
 		01491639247923EC001F3C2C /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01491638247923EC001F3C2C /* ProgressViewController.swift */; };
 		0149163C24792415001F3C2C /* ProgressNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0149163B24792415001F3C2C /* ProgressNavigationController.swift */; };
+		01571298249BC6BB00A274FB /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01571297249BC6BB00A274FB /* MainTabBarController.swift */; };
 		015ED5DD2466BA20002FDB4D /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015ED5DC2466BA20002FDB4D /* UserSettings.swift */; };
 		015ED5DF2466FE34002FDB4D /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015ED5DE2466FE33002FDB4D /* UserProfileModel.swift */; };
 		015ED5E424688C29002FDB4D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015ED5E324688C29002FDB4D /* UIView+Extension.swift */; };
@@ -65,7 +66,7 @@
 		01A16E9324618EE60014650C /* OperationHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A16E9124618EE60014650C /* OperationHistoryViewModel.swift */; };
 		01B2F2BC24859D0F00AE9E98 /* PolyclinicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B2F2BB24859D0F00AE9E98 /* PolyclinicService.swift */; };
 		01B2F2C02485A0D900AE9E98 /* PolyclinicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B2F2BF2485A0D900AE9E98 /* PolyclinicModel.swift */; };
-		01BD72A124324E4B0090175E /* DayCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BD72A024324E4B0090175E /* DayCellTableViewCell.swift */; };
+		01BD72A124324E4B0090175E /* DoctorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BD72A024324E4B0090175E /* DoctorTableViewCell.swift */; };
 		01BD72A32432523E0090175E /* DoctorSpecialitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BD72A22432523E0090175E /* DoctorSpecialitiesViewController.swift */; };
 		01BD72A5243252CB0090175E /* DoctorSpecialitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BD72A4243252CB0090175E /* DoctorSpecialitiesCell.swift */; };
 		01C6C09C2486CFD200E99726 /* OperationHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C6C09B2486CFD200E99726 /* OperationHistoryService.swift */; };
@@ -100,6 +101,7 @@
 		011CB92D24966E3700C49E86 /* Ticket+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ticket+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		01491638247923EC001F3C2C /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		0149163B24792415001F3C2C /* ProgressNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressNavigationController.swift; sourceTree = "<group>"; };
+		01571297249BC6BB00A274FB /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		015ED5DC2466BA20002FDB4D /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		015ED5DE2466FE33002FDB4D /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
 		015ED5E324688C29002FDB4D /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -150,7 +152,7 @@
 		01A16E9124618EE60014650C /* OperationHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationHistoryViewModel.swift; sourceTree = "<group>"; };
 		01B2F2BB24859D0F00AE9E98 /* PolyclinicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyclinicService.swift; sourceTree = "<group>"; };
 		01B2F2BF2485A0D900AE9E98 /* PolyclinicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyclinicModel.swift; sourceTree = "<group>"; };
-		01BD72A024324E4B0090175E /* DayCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellTableViewCell.swift; sourceTree = "<group>"; };
+		01BD72A024324E4B0090175E /* DoctorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorTableViewCell.swift; sourceTree = "<group>"; };
 		01BD72A22432523E0090175E /* DoctorSpecialitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSpecialitiesViewController.swift; sourceTree = "<group>"; };
 		01BD72A4243252CB0090175E /* DoctorSpecialitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSpecialitiesCell.swift; sourceTree = "<group>"; };
 		01C6C09B2486CFD200E99726 /* OperationHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationHistoryService.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 		01491637247923CE001F3C2C /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				01571297249BC6BB00A274FB /* MainTabBarController.swift */,
 				019CC5A623F9BE5800CB8D14 /* Style */,
 				0149163A247923F0001F3C2C /* NavigationController */,
 			);
@@ -270,10 +273,10 @@
 		01943D8F240C1B5A00DD4237 /* Doctors */ = {
 			isa = PBXGroup;
 			children = (
-				01BD72A024324E4B0090175E /* DayCellTableViewCell.swift */,
 				01943D96240C1C3000DD4237 /* DoctorsViewController.swift */,
 				01943D98240C1C4000DD4237 /* DoctorsPresenter.swift */,
 				01943D9A240C1C5300DD4237 /* DoctorsInteractor.swift */,
+				01BD72A024324E4B0090175E /* DoctorTableViewCell.swift */,
 			);
 			path = Doctors;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				015ED5EE24689BC5002FDB4D /* PolyclinicsViewController.swift in Sources */,
 				011CB92B24966DEC00C49E86 /* SlotCoreData.xcdatamodeld in Sources */,
 				0149163C24792415001F3C2C /* ProgressNavigationController.swift in Sources */,
+				01571298249BC6BB00A274FB /* MainTabBarController.swift in Sources */,
 				01F48DEC247FE219007CBFA5 /* DoctorsPhotoCollectionViewCell.swift in Sources */,
 				01F48DE4247FD4CF007CBFA5 /* Color+Extension.swift in Sources */,
 				015ED5EF24689BC5002FDB4D /* PolyclinicsViewModel.swift in Sources */,
@@ -586,7 +590,7 @@
 				018CE3BE24427DAF0064E3E1 /* FlowRouting.swift in Sources */,
 				01F48DEA247FE1FF007CBFA5 /* GenreCollectionViewCell.swift in Sources */,
 				01A16E6F245B4CC40014650C /* LaunchView.swift in Sources */,
-				01BD72A124324E4B0090175E /* DayCellTableViewCell.swift in Sources */,
+				01BD72A124324E4B0090175E /* DoctorTableViewCell.swift in Sources */,
 				01CBB7C2246C606A00DB7A03 /* TicketModel.swift in Sources */,
 				011CB92F24966E3700C49E86 /* Ticket+CoreDataProperties.swift in Sources */,
 				01F48DEE247FE239007CBFA5 /* NewsViewCell.swift in Sources */,

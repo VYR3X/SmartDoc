@@ -35,15 +35,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		/// создаю таб бар
 		let item = UITabBarItem(title: "История", image: nil, selectedImage: nil)
-		//et specialitiesViewController = assembly.makeSpecialitiesViewController(coordinator: coordinator)
 		let mainscreen = assembly.makeMainViewController(coordinator: coordinator)
 
 		let item2 = UITabBarItem()
 		item2.title = "Профиль"
+
 		let historyViewController = assembly.makeOperationHistoryViewController(coordinator: coordinator)
 
 		let item3 = UITabBarItem()
-		item3.title = "Профиль"
+		item3.title = "Запись"
 		let userProfileViewController = assembly.makeProfileViewController(coordinator: coordinator)
 
         let nc1 = UINavigationController(rootViewController: historyViewController)
@@ -57,9 +57,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let tabBarController = UITabBarController()
 		tabBarController.viewControllers = [nc3, nc1, nc2]
 
-		//coordinator.startFlow()
+		//coordinator.startFlow() не трогаю
 
-		window?.rootViewController = tabBarController
+//		let tabBar = MainTabBarController(assembly: assembly,
+//										  mainNavigatioController: mainNavigationViewController)
+		window?.rootViewController = tabBarController // tabBar
 		return true
 	}
 

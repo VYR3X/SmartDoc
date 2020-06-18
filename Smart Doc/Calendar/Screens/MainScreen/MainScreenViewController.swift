@@ -32,6 +32,7 @@ protocol MainScreenPresentableListener {
 	func didLoadDoctorName()
 }
 
+/// Главный экран
 final class MainScreenViewController: UIViewController, MainScreenViewControllable {
 
 	// MARK: UI
@@ -70,6 +71,13 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 
 	private let newSubTitles = ["ТАСС", "РИА НОВОСТИ", "РБК", "LENTA.RU", "RAMBLER"]
 
+	private let polyclinicAddress = ["Одинцовский р-н, поселок санатория им. Герцена",
+									 "Грохольский пер., 31",
+									 "Одинцовский р-н, поселок санатория им. Герцена",
+									 "Одинцовский р-н, поселок санатория им. Герцена"]
+
+	private let ratings = ["4.2", "4.6", "4.2", "4.2"]
+
 	/// Контейнер вью для шапки экрана (новости, интерин, москва)
 	private let newsContainerView : UIView = {
 		let view = UIView(frame: .zero)
@@ -92,7 +100,7 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 		return collectionView
 	}()
 
-	private let cinemaLabel : UILabel = {
+	private let interinNameLabel : UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.backgroundColor = UIColor(red: 0.969, green: 0.973, blue: 0.973, alpha: 1)
@@ -205,7 +213,7 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 
 		var imageView: UIImageView?
 //		imageView?.backgroundColor = .ligthGreenColor
-		var image: UIImage = UIImage(named:"heart")!
+		var image: UIImage = UIImage(named:"compass")!
 		imageView = UIImageView(image: image)
 		imageView!.frame = CGRect(x: 351, y: 2, width: 24, height: 24)
 		label.addSubview(imageView!)
@@ -256,7 +264,7 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 		scrollView.refreshControl = refreshControl
 
 		newsContainerView.addSubviews(newsCollectionView,
-									  cinemaLabel,
+									  interinNameLabel,
 									  locationLabel)
 
 		roundedView.addSubviews(allMoviesLabel,
@@ -341,10 +349,10 @@ final class MainScreenViewController: UIViewController, MainScreenViewControllab
 				newsContainerView.widthAnchor.constraint(equalToConstant: view.frame.width),
 				newsContainerView.topAnchor.constraint(equalTo: massiveContainerView.topAnchor, constant: 0),
 
-				cinemaLabel.widthAnchor.constraint(equalToConstant: 28),
-				cinemaLabel.topAnchor.constraint(equalTo: newsContainerView.topAnchor, constant: 32),
-				cinemaLabel.rightAnchor.constraint(equalTo: newsContainerView.rightAnchor, constant: -16),
-				cinemaLabel.leftAnchor.constraint(equalTo: newsContainerView.leftAnchor, constant: 20),
+				interinNameLabel.widthAnchor.constraint(equalToConstant: 28),
+				interinNameLabel.topAnchor.constraint(equalTo: newsContainerView.topAnchor, constant: 32),
+				interinNameLabel.rightAnchor.constraint(equalTo: newsContainerView.rightAnchor, constant: -16),
+				interinNameLabel.leftAnchor.constraint(equalTo: newsContainerView.leftAnchor, constant: 20),
 
 				locationLabel.heightAnchor.constraint(equalToConstant: 20),
 				locationLabel.topAnchor.constraint(equalTo: newsContainerView.topAnchor, constant: 64),
@@ -451,6 +459,8 @@ extension MainScreenViewController : UITableViewDataSource {
 		let cell = cinemaTableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! NearbyPolyclinicsViewCell
 
 		cell.polyclinicNameLabel.text = polyclinics[indexPath.row]
+		cell.polyclinicAddressLabel.text = polyclinicAddress[indexPath.row]
+		cell.polyclinicRatingLabel.text = ratings[indexPath.row]
 		return cell
 	}
 }

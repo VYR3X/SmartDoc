@@ -105,6 +105,7 @@ extension Coordinator: FlowRouting {
 		let viewController = assembly.makeTimeTableViewController(coordinator: self, slotsModel: slotModel)
 		navigationController?.pushViewController(viewController, animated: true)
 	}
+
 }
 
 // MARK: - FlowCoordinating
@@ -122,6 +123,12 @@ extension Coordinator: FlowCoordinating {
 		let mainViewController = assembly.makeSpecialitiesViewController(coordinator: self, polyclinicID: nil, polyclinicName: nil)
 //																				 coordinator: self)
 		navigationController?.pushViewController(mainViewController, animated: true)
+	}
+
+	func repeateReseption() {
+		navigationController?.popViewController(animated: false)
+		navigationController?.popViewController(animated: false)
+		navigationController?.popViewController(animated: true)
 	}
 
 	func finishFlow(time: String, date: String) {

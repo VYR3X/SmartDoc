@@ -74,23 +74,35 @@ class DoctorsViewController: UIViewController  {
 
 	private lazy var tableView : UITableView = {
 		let tableView = UITableView()
-		tableView.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
+		tableView.backgroundColor = .clear
 		tableView.translatesAutoresizingMaskIntoConstraints = false
 		tableView.delegate = self
 		tableView.dataSource = self
-//		tableView.allowsSelection = false
-		tableView.register(DayCellTableViewCell.self, forCellReuseIdentifier: "cellId")
+		tableView.register(DoctorTableViewCell.self, forCellReuseIdentifier: "cellId")
 		tableView.refreshControl = refreshControl
 		return tableView
 	}()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		view.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
-		//view.backgroundColor = .white
-		view.addSubview(descriptionLabel)
-		view.addSubview(tableView)
+		view.addSubviews(descriptionLabel, tableView)
 		setupTableView()
+		setGradient()
+	}
+
+	private func setGradient() {
+		let gradient: CAGradientLayer = CAGradientLayer()
+
+		let leftColor = Colors.mainColor
+		let rightColor = UIColor.purple
+
+		gradient.colors = [leftColor.cgColor, rightColor.cgColor]
+		gradient.locations = [0.0 , 1.0]
+		gradient.startPoint = CGPoint(x: 0.4, y: 0.6)
+		gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
+		gradient.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
+
+		view.layer.insertSublayer(gradient, at: 0)
 	}
 
 	@objc private func refresh(sender: UIRefreshControl) {
@@ -125,9 +137,8 @@ extension DoctorsViewController : UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! DayCellTableViewCell
-		//cell.backgroundColor = UIColor.white
-		cell.backgroundColor = UIColor(red: 125/255, green: 0/255, blue: 235/255, alpha: 1)
+		let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! DoctorTableViewCell
+
 		cell.dayLabel.text = datasource[indexPath.row]
 		cell.descrioption.text = "Терапевт"
 		cell.picture.image = UIImage(named: "doctorM")
@@ -158,7 +169,7 @@ extension DoctorsViewController : UITableViewDelegate {
 			cell.transform = CGAffineTransform(translationX: 0, y: 100/2)
 			cell.alpha = 0
 
-			UIView.animate(withDuration: 0.5, delay: 0.05*Double(indexPath.row), options: [.curveEaseInOut], animations: {
+			UIView.animate(withDuration: 0.5, delay: 0.05 * Double(indexPath.row), options: [.curveEaseInOut], animations: {
 				cell.transform = CGAffineTransform(translationX: 0, y: 0)
 				cell.alpha = 1
 			}, completion: nil)

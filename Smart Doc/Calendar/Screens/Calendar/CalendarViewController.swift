@@ -125,10 +125,26 @@ class CalendarViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		listener?.didLoad(self)
-		self.title = "Calendar"
+		self.title = "Календарь"
 		self.navigationController?.navigationBar.isTranslucent = false
 		initializeView()
 		setupViews()
+		setGradient()
+	}
+
+	private func setGradient() {
+		let gradient: CAGradientLayer = CAGradientLayer()
+
+		let leftColor = Colors.mainColor
+		let rightColor = UIColor.purple
+
+		gradient.colors = [leftColor.cgColor, rightColor.cgColor]
+		gradient.locations = [0.0 , 1.0]
+		gradient.startPoint = CGPoint(x: 0.4, y: 0.6)
+		gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
+		gradient.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
+
+		view.layer.insertSublayer(gradient, at: 0)
 	}
 
 	@objc private func refresh(sender: UIRefreshControl) {
