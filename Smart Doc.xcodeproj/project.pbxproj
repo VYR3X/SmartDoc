@@ -10,6 +10,7 @@
 		0101AE7F2478746000584A99 /* UINavigationController+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0101AE7E2478746000584A99 /* UINavigationController+Progress.swift */; };
 		01048873246DC764000B90D1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01048872246DC764000B90D1 /* TabBarController.swift */; };
 		0104887A24716066000B90D1 /* SpecialitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0104887924716066000B90D1 /* SpecialitiesViewModel.swift */; };
+		010F163B2599172F001FF116 /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 010F163A2599172F001FF116 /* Readme.md */; };
 		01186834244CA0D000609D35 /* TimeTableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01186833244CA0D000609D35 /* TimeTableCollectionViewCell.swift */; };
 		011CB91D249669BF00C49E86 /* DataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011CB91C249669BF00C49E86 /* DataStoreManager.swift */; };
 		011CB92B24966DEC00C49E86 /* SlotCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 011CB92924966DEC00C49E86 /* SlotCoreData.xcdatamodeld */; };
@@ -94,6 +95,7 @@
 		0101AE7E2478746000584A99 /* UINavigationController+Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Progress.swift"; sourceTree = "<group>"; };
 		01048872246DC764000B90D1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		0104887924716066000B90D1 /* SpecialitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialitiesViewModel.swift; sourceTree = "<group>"; };
+		010F163A2599172F001FF116 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		01186833244CA0D000609D35 /* TimeTableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableCollectionViewCell.swift; sourceTree = "<group>"; };
 		011CB91C249669BF00C49E86 /* DataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManager.swift; sourceTree = "<group>"; };
 		011CB92A24966DEC00C49E86 /* SlotCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SlotCoreData.xcdatamodel; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 		019CC57E23F9A4AE00CB8D14 = {
 			isa = PBXGroup;
 			children = (
+				010F163A2599172F001FF116 /* Readme.md */,
 				019CC58923F9A4AE00CB8D14 /* Smart Doc */,
 				019CC58823F9A4AE00CB8D14 /* Products */,
 			);
@@ -528,6 +531,7 @@
 			files = (
 				019CC59523F9A4AF00CB8D14 /* LaunchScreen.storyboard in Resources */,
 				019CC59223F9A4AF00CB8D14 /* Assets.xcassets in Resources */,
+				010F163B2599172F001FF116 /* Readme.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
